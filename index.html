@@ -794,7 +794,11 @@ async function submitAuth(){
       if(error) throw error;
       closeAuthModal();
     } else {
-      const{data,error}=await sb.auth.signUp({email,password});
+      const{data,error}=await sb.auth.signUp({
+        email,
+        password,
+        options:{ emailRedirectTo: window.location.href.split('?')[0].split('#')[0] }
+      });
       if(error) throw error;
       if(data.session){
         closeAuthModal();

@@ -120,6 +120,14 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
 .lstep.done{opacity:1;}
 .lstep.done::before{content:'✓';color:var(--green);font-weight:600;}
 .error-box{display:none;background:var(--red-light);border:1px solid var(--red)44;border-radius:10px;padding:12px 16px;font-size:13px;color:var(--red);margin-top:1rem;}
+
+.price-warning{display:none;align-items:center;justify-content:space-between;gap:12px;background:var(--accent-light);border:1px solid var(--accent)44;border-radius:12px;padding:12px 16px;font-size:13px;color:var(--ink2);margin-bottom:1.25rem;flex-wrap:wrap;}
+.price-warning.show{display:flex;}
+.price-warning-text{display:flex;align-items:center;gap:10px;flex:1;min-width:200px;}
+.price-warning-icon{font-size:18px;flex-shrink:0;}
+.price-retry-btn{padding:6px 14px;border-radius:20px;border:1.5px solid var(--accent);background:var(--accent);color:#fff;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;transition:background .15s;}
+.price-retry-btn:hover{background:var(--accent-h);}
+.price-retry-btn:disabled{background:var(--ink4);border-color:var(--ink4);cursor:not-allowed;}
 .error-box.show{display:block;}
 /* RESULTS */
 .results{display:none;}
@@ -586,13 +594,20 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
       </div>
 
       <div class="sec-heading" style="margin-bottom:12px;">What to buy — pick by pick</div>
+      <div class="price-warning" id="priceWarning">
+        <div class="price-warning-text">
+          <span class="price-warning-icon">⚠️</span>
+          <span id="priceWarningText">Some live prices couldn't be loaded — showing estimated allocations instead.</span>
+        </div>
+        <button class="price-retry-btn" id="priceRetryBtn" onclick="retryPrices()">Retry</button>
+      </div>
       <div class="picks-grid" id="picksList"></div>
       <div class="proj-box" id="projBox"></div>
       <div class="disclaimer">⚠ Educational purposes only — not financial advice. Prices via Yahoo Finance, may be delayed. Historical data is illustrative/simulated. All investing involves risk of loss. Consult a licensed financial advisor before making decisions.</div>
     </div>
   </div>
 </div>
-<footer>Vestly · Free investment planner · Data via Yahoo Finance · No ads</footer>
+<footer>Vestly · Free investment planner · Data via Yahoo Finance · No ads · <a href="about.html" style="color:var(--accent);text-decoration:none;font-weight:600;">About & disclaimer</a></footer>
 
 <!-- AUTH MODAL -->
 <div class="auth-modal-bg" id="authModalBg" onclick="if(event.target===this)closeAuthModal()">
@@ -1015,7 +1030,7 @@ function getHoldings(){
 }
 
 // COLORS — orange-anchored palette
-const COLORS=['#e07b00','#f59e0b','#c06000','#3b82f6','#8b5cf6','#10b981','#ef4444','#06b6d4','#f97316'];
+const COLORS=['#e07b00','#2563eb','#16a34a','#dc2626','#9333ea','#0d9488','#db2777','#65a30d','#0284c7','#ca8a04'];
 
 // PICKS DATABASE
 const DB={
@@ -1121,6 +1136,21 @@ async function fetchPrice(ticker){
     if(!closes)return null;
     return closes.filter(Boolean).pop()?.toFixed(2)*1||null;
   }catch{return null;}
+}
+
+async function fetchAllPrices(tickers){
+  const prices={};
+  await Promise.all(tickers.map(async t=>{prices[t]=await fetchPrice(t);}));
+  return prices;
+}
+
+async function retryPrices(){
+  if(!lastBuildParams) return;
+  const btn=document.getElementById('priceRetryBtn');
+  btn.disabled=true; btn.textContent='Retrying…';
+  const prices=await fetchAllPrices(lastBuildParams.allTickers);
+  btn.disabled=false; btn.textContent='Retry';
+  render(lastBuildParams.budget,lastBuildParams.horizon,lastBuildParams.picks,prices,lastBuildParams.existing,lastBuildParams.ownedPicks);
 }
 
 // KEY STATS (derived/illustrative — mirrors what you'd see on a Yahoo Finance quote page)
@@ -1240,6 +1270,8 @@ let activeTicker=null,activeRange='3y';
 function stepDone(id,d){return new Promise(r=>setTimeout(()=>{document.getElementById(id).classList.add('done');r();},d));}
 
 // BUILD
+let lastBuildParams=null; // stored so "Retry" can re-fetch prices without rebuilding the whole plan
+
 async function buildPlan(){
   const budget=parseFloat(document.getElementById('budget').value);
   if(!budget||budget<100){showErr('Please enter a budget of at least $100.');return;}
@@ -1265,14 +1297,14 @@ async function buildPlan(){
   await stepDone('ls2',400);
 
   const allT=[...new Set([...picks.map(p=>p.ticker),...existing.map(h=>h.ticker)])];
-  const prices={};
-  await Promise.all(allT.map(async t=>{prices[t]=await fetchPrice(t);}));
+  const prices=await fetchAllPrices(allT);
   await stepDone('ls3',400); await stepDone('ls4',300);
 
   document.getElementById('loadingState').classList.remove('show');
   document.getElementById('buildBtn').disabled=false;
   curPicks=picks; curBudget=budget;
   curHrzYrs=horizon==='short'?1.5:horizon==='medium'?4:10;
+  lastBuildParams={budget,horizon,picks,existing,ownedPicks,allTickers:allT};
 
   render(budget,horizon,picks,prices,existing,ownedPicks);
 }
@@ -1306,11 +1338,33 @@ function render(budget,horizon,picks,prices,existing,ownedPicks){
   const annIncome=picks.reduce((s,p)=>s+Math.round(budget*p.pct/100)*(p.yield/100),0);
   const divNote=divMode?` Total estimated annual yield: ${avgYield.toFixed(1)}%. Income paid monthly or quarterly.`:'';
 
+  const liveCount=Object.values(prices).filter(v=>v!==null && v!==0).length;
+  const totalCount=Object.keys(prices).length;
+  const fetchTime=new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+  const priceStatus=liveCount===totalCount
+    ? `· Prices fetched live at ${fetchTime}`
+    : liveCount>0
+    ? `· ${liveCount}/${totalCount} prices fetched live at ${fetchTime}, rest unavailable`
+    : `· Live prices unavailable right now — showing estimates`;
+
   document.getElementById('rTitle').textContent=divMode?'Your all-dividends plan':`Your ${fLabels[focus]||focus} plan`;
-  document.getElementById('rDate').textContent=`Generated ${now} · ${hLabel} horizon`;
+  document.getElementById('rDate').textContent=`Generated ${now} · ${hLabel} horizon ${priceStatus}`;
   document.getElementById('riskPill').textContent=riskLevel+' risk';
   document.getElementById('riskPill').className=`risk-pill ${rClass}`;
   document.getElementById('stratNote').textContent=(strats[focus]||'')+divNote;
+
+  // Price warning banner
+  const warnBox=document.getElementById('priceWarning');
+  const warnText=document.getElementById('priceWarningText');
+  if(liveCount===0 && totalCount>0){
+    warnText.textContent="Couldn't reach live prices right now — the numbers below use estimated allocations only. This is usually temporary (a network hiccup or a rate limit), not a problem with your plan.";
+    warnBox.classList.add('show');
+  } else if(liveCount<totalCount){
+    warnText.textContent=`Live prices loaded for ${liveCount} of ${totalCount} picks — the rest show estimated allocations until prices are available.`;
+    warnBox.classList.add('show');
+  } else {
+    warnBox.classList.remove('show');
+  }
 
   // Existing holdings
   const exBox=document.getElementById('exBox');
@@ -1385,7 +1439,7 @@ function render(budget,horizon,picks,prices,existing,ownedPicks){
         <div class="pick-main">
           <div class="pick-hdr">
             <div><div class="pick-ticker">${p.ticker}<span class="tbadge ${tb}">${p.type}</span></div><div class="pick-name">${p.name}</div></div>
-            <div class="pick-right"><div class="pick-price">${price?'$'+(price*1).toFixed(2):'—'}</div><div class="price-label">${price?'current price':'unavailable'}</div></div>
+            <div class="pick-right"><div class="pick-price">${price?'$'+(price*1).toFixed(2):'—'}</div><div class="price-label">${price?'current price':'price pending'}</div></div>
           </div>
           <div class="pick-tags">
             <span class="tag">${p.sector}</span>

@@ -365,6 +365,76 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
 .share-link-box input{flex:1;height:40px;font-size:12px;font-family:'JetBrains Mono',monospace;background:var(--surface2);}
 .share-copy-btn{height:40px;padding:0 16px;border-radius:10px;border:none;background:var(--accent);color:#fff;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;}
 .share-copy-btn.copied{background:var(--green);}
+
+/* PAPER TRADING SIM */
+.sim-btn{display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;border:1.5px solid var(--green)55;background:var(--green-light);color:var(--green);cursor:pointer;font-size:12px;font-weight:700;transition:all .15s;font-family:inherit;}
+.sim-btn:hover{border-color:var(--green);}
+.sim-modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;align-items:center;justify-content:center;padding:1rem;overflow-y:auto;}
+.sim-modal-bg.open{display:flex;}
+.sim-modal{background:var(--surface);border-radius:18px;max-width:560px;width:100%;padding:1.75rem;box-shadow:0 20px 60px rgba(0,0,0,.3);max-height:90vh;overflow-y:auto;}
+.sim-modal h3{font-family:'DM Serif Display',serif;font-size:20px;color:var(--ink);margin-bottom:6px;}
+.sim-modal-sub{font-size:13px;color:var(--ink3);margin-bottom:1.25rem;line-height:1.6;}
+.sim-pick-row{display:grid;grid-template-columns:28px 1fr 110px;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);}
+.sim-pick-row:last-child{border-bottom:none;}
+.sim-pick-row input[type="checkbox"]{width:18px;height:18px;accent-color:var(--accent);cursor:pointer;}
+.sim-pick-info{min-width:0;}
+.sim-pick-ticker{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:600;color:var(--ink);}
+.sim-pick-meta{font-size:11px;color:var(--ink3);}
+.sim-pick-amt{position:relative;}
+.sim-pick-amt .prefix{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:13px;color:var(--ink3);}
+.sim-pick-amt input{width:100%;height:38px;padding:0 10px 0 22px;border:1.5px solid var(--border2);border-radius:8px;font-size:13px;font-family:inherit;color:var(--ink);background:var(--surface2);}
+.sim-pick-row.dim{opacity:.4;}
+.sim-total-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0 6px;font-size:13px;color:var(--ink2);font-weight:600;}
+.sim-total-row span:last-child{font-family:'JetBrains Mono',monospace;font-size:16px;color:var(--ink);}
+.sim-name-field{margin:1rem 0;}
+.sim-name-field label{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px;display:block;}
+.sim-name-field input{width:100%;height:44px;padding:0 14px;border:1.5px solid var(--border2);border-radius:10px;font-size:14px;font-family:inherit;color:var(--ink);background:var(--surface2);}
+.sim-start-btn{width:100%;height:50px;background:var(--green);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;transition:opacity .15s;margin-top:.5rem;}
+.sim-start-btn:hover{opacity:.9;}
+.sim-start-btn:disabled{background:var(--ink4);cursor:not-allowed;}
+.sim-close{width:100%;text-align:center;padding:10px;font-size:13px;color:var(--ink3);cursor:pointer;background:none;border:none;font-family:inherit;margin-top:6px;}
+.sim-note{font-size:11px;color:var(--ink4);line-height:1.55;margin-top:.75rem;}
+
+.sim-section{background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:2rem;}
+.sim-section-header{display:flex;align-items:center;gap:10px;margin-bottom:1rem;}
+.sim-section-icon{font-size:20px;}
+.sim-section-title{font-family:'DM Serif Display',serif;font-size:18px;color:var(--ink);}
+.sim-section-sub{font-size:12px;color:var(--ink3);margin-top:1px;}
+.sim-list{display:flex;flex-direction:column;gap:14px;}
+.sim-card{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;overflow:hidden;}
+.sim-card-hdr{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 18px;cursor:pointer;flex-wrap:wrap;}
+.sim-card-name{font-size:14px;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:8px;}
+.sim-status-pill{font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;letter-spacing:.04em;text-transform:uppercase;}
+.sim-status-open{background:var(--green-light);color:var(--green);}
+.sim-status-closed{background:var(--surface2);color:var(--ink3);border:1px solid var(--border2);}
+.sim-card-pl{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:600;}
+.sim-card-pl.up{color:var(--green);}
+.sim-card-pl.down{color:var(--red);}
+.sim-card-toggle{font-size:16px;color:var(--ink3);transition:transform .2s;}
+.sim-card-toggle.open{transform:rotate(180deg);}
+.sim-card-body{display:none;padding:0 18px 18px;border-top:1px solid var(--border);}
+.sim-card-body.open{display:block;padding-top:14px;}
+.sim-card-meta-row{font-size:12px;color:var(--ink3);margin-bottom:14px;}
+.sim-chart-wrap{position:relative;width:100%;height:200px;margin-bottom:1rem;}
+.sim-holdings-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:8px;}
+.sim-holdings-table th{text-align:left;color:var(--ink3);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;padding:6px 8px;border-bottom:1px solid var(--border);}
+.sim-holdings-table td{padding:8px 8px;border-bottom:1px solid var(--border);color:var(--ink2);}
+.sim-holdings-table tr:last-child td{border-bottom:none;}
+.sim-h-ticker{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--ink);}
+.sim-h-pl{font-weight:600;}
+.sim-h-pl.up{color:var(--green);}
+.sim-h-pl.down{color:var(--red);}
+.sim-sell-btn{font-size:11px;font-weight:600;padding:4px 10px;border-radius:14px;border:1.5px solid var(--red)55;background:var(--red-light);color:var(--red);cursor:pointer;font-family:inherit;transition:all .15s;}
+.sim-sell-btn:hover{border-color:var(--red);}
+.sim-sold-tag{font-size:11px;color:var(--ink4);font-style:italic;}
+.sim-card-actions{display:flex;gap:8px;margin-top:10px;}
+.sim-refresh-btn{flex:1;padding:9px 14px;border-radius:10px;border:1.5px solid var(--border2);background:var(--surface2);color:var(--ink2);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;}
+.sim-refresh-btn:hover{border-color:var(--accent);color:var(--accent);}
+.sim-delete-btn{padding:9px 14px;border-radius:10px;border:1.5px solid var(--red)44;background:none;color:var(--red);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;}
+.sim-delete-btn:hover{background:var(--red-light);}
+.sim-empty{font-size:13px;color:var(--ink3);text-align:center;padding:1.25rem 0;}
+.sim-signin-prompt{text-align:center;padding:1rem;font-size:13px;color:var(--ink3);}
+.sim-signin-prompt button{color:var(--accent);font-weight:600;background:none;border:none;cursor:pointer;font-family:inherit;font-size:13px;text-decoration:underline;}
 </style>
 </head>
 <body>
@@ -451,6 +521,24 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
       </div>
       <div class="div-pill" id="divPill">OFF</div>
     </div>
+    <!-- PAPER TRADING SIMULATOR -->
+    <div class="sim-section" id="simSection" style="display:none;">
+      <div class="sim-section-header">
+        <div class="sim-section-icon">📈</div>
+        <div>
+          <div class="sim-section-title">Paper trading</div>
+          <div class="sim-section-sub">Test your picks with fake cash against real, live market prices</div>
+        </div>
+      </div>
+      <div class="sim-list" id="simList"></div>
+    </div>
+    <div class="sim-section" id="simSigninSection" style="display:none;">
+      <div class="sim-signin-prompt">
+        <span style="font-size:20px;display:block;margin-bottom:6px;">📈</span>
+        <button onclick="openAuthModal()">Sign in or create a free account</button> to paper-trade your picks with fake cash and track them against the real market.
+      </div>
+    </div>
+
     <!-- EXISTING HOLDINGS -->
     <div class="portfolio-section">
       <div class="portfolio-header" onclick="togglePortfolio()">
@@ -593,7 +681,10 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
         <div class="dc-note">Assumes dividend yield stays constant on cost basis plus the entered annual growth rate, and that share price grows at this portfolio's blended historical rate. Illustrative only — actual dividend payments vary and are not guaranteed.</div>
       </div>
 
-      <div class="sec-heading" style="margin-bottom:12px;">What to buy — pick by pick</div>
+      <div class="sec-heading" style="margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+        <span>What to buy — pick by pick</span>
+        <button class="sim-btn" onclick="openSimModal()">📈 Simulate this plan</button>
+      </div>
       <div class="price-warning" id="priceWarning">
         <div class="price-warning-text">
           <span class="price-warning-icon">⚠️</span>
@@ -726,6 +817,23 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
   </div>
 </div>
 
+<!-- PAPER TRADING SIM MODAL -->
+<div class="sim-modal-bg" id="simModalBg" onclick="if(event.target===this)closeSimModal()">
+  <div class="sim-modal">
+    <h3>Start a paper trade</h3>
+    <div class="sim-modal-sub">Check the picks you want to test, set how much fake cash goes into each, then track them against real, live market prices over time.</div>
+    <div id="simPickRows"></div>
+    <div class="sim-total-row"><span>Total fake cash invested</span><span id="simTotalAmt">$0</span></div>
+    <div class="sim-name-field">
+      <label for="simNameInput">Name this simulation (optional)</label>
+      <input type="text" id="simNameInput" placeholder="e.g. 'Testing the balanced growth plan'">
+    </div>
+    <button class="sim-start-btn" id="simStartBtn" onclick="startSimulation()">📈 Start paper trading at today's prices</button>
+    <button class="sim-close" onclick="closeSimModal()">Cancel</button>
+    <div class="sim-note">This uses fake money only — nothing is bought or sold for real. Entry prices are today's live (or estimated) prices. Sign in required so your simulation can be saved and tracked over time.</div>
+  </div>
+</div>
+
 <canvas id="confettiCanvas"></canvas>
 <script>
 // ── SUPABASE SETUP ──
@@ -757,14 +865,20 @@ function onAuthSuccess(user){
     </button>`;
   document.getElementById('plansSection').style.display='block';
   document.getElementById('signinPromptSection').style.display='none';
+  document.getElementById('simSection').style.display='block';
+  document.getElementById('simSigninSection').style.display='none';
   loadUserPlans();
+  loadUserSims();
 }
 function onSignOut(){
   currentUser=null;
   userPlans=[];
+  userSims=[];
   document.getElementById('authArea').innerHTML=`<button class="auth-btn" id="loginBtn" onclick="openAuthModal()">Sign in</button>`;
   document.getElementById('plansSection').style.display='none';
   document.getElementById('signinPromptSection').style.display='block';
+  document.getElementById('simSection').style.display='none';
+  document.getElementById('simSigninSection').style.display='block';
 }
 function toggleUserMenu(){
   if(confirm('Sign out of Vestly?')) signOut();
@@ -1265,6 +1379,9 @@ function makeLabels(back,fwd){
 // STATE
 let allocChartInst=null,perfChartInst=null;
 let curPicks=[],curBudget=0,curRisk='Moderate',curHrzYrs=4;
+let lastPrices={};
+let userSims=[];
+let simChartInsts={};
 let activeTicker=null,activeRange='3y';
 
 function stepDone(id,d){return new Promise(r=>setTimeout(()=>{document.getElementById(id).classList.add('done');r();},d));}
@@ -1310,6 +1427,7 @@ async function buildPlan(){
 }
 
 function render(budget,horizon,picks,prices,existing,ownedPicks){
+  lastPrices=prices;
   const hLabel=horizon==='short'?'1–2 yrs':horizon==='medium'?'3–5 yrs':'7+ yrs';
   const yrs=horizon==='short'?1.5:horizon==='medium'?4:10;
   const now=new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
@@ -1503,7 +1621,10 @@ function render(budget,horizon,picks,prices,existing,ownedPicks){
           <div class="buy-icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
           <div><div class="buy-shares">${sharesText}</div><div class="buy-cost">${costText}</div></div>
         </div>
-        <div><div class="alloc-pct">${p.pct}%</div><div class="alloc-label">of budget</div></div>
+        <div style="display:flex;align-items:center;gap:14px;">
+          <button class="sim-btn" onclick="openSimModal('${p.ticker}')">📈 Simulate</button>
+          <div><div class="alloc-pct">${p.pct}%</div><div class="alloc-label">of budget</div></div>
+        </div>
       </div>
     </div>`;
   }).join('');
@@ -1779,6 +1900,332 @@ function runCompare(){
   document.getElementById('compareGrid').innerHTML=
     colHtml(a,fLabels[focusA]) + colHtml(b,fLabels[focusB]) +
     `<div style="grid-column:1/-1;font-size:11px;color:var(--ink4);margin-top:4px;">Based on a $${budget.toLocaleString()} budget over ${yrs} year${yrs!==1?'s':''}. Build a full plan first for these numbers to reflect your actual budget and horizon — otherwise this uses a $10,000 / 4-year default.</div>`;
+}
+
+// ══════════════════════════════════════════
+// PAPER TRADING SIMULATOR
+// Lets a user "invest" fake cash in real picks at today's real (or estimated)
+// live price, then track that position against the real market over time.
+// Each time the sim card is opened/refreshed, the current price is logged as
+// a new point in that holding's price-history array (persisted to Supabase),
+// building a real chart of how the simulated trade has actually performed.
+//
+// REQUIRES a Supabase table named `sim_portfolios` (not created automatically
+// by this frontend). Run once in the Supabase SQL editor:
+//
+//   create table sim_portfolios (
+//     id uuid primary key default gen_random_uuid(),
+//     user_id uuid references auth.users(id) not null,
+//     name text not null,
+//     total_invested numeric not null default 0,
+//     holdings jsonb not null default '[]',
+//     status text not null default 'open',
+//     created_at timestamptz not null default now()
+//   );
+//   alter table sim_portfolios enable row level security;
+//   create policy "Users manage their own sim portfolios" on sim_portfolios
+//     for all using (auth.uid() = user_id) with check (auth.uid() = user_id);
+// ══════════════════════════════════════════
+
+let simModalTicker=null; // if opened from a single pick's "Simulate" button, pre-checks just that one
+
+function openSimModal(onlyTicker){
+  if(!currentUser){ closeSimModal(); openAuthModal(); return; }
+  if(!curPicks.length){ alert('Build a plan first, then you can simulate it.'); return; }
+  simModalTicker=onlyTicker||null;
+
+  const rows=document.getElementById('simPickRows');
+  rows.innerHTML=curPicks.map(p=>{
+    const dollars=Math.round(curBudget*p.pct/100);
+    const checked=onlyTicker?(p.ticker===onlyTicker):true;
+    return `<div class="sim-pick-row${checked?'':' dim'}" id="simRow-${p.ticker}">
+      <input type="checkbox" id="simChk-${p.ticker}" ${checked?'checked':''} onchange="onSimRowToggle('${p.ticker}')">
+      <div class="sim-pick-info">
+        <div class="sim-pick-ticker">${p.ticker}</div>
+        <div class="sim-pick-meta">${p.name} · ${p.pct}% of plan</div>
+      </div>
+      <div class="sim-pick-amt"><span class="prefix">$</span><input type="number" id="simAmt-${p.ticker}" value="${dollars}" min="0" step="50" oninput="updateSimTotal()"></div>
+    </div>`;
+  }).join('');
+  updateSimTotal();
+  document.getElementById('simNameInput').value='';
+  document.getElementById('simModalBg').classList.add('open');
+}
+function closeSimModal(){
+  document.getElementById('simModalBg').classList.remove('open');
+}
+function onSimRowToggle(ticker){
+  const row=document.getElementById('simRow-'+ticker);
+  const chk=document.getElementById('simChk-'+ticker);
+  row.classList.toggle('dim',!chk.checked);
+  updateSimTotal();
+}
+function updateSimTotal(){
+  let total=0;
+  curPicks.forEach(p=>{
+    const chk=document.getElementById('simChk-'+p.ticker);
+    if(chk&&chk.checked) total+=parseFloat(document.getElementById('simAmt-'+p.ticker).value)||0;
+  });
+  document.getElementById('simTotalAmt').textContent='$'+Math.round(total).toLocaleString();
+}
+
+async function startSimulation(){
+  if(!currentUser){ openAuthModal(); return; }
+  const selected=curPicks.filter(p=>{
+    const chk=document.getElementById('simChk-'+p.ticker);
+    return chk&&chk.checked;
+  }).map(p=>({
+    ticker:p.ticker,name:p.name,type:p.type,
+    amount:parseFloat(document.getElementById('simAmt-'+p.ticker).value)||0,
+  })).filter(h=>h.amount>0);
+
+  if(!selected.length){ alert('Check at least one pick and give it an amount above $0.'); return; }
+
+  const btn=document.getElementById('simStartBtn');
+  btn.disabled=true; btn.textContent='Fetching live entry prices…';
+
+  const tickers=selected.map(h=>h.ticker);
+  const prices=await fetchAllPrices(tickers);
+  const now=new Date().toISOString();
+
+  const holdings=selected.map(h=>{
+    const price=prices[h.ticker]||lastPrices[h.ticker]||null;
+    const shares=price?+(h.amount/price).toFixed(6):0;
+    return{
+      ticker:h.ticker,name:h.name,type:h.type,
+      amountInvested:h.amount,
+      entryPrice:price,
+      entryDate:now,
+      shares,
+      status:'open', // 'open' | 'sold'
+      exitPrice:null,
+      exitDate:null,
+      history:price?[{date:now,price}]:[],
+    };
+  });
+
+  const totalInvested=holdings.reduce((s,h)=>s+h.amountInvested,0);
+  const name=document.getElementById('simNameInput').value.trim()||('Paper trade — '+new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}));
+
+  try{
+    const{error}=await sb.from('sim_portfolios').insert({
+      user_id:currentUser.id,
+      name,
+      total_invested:totalInvested,
+      holdings,
+      status:'open',
+    });
+    if(error) throw error;
+    closeSimModal();
+    await loadUserSims();
+    document.getElementById('simSection').scrollIntoView({behavior:'smooth',block:'start'});
+  }catch(e){
+    alert('Could not start simulation: '+(e.message||'unknown error'));
+  }
+  btn.disabled=false; btn.textContent="📈 Start paper trading at today's prices";
+}
+
+async function loadUserSims(){
+  if(!currentUser) return;
+  try{
+    const{data,error}=await sb.from('sim_portfolios').select('*').order('created_at',{ascending:false});
+    if(error) throw error;
+    userSims=data||[];
+    renderSimList();
+  }catch(e){
+    console.error('Failed to load paper trades',e);
+  }
+}
+
+function calcSimPL(sim,livePrices){
+  let invested=0,currentValue=0;
+  (sim.holdings||[]).forEach(h=>{
+    invested+=h.amountInvested;
+    if(h.status==='sold'){
+      currentValue+=h.amountInvested*((h.exitPrice||h.entryPrice||0)/(h.entryPrice||1));
+    } else {
+      const live=livePrices?.[h.ticker];
+      const price=live!=null?live:(h.history&&h.history.length?h.history[h.history.length-1].price:h.entryPrice);
+      currentValue+=price&&h.entryPrice?h.amountInvested*(price/h.entryPrice):h.amountInvested;
+    }
+  });
+  return{invested,currentValue,pl:currentValue-invested,plPct:invested?((currentValue-invested)/invested*100):0};
+}
+
+function renderSimList(){
+  const list=document.getElementById('simList');
+  if(!userSims.length){
+    list.innerHTML=`<div class="sim-empty">No paper trades yet — open a plan above and click "Simulate" on any pick or the whole plan.</div>`;
+    return;
+  }
+  list.innerHTML=userSims.map(sim=>{
+    const{invested,currentValue,pl,plPct}=calcSimPL(sim,null);
+    const up=pl>=0;
+    const startDate=sim.created_at?new Date(sim.created_at).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'';
+    const openCount=(sim.holdings||[]).filter(h=>h.status!=='sold').length;
+    const soldCount=(sim.holdings||[]).filter(h=>h.status==='sold').length;
+    return `<div class="sim-card" id="simCard-${sim.id}">
+      <div class="sim-card-hdr" onclick="toggleSimCard('${sim.id}')">
+        <div class="sim-card-name">
+          ${escapeHtml(sim.name)}
+          <span class="sim-status-pill ${sim.status==='closed'?'sim-status-closed':'sim-status-open'}">${sim.status==='closed'?'Closed':'Open'}</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px;">
+          <div class="sim-card-pl ${up?'up':'down'}">${up?'+':''}$${Math.abs(Math.round(pl)).toLocaleString()} (${up?'+':''}${plPct.toFixed(1)}%)</div>
+          <span class="sim-card-toggle" id="simToggle-${sim.id}">▾</span>
+        </div>
+      </div>
+      <div class="sim-card-body" id="simBody-${sim.id}">
+        <div class="sim-card-meta-row">Started ${startDate} with <strong>$${Math.round(invested).toLocaleString()}</strong> fake cash · ${openCount} open position${openCount!==1?'s':''}${soldCount?` · ${soldCount} sold`:''} · now worth <strong>$${Math.round(currentValue).toLocaleString()}</strong></div>
+        <div class="sim-chart-wrap"><canvas id="simChart-${sim.id}"></canvas></div>
+        <table class="sim-holdings-table">
+          <tr><th>Ticker</th><th>Invested</th><th>Entry</th><th>Current</th><th>P/L</th><th></th></tr>
+          ${(sim.holdings||[]).map(h=>renderSimHoldingRow(sim.id,h)).join('')}
+        </table>
+        <div class="sim-card-actions">
+          <button class="sim-refresh-btn" onclick="refreshSim('${sim.id}')">🔄 Refresh live prices</button>
+          <button class="sim-delete-btn" onclick="deleteSim('${sim.id}')">Delete</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderSimHoldingRow(simId,h){
+  const sold=h.status==='sold';
+  const lastPrice=sold?h.exitPrice:(h.history&&h.history.length?h.history[h.history.length-1].price:h.entryPrice);
+  const pl=h.entryPrice&&lastPrice?h.amountInvested*((lastPrice-h.entryPrice)/h.entryPrice):0;
+  const plPct=h.entryPrice&&lastPrice?((lastPrice-h.entryPrice)/h.entryPrice*100):0;
+  const up=pl>=0;
+  return `<tr>
+    <td class="sim-h-ticker">${h.ticker}</td>
+    <td>$${Math.round(h.amountInvested).toLocaleString()}</td>
+    <td>${h.entryPrice?'$'+h.entryPrice.toFixed(2):'—'}</td>
+    <td>${lastPrice?'$'+lastPrice.toFixed(2):'—'}</td>
+    <td class="sim-h-pl ${up?'up':'down'}">${up?'+':''}$${Math.abs(Math.round(pl)).toLocaleString()} (${up?'+':''}${plPct.toFixed(1)}%)</td>
+    <td>${sold?`<span class="sim-sold-tag">Sold ${h.exitDate?new Date(h.exitDate).toLocaleDateString('en-US',{month:'short',day:'numeric'}):''}</span>`:`<button class="sim-sell-btn" onclick="sellSimHolding('${simId}','${h.ticker}')">Sell</button>`}</td>
+  </tr>`;
+}
+
+async function toggleSimCard(simId){
+  const body=document.getElementById('simBody-'+simId);
+  const toggle=document.getElementById('simToggle-'+simId);
+  const opening=!body.classList.contains('open');
+  body.classList.toggle('open');
+  toggle.classList.toggle('open');
+  if(opening){
+    await refreshSim(simId,true);
+  }
+}
+
+async function refreshSim(simId,silent){
+  const sim=userSims.find(s=>s.id===simId);
+  if(!sim) return;
+  const openHoldings=(sim.holdings||[]).filter(h=>h.status!=='sold');
+  if(openHoldings.length){
+    const prices=await fetchAllPrices(openHoldings.map(h=>h.ticker));
+    const now=new Date().toISOString();
+    sim.holdings=(sim.holdings||[]).map(h=>{
+      if(h.status==='sold') return h;
+      const price=prices[h.ticker];
+      if(price==null) return h; // keep last known price if fetch failed
+      const history=[...(h.history||[]),{date:now,price}].slice(-60); // cap history length
+      return{...h,history};
+    });
+    try{
+      await sb.from('sim_portfolios').update({holdings:sim.holdings}).eq('id',simId);
+    }catch(e){ console.error('Could not save price update',e); }
+  }
+  renderSimList();
+  // re-open this card and redraw its chart after re-render
+  const body=document.getElementById('simBody-'+simId);
+  const toggle=document.getElementById('simToggle-'+simId);
+  if(body){ body.classList.add('open'); if(toggle) toggle.classList.add('open'); }
+  drawSimChart(sim);
+}
+
+function drawSimChart(sim){
+  const canvas=document.getElementById('simChart-'+sim.id);
+  if(!canvas) return;
+  const dark=document.documentElement.dataset.theme==='dark';
+  const gc=dark?'rgba(255,255,255,.04)':'rgba(0,0,0,.05)';
+  const tc=dark?'#555':'#aaa';
+
+  // Build a combined portfolio value series from each holding's history, aligned by date.
+  const allDates=new Set();
+  (sim.holdings||[]).forEach(h=>(h.history||[]).forEach(pt=>allDates.add(pt.date)));
+  const dates=[...allDates].sort();
+  if(!dates.length){
+    if(simChartInsts[sim.id]){ simChartInsts[sim.id].destroy(); delete simChartInsts[sim.id]; }
+    return;
+  }
+  const series=dates.map(d=>{
+    let value=0;
+    (sim.holdings||[]).forEach(h=>{
+      const pts=(h.history||[]).filter(p=>p.date<=d);
+      if(pts.length){
+        const price=pts[pts.length-1].price;
+        value+=h.entryPrice?h.amountInvested*(price/h.entryPrice):h.amountInvested;
+      } else {
+        value+=h.amountInvested;
+      }
+    });
+    return Math.round(value);
+  });
+  const labels=dates.map(d=>new Date(d).toLocaleDateString('en-US',{month:'short',day:'numeric',hour:dates.length<3?'numeric':undefined}));
+  const invested=sim.total_invested||(sim.holdings||[]).reduce((s,h)=>s+h.amountInvested,0);
+
+  if(simChartInsts[sim.id]) simChartInsts[sim.id].destroy();
+  simChartInsts[sim.id]=new Chart(canvas,{
+    type:'line',
+    data:{labels,datasets:[
+      {label:'Portfolio value',data:series,borderColor:'#16a34a',backgroundColor:'#16a34a22',borderWidth:2.5,pointRadius:dates.length<6?3:0,tension:.25,fill:true},
+      {label:'Invested',data:dates.map(()=>Math.round(invested)),borderColor:tc,borderWidth:1.5,borderDash:[4,4],pointRadius:0,fill:false}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: $${ctx.parsed.y.toLocaleString()}`}}},
+      scales:{x:{grid:{color:gc},ticks:{font:{size:10},color:tc,maxTicksLimit:6},border:{display:false}},
+               y:{grid:{color:gc},ticks:{font:{size:10},color:tc,callback:v=>'$'+(Math.abs(v)>=1000?(v/1000).toFixed(1)+'k':v)},border:{display:false}}}}
+  });
+}
+
+async function sellSimHolding(simId,ticker){
+  const sim=userSims.find(s=>s.id===simId);
+  if(!sim) return;
+  if(!confirm(`Sell your simulated ${ticker} position at today's live price? This locks in the result.`)) return;
+  const price=await fetchPrice(ticker);
+  const h=(sim.holdings||[]).find(x=>x.ticker===ticker);
+  if(!h) return;
+  const finalPrice=price!=null?price:(h.history&&h.history.length?h.history[h.history.length-1].price:h.entryPrice);
+  const now=new Date().toISOString();
+  sim.holdings=sim.holdings.map(x=>x.ticker===ticker?{
+    ...x,status:'sold',exitPrice:finalPrice,exitDate:now,
+    history:[...(x.history||[]),{date:now,price:finalPrice}]
+  }:x);
+  const allSold=sim.holdings.every(x=>x.status==='sold');
+  try{
+    await sb.from('sim_portfolios').update({holdings:sim.holdings,status:allSold?'closed':sim.status}).eq('id',simId);
+    sim.status=allSold?'closed':sim.status;
+  }catch(e){
+    alert('Could not record sale: '+(e.message||'unknown error'));
+    return;
+  }
+  renderSimList();
+  const body=document.getElementById('simBody-'+simId);
+  const toggle=document.getElementById('simToggle-'+simId);
+  if(body){ body.classList.add('open'); if(toggle) toggle.classList.add('open'); }
+  drawSimChart(sim);
+}
+
+async function deleteSim(simId){
+  if(!confirm('Delete this paper trade? This cannot be undone.')) return;
+  try{
+    const{error}=await sb.from('sim_portfolios').delete().eq('id',simId);
+    if(error) throw error;
+    if(simChartInsts[simId]){ simChartInsts[simId].destroy(); delete simChartInsts[simId]; }
+    loadUserSims();
+  }catch(e){
+    alert('Could not delete: '+(e.message||'unknown error'));
+  }
 }
 </script>
 </body>

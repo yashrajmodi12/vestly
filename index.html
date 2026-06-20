@@ -1930,7 +1930,11 @@ function runCompare(){
 let simModalTicker=null; // if opened from a single pick's "Simulate" button, pre-checks just that one
 
 function openSimModal(onlyTicker){
-  if(!currentUser){ closeSimModal(); openAuthModal(); return; }
+  if(!currentUser){
+    alert('Sign in first — paper trades are saved to your account so you can track them over time.');
+    openAuthModal();
+    return;
+  }
   if(!curPicks.length){ alert('Build a plan first, then you can simulate it.'); return; }
   simModalTicker=onlyTicker||null;
 
@@ -1970,7 +1974,12 @@ function updateSimTotal(){
 }
 
 async function startSimulation(){
-  if(!currentUser){ openAuthModal(); return; }
+  if(!currentUser){
+    closeSimModal();
+    alert('Please sign in first — paper trades are saved to your account so you can track them over time.');
+    openAuthModal();
+    return;
+  }
   const selected=curPicks.filter(p=>{
     const chk=document.getElementById('simChk-'+p.ticker);
     return chk&&chk.checked;
@@ -1984,30 +1993,37 @@ async function startSimulation(){
   const btn=document.getElementById('simStartBtn');
   btn.disabled=true; btn.textContent='Fetching live entry prices…';
 
-  const tickers=selected.map(h=>h.ticker);
-  const prices=await fetchAllPrices(tickers);
-  const now=new Date().toISOString();
-
-  const holdings=selected.map(h=>{
-    const price=prices[h.ticker]||lastPrices[h.ticker]||null;
-    const shares=price?+(h.amount/price).toFixed(6):0;
-    return{
-      ticker:h.ticker,name:h.name,type:h.type,
-      amountInvested:h.amount,
-      entryPrice:price,
-      entryDate:now,
-      shares,
-      status:'open', // 'open' | 'sold'
-      exitPrice:null,
-      exitDate:null,
-      history:price?[{date:now,price}]:[],
-    };
-  });
-
-  const totalInvested=holdings.reduce((s,h)=>s+h.amountInvested,0);
-  const name=document.getElementById('simNameInput').value.trim()||('Paper trade — '+new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}));
-
   try{
+    let prices={};
+    try{
+      const tickers=selected.map(h=>h.ticker);
+      prices=await fetchAllPrices(tickers);
+    }catch(e){
+      console.error('Price fetch failed, continuing with estimated prices',e);
+      prices={};
+    }
+    const now=new Date().toISOString();
+
+    const holdings=selected.map(h=>{
+      const price=prices[h.ticker]||lastPrices[h.ticker]||null;
+      const shares=price?+(h.amount/price).toFixed(6):0;
+      return{
+        ticker:h.ticker,name:h.name,type:h.type,
+        amountInvested:h.amount,
+        entryPrice:price,
+        entryDate:now,
+        shares,
+        status:'open', // 'open' | 'sold'
+        exitPrice:null,
+        exitDate:null,
+        history:price?[{date:now,price}]:[],
+      };
+    });
+
+    const totalInvested=holdings.reduce((s,h)=>s+h.amountInvested,0);
+    const name=document.getElementById('simNameInput').value.trim()||('Paper trade — '+new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}));
+
+    btn.textContent='Saving…';
     const{error}=await sb.from('sim_portfolios').insert({
       user_id:currentUser.id,
       name,
@@ -2020,9 +2036,11 @@ async function startSimulation(){
     await loadUserSims();
     document.getElementById('simSection').scrollIntoView({behavior:'smooth',block:'start'});
   }catch(e){
-    alert('Could not start simulation: '+(e.message||'unknown error'));
+    console.error('Could not start simulation',e);
+    alert('Could not start simulation: '+(e?.message||'unknown error. If this keeps happening, the "sim_portfolios" table may not be set up in Supabase yet.'));
+  }finally{
+    btn.disabled=false; btn.textContent="📈 Start paper trading at today's prices";
   }
-  btn.disabled=false; btn.textContent="📈 Start paper trading at today's prices";
 }
 
 async function loadUserSims(){

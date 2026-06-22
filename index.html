@@ -435,6 +435,66 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
 .sim-empty{font-size:13px;color:var(--ink3);text-align:center;padding:1.25rem 0;}
 .sim-signin-prompt{text-align:center;padding:1rem;font-size:13px;color:var(--ink3);}
 .sim-signin-prompt button{color:var(--accent);font-weight:600;background:none;border:none;cursor:pointer;font-family:inherit;font-size:13px;text-decoration:underline;}
+
+/* STOCK LOOKUP */
+.lookup-section{background:var(--surface);border:1px solid var(--border);border-radius:24px;box-shadow:var(--shadow);max-width:920px;margin:0 auto 3rem;overflow:hidden;}
+.lookup-header{background:var(--hdr);padding:1.5rem 2rem;}
+.lookup-header h2{font-family:'DM Serif Display',serif;font-size:20px;color:#fff;font-weight:400;}
+.lookup-header p{font-size:13px;color:rgba(255,255,255,.4);margin-top:2px;}
+.lookup-body{padding:2rem;}
+.lookup-bar{display:flex;gap:10px;position:relative;}
+.lookup-input-wrap{flex:1;position:relative;}
+.lookup-input-wrap svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:17px;height:17px;stroke:var(--ink3);pointer-events:none;}
+#lookupInput{width:100%;height:50px;padding:0 14px 0 42px;border:1.5px solid var(--border2);border-radius:12px;font-size:15px;font-family:inherit;color:var(--ink);background:var(--surface2);}
+#lookupInput:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent)22;}
+.lookup-go-btn{height:50px;padding:0 24px;background:var(--accent);color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;transition:background .15s;white-space:nowrap;}
+.lookup-go-btn:hover{background:var(--accent-h);}
+.lookup-go-btn:disabled{background:var(--ink4);cursor:not-allowed;}
+.lookup-suggest-list{position:absolute;top:56px;left:0;right:0;background:var(--surface);border:1.5px solid var(--border2);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.12);z-index:50;max-height:280px;overflow-y:auto;display:none;}
+.lookup-suggest-list.show{display:block;}
+.lookup-suggest-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 16px;cursor:pointer;transition:background .1s;border-bottom:1px solid var(--border);}
+.lookup-suggest-item:last-child{border-bottom:none;}
+.lookup-suggest-item:hover{background:var(--surface2);}
+.lookup-suggest-ticker{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:13px;color:var(--ink);}
+.lookup-suggest-name{font-size:12px;color:var(--ink3);}
+.lookup-examples{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+.lookup-ex-chip{font-size:12px;font-weight:500;padding:6px 14px;border-radius:20px;border:1.5px solid var(--border2);background:var(--surface2);color:var(--ink2);cursor:pointer;font-family:inherit;transition:all .15s;}
+.lookup-ex-chip:hover{border-color:var(--accent);color:var(--accent);}
+.lookup-loading{display:none;text-align:center;padding:2rem;color:var(--ink3);}
+.lookup-loading.show{display:block;}
+.lookup-error{display:none;background:var(--red-light);border:1px solid var(--red)44;border-radius:10px;padding:12px 16px;font-size:13px;color:var(--red);margin-top:1rem;}
+.lookup-error.show{display:block;}
+.lookup-result{display:none;margin-top:1.5rem;}
+.lookup-result.show{display:block;}
+.lookup-result-hdr{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:1.25rem;}
+.lookup-result-id{display:flex;align-items:center;gap:12px;}
+.lookup-result-ticker{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:600;color:var(--ink);}
+.lookup-result-name{font-size:14px;color:var(--ink3);margin-top:2px;}
+.lookup-result-price-block{text-align:right;}
+.lookup-result-price{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:600;color:var(--ink);}
+.lookup-price-tag{font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;margin-top:4px;display:inline-block;}
+.lookup-price-live{background:var(--green-light);color:var(--green);}
+.lookup-price-est{background:var(--accent-light);color:var(--accent);}
+.lookup-result-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.25rem;}
+.lookup-explain-card{background:var(--accent-light);border-left:3px solid var(--accent);border-radius:10px;padding:14px 18px;font-size:14px;color:var(--ink2);line-height:1.65;margin-bottom:1.5rem;}
+.lookup-stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:1.5rem;}
+.lookup-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:.5rem;}
+.lookup-action-btn{flex:1;min-width:160px;height:46px;border-radius:10px;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .15s;}
+.lookup-add-holding-btn{background:var(--accent);color:#fff;border:none;}
+.lookup-add-holding-btn:hover{background:var(--accent-h);}
+.lookup-sim-btn-result{background:var(--green-light);color:var(--green);border:1.5px solid var(--green)55;}
+.lookup-sim-btn-result:hover{border-color:var(--green);}
+.lookup-unknown-note{font-size:12px;color:var(--ink4);line-height:1.6;margin-top:1rem;padding-top:1rem;border-top:1px dashed var(--border);}
+.stat-source-tag{font-size:9px;font-weight:700;padding:1px 7px;border-radius:20px;letter-spacing:.03em;text-transform:uppercase;}
+.stat-source-real{background:var(--green-light);color:var(--green);}
+.stat-source-est{background:var(--surface2);color:var(--ink4);border:1px solid var(--border2);}
+.lookup-news-section{margin-top:1.5rem;}
+.lookup-news-list{display:flex;flex-direction:column;gap:8px;}
+.lookup-news-item{display:block;padding:12px 14px;border:1px solid var(--border);border-radius:10px;text-decoration:none;color:inherit;transition:all .15s;background:var(--surface2);}
+.lookup-news-item:hover{border-color:var(--accent);background:var(--surface);}
+.lookup-news-headline{font-size:13px;font-weight:600;color:var(--ink);line-height:1.4;margin-bottom:3px;}
+.lookup-news-meta{font-size:11px;color:var(--ink3);}
+.lookup-news-empty{font-size:13px;color:var(--ink3);padding:1rem 0;text-align:center;}
 </style>
 </head>
 <body>
@@ -456,6 +516,38 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
   <div class="hero-eyebrow">Personal investment planner</div>
   <h1>Put in your budget.<br>Get a <em>real plan</em>.</h1>
   <p class="hero-sub">Enter your budget, add your existing holdings, choose a strategy — and get a full plan built around you. Live prices, historical charts, what-if simulator, dividend income estimates.</p>
+</div>
+
+<!-- STOCK LOOKUP -->
+<div class="lookup-section">
+  <div class="lookup-header">
+    <h2>Look up any stock or ETF</h2>
+    <p>Search a ticker or company name — plain-English info, no jargon</p>
+  </div>
+  <div class="lookup-body">
+    <div class="lookup-bar">
+      <div class="lookup-input-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="lookupInput" placeholder="Try a ticker like NVDA, or a name like 'Apple'" autocomplete="off" oninput="onLookupInput()" onkeydown="if(event.key==='Enter'){hideLookupSuggestions();runLookup();}">
+        <div class="lookup-suggest-list" id="lookupSuggestList"></div>
+      </div>
+      <button class="lookup-go-btn" id="lookupGoBtn" onclick="hideLookupSuggestions();runLookup();">Search</button>
+    </div>
+    <div class="lookup-examples">
+      <span style="font-size:11px;color:var(--ink4);align-self:center;margin-right:2px;">Try:</span>
+      <button class="lookup-ex-chip" onclick="quickLookup('AAPL')">AAPL</button>
+      <button class="lookup-ex-chip" onclick="quickLookup('NVDA')">NVDA</button>
+      <button class="lookup-ex-chip" onclick="quickLookup('VTI')">VTI</button>
+      <button class="lookup-ex-chip" onclick="quickLookup('SCHD')">SCHD</button>
+      <button class="lookup-ex-chip" onclick="quickLookup('Tesla')">Tesla</button>
+    </div>
+    <div class="lookup-loading" id="lookupLoading">
+      <div class="spinner" style="margin:0 auto 10px;"></div>
+      Looking that up…
+    </div>
+    <div class="lookup-error" id="lookupError"></div>
+    <div class="lookup-result" id="lookupResult"></div>
+  </div>
 </div>
 
 <div class="planner-card">
@@ -1238,8 +1330,109 @@ const DIV_PICKS=[
   {ticker:'AGNC',name:'AGNC Investment Corp.',                 type:'Stock',sector:'REITs',         risk:'High',  pct:10,ar:0.094,div:true,yield:14.5,why:"Highest-yield position. Mortgage REIT paying monthly dividends ~14% annually. Keep small — higher interest-rate risk."},
 ];
 
+// ══════════════════════════════════════════
+// STOCK / ETF LOOKUP DATABASE
+// A broader reference list (beyond the curated picks above) so the search
+// feature can recognize well-known real tickers and give accurate name/
+// sector/type info, even for ones not used in any strategy's picks.
+// Anything typed that ISN'T in here or in DB/DIV_PICKS still works — it just
+// falls back to a generic, clearly-labeled estimate instead of real facts.
+// ══════════════════════════════════════════
+const LOOKUP_DB={
+  AAPL:{name:'Apple Inc.',type:'Stock',sector:'Technology',risk:'Medium',ar:0.178,div:false,yield:0.5,why:"World's most valuable company. Massive free cash flow from iPhones, services, and the App Store ecosystem."},
+  MSFT:{name:'Microsoft Corporation',type:'Stock',sector:'Technology',risk:'Medium',ar:0.192,div:false,yield:0.8,why:"Azure cloud growing fast. Owns Office 365, LinkedIn, GitHub, and a major stake in OpenAI."},
+  GOOGL:{name:'Alphabet Inc.',type:'Stock',sector:'Technology',risk:'Medium',ar:0.156,div:false,yield:0.4,why:"Owns Google Search and YouTube. Massive ad business plus a growing cloud and AI division."},
+  AMZN:{name:'Amazon.com Inc.',type:'Stock',sector:'Tech/Retail',risk:'Medium',ar:0.198,div:false,yield:0.0,why:"AWS cloud computing generates most of Amazon's profit. Also the world's largest online retailer."},
+  NVDA:{name:'NVIDIA Corporation',type:'Stock',sector:'Semiconductors',risk:'High',ar:0.312,div:false,yield:0.0,why:"Makes the chips that power most AI systems today. Huge demand from data centers and AI companies."},
+  META:{name:'Meta Platforms Inc.',type:'Stock',sector:'Technology',risk:'High',ar:0.232,div:false,yield:0.4,why:"Owns Facebook, Instagram, and WhatsApp. Makes nearly all its money from advertising."},
+  TSLA:{name:'Tesla Inc.',type:'Stock',sector:'EV/Energy',risk:'High',ar:0.187,div:false,yield:0.0,why:"Electric vehicle maker known for the Model 3/Y and self-driving software ambitions. Famously volatile stock."},
+  'BRK.B':{name:'Berkshire Hathaway B',type:'Stock',sector:'Conglomerate',risk:'Low',ar:0.122,div:false,yield:0.0,why:"Warren Buffett's company. Owns dozens of businesses outright plus big stakes in Apple, Coke, and Amex."},
+  JNJ:{name:'Johnson & Johnson',type:'Stock',sector:'Healthcare',risk:'Low',ar:0.067,div:true,yield:3.2,why:"Healthcare giant — medical devices, pharmaceuticals, and consumer products. Dividend King for 60+ years."},
+  KO:{name:'The Coca-Cola Company',type:'Stock',sector:'Consumer',risk:'Low',ar:0.058,div:true,yield:3.0,why:"Sells beverages in 200+ countries. One of the most defensive, recession-resistant stocks around."},
+  PG:{name:'Procter & Gamble',type:'Stock',sector:'Consumer',risk:'Low',ar:0.078,div:true,yield:2.4,why:"Makes Tide, Pampers, and Gillette. People keep buying these products no matter the economy."},
+  PEP:{name:'PepsiCo Inc.',type:'Stock',sector:'Consumer',risk:'Low',ar:0.071,div:true,yield:3.1,why:"Owns Pepsi, Frito-Lay, Gatorade, and Quaker. More diversified than a pure soda company."},
+  VZ:{name:'Verizon Communications',type:'Stock',sector:'Telecom',risk:'Low',ar:0.044,div:true,yield:6.5,why:"Major US phone and internet carrier. Stable subscriber base and a very high dividend yield."},
+  T:{name:'AT&T Inc.',type:'Stock',sector:'Telecom',risk:'Low',ar:0.038,div:true,yield:5.8,why:"Major US telecom carrier. Pays a high dividend but has historically grown slowly."},
+  DIS:{name:'The Walt Disney Company',type:'Stock',sector:'Media/Entertainment',risk:'Medium',ar:0.061,div:false,yield:0.4,why:"Owns theme parks, movie studios, and streaming (Disney+, ESPN+). Earnings tied to travel and ad spending."},
+  NFLX:{name:'Netflix Inc.',type:'Stock',sector:'Media/Streaming',risk:'High',ar:0.241,div:false,yield:0.0,why:"The largest paid video streaming service globally. Growth now depends on ads and password-sharing crackdowns."},
+  PLTR:{name:'Palantir Technologies',type:'Stock',sector:'Data/AI',risk:'High',ar:0.198,div:false,yield:0.0,why:"Data analytics software used heavily by governments and increasingly large enterprises."},
+  AMD:{name:'Advanced Micro Devices',type:'Stock',sector:'Semiconductors',risk:'High',ar:0.186,div:false,yield:0.0,why:"Makes computer chips that compete with NVIDIA and Intel — CPUs, GPUs, and AI accelerators."},
+  INTC:{name:'Intel Corporation',type:'Stock',sector:'Semiconductors',risk:'Medium',ar:0.021,div:true,yield:1.8,why:"Longtime PC and server chipmaker working through a difficult turnaround against AMD and NVIDIA."},
+  SMCI:{name:'Super Micro Computer',type:'Stock',sector:'AI Hardware',risk:'High',ar:0.245,div:false,yield:0.0,why:"Builds server hardware that houses AI chips — rides the same wave as NVIDIA's growth."},
+  CRM:{name:'Salesforce Inc.',type:'Stock',sector:'Software',risk:'Medium',ar:0.112,div:false,yield:0.6,why:"The leading customer-relationship-management software used by sales teams worldwide."},
+  ORCL:{name:'Oracle Corporation',type:'Stock',sector:'Software',risk:'Medium',ar:0.134,div:true,yield:0.9,why:"Major database and enterprise software company, now also growing fast in cloud infrastructure."},
+  ADBE:{name:'Adobe Inc.',type:'Stock',sector:'Software',risk:'Medium',ar:0.098,div:false,yield:0.0,why:"Makes Photoshop, Premiere, and Acrobat. Subscription software used by creative professionals everywhere."},
+  UBER:{name:'Uber Technologies',type:'Stock',sector:'Tech/Transport',risk:'High',ar:0.142,div:false,yield:0.0,why:"Ride-hailing and food delivery app operating in hundreds of cities worldwide."},
+  SHOP:{name:'Shopify Inc.',type:'Stock',sector:'E-commerce',risk:'High',ar:0.176,div:false,yield:0.0,why:"E-commerce platform that lets small businesses build their own online stores."},
+  SBUX:{name:'Starbucks Corporation',type:'Stock',sector:'Consumer',risk:'Medium',ar:0.052,div:true,yield:2.6,why:"World's largest coffee chain. Growth depends heavily on China and US store traffic."},
+  MCD:{name:"McDonald's Corporation",type:'Stock',sector:'Consumer',risk:'Low',ar:0.094,div:true,yield:2.2,why:"The world's largest fast-food chain by locations, with a famously consistent dividend history."},
+  NKE:{name:'Nike Inc.',type:'Stock',sector:'Consumer',risk:'Medium',ar:0.041,div:true,yield:2.1,why:"The world's largest athletic shoe and apparel brand, sold in nearly every country."},
+  WMT:{name:'Walmart Inc.',type:'Stock',sector:'Retail',risk:'Low',ar:0.121,div:true,yield:1.1,why:"The world's largest retailer by revenue. Considered very defensive — people shop there in any economy."},
+  COST:{name:'Costco Wholesale',type:'Stock',sector:'Retail',risk:'Low',ar:0.156,div:true,yield:0.6,why:"Membership warehouse retailer known for customer loyalty and steady, predictable growth."},
+  XOM:{name:'Exxon Mobil Corporation',type:'Stock',sector:'Energy',risk:'Medium',ar:0.082,div:true,yield:3.4,why:"One of the world's largest oil and gas companies. Profits rise and fall with oil prices."},
+  CVX:{name:'Chevron Corporation',type:'Stock',sector:'Energy',risk:'Medium',ar:0.071,div:true,yield:4.0,why:"Major oil and gas producer, similar to Exxon. Pays a strong, long-running dividend."},
+  JPM:{name:'JPMorgan Chase & Co.',type:'Stock',sector:'Financials',risk:'Medium',ar:0.124,div:true,yield:2.2,why:"The largest US bank by assets. Profits tend to track interest rates and the broader economy."},
+  V:{name:'Visa Inc.',type:'Stock',sector:'Financials',risk:'Low',ar:0.142,div:true,yield:0.7,why:"Processes card payments worldwide. Doesn't lend money itself — earns a small fee on transactions."},
+  MA:{name:'Mastercard Inc.',type:'Stock',sector:'Financials',risk:'Low',ar:0.151,div:true,yield:0.5,why:"Visa's main competitor in global payment processing — similar fee-based, asset-light business."},
+  PFE:{name:'Pfizer Inc.',type:'Stock',sector:'Healthcare',risk:'Low',ar:0.018,div:true,yield:6.1,why:"Major pharmaceutical company. Revenue dropped sharply after COVID vaccine demand faded."},
+  UNH:{name:'UnitedHealth Group',type:'Stock',sector:'Healthcare',risk:'Medium',ar:0.142,div:true,yield:1.6,why:"The largest US health insurer, also operating a large network of clinics and pharmacy services."},
+  BA:{name:'The Boeing Company',type:'Stock',sector:'Industrials',risk:'High',ar:-0.012,div:false,yield:0.0,why:"Major aircraft manufacturer that's faced years of safety and production setbacks."},
+  GE:{name:'General Electric',type:'Stock',sector:'Industrials',risk:'Medium',ar:0.176,div:true,yield:0.6,why:"Industrial conglomerate now focused mainly on jet engines after spinning off other divisions."},
+  IBM:{name:'IBM Corporation',type:'Stock',sector:'Technology',risk:'Low',ar:0.072,div:true,yield:3.3,why:"Legacy tech giant now focused on enterprise software, consulting, and hybrid cloud."},
+  O:{name:'Realty Income Corp.',type:'Stock',sector:'REITs',risk:'Low',ar:0.086,div:true,yield:5.8,why:"'The Monthly Dividend Company.' Owns retail real estate and pays dividends every single month."},
+  AGNC:{name:'AGNC Investment Corp.',type:'Stock',sector:'REITs',risk:'High',ar:0.094,div:true,yield:14.5,why:"Mortgage REIT with a very high dividend yield. More interest-rate sensitive than typical stocks."},
+  // ETFs
+  VTI:{name:'Vanguard Total Stock Market ETF',type:'ETF',sector:'Broad Market',risk:'Low',ar:0.104,div:false,yield:1.4,why:"Owns essentially every publicly traded US company in one low-cost fund."},
+  VOO:{name:'Vanguard S&P 500 ETF',type:'ETF',sector:'Broad Market',risk:'Low',ar:0.108,div:false,yield:1.3,why:"Tracks the S&P 500 — the 500 largest US companies. One of the most popular funds in the world."},
+  SPY:{name:'SPDR S&P 500 ETF',type:'ETF',sector:'Broad Market',risk:'Low',ar:0.104,div:false,yield:1.3,why:"The original and most-traded S&P 500 ETF. Functionally very similar to VOO."},
+  QQQ:{name:'Invesco QQQ (Nasdaq-100)',type:'ETF',sector:'Tech/Growth',risk:'High',ar:0.185,div:false,yield:0.6,why:"Tracks the 100 largest Nasdaq companies — heavy on tech names like Apple, NVDA, and Amazon."},
+  VXUS:{name:'Vanguard Total International ETF',type:'ETF',sector:'International',risk:'Low',ar:0.072,div:false,yield:3.0,why:"Owns thousands of stocks outside the US, across both developed and emerging markets."},
+  VWO:{name:'Vanguard Emerging Markets ETF',type:'ETF',sector:'Emerging Markets',risk:'High',ar:0.098,div:false,yield:2.8,why:"Focused on faster-growing but more volatile economies like China, India, and Brazil."},
+  EFA:{name:'iShares MSCI EAFE ETF',type:'ETF',sector:'Dev. International',risk:'Low',ar:0.075,div:false,yield:3.2,why:"Developed international markets — Europe, Australasia, and the Far East."},
+  BND:{name:'Vanguard Total Bond Market ETF',type:'ETF',sector:'Bonds',risk:'Low',ar:0.032,div:true,yield:4.2,why:"Holds thousands of US government and corporate bonds. Tends to cushion stock market downturns."},
+  AGG:{name:'iShares Core US Aggregate Bond ETF',type:'ETF',sector:'Bonds',risk:'Low',ar:0.030,div:true,yield:4.1,why:"Very similar to BND — broad exposure to US investment-grade bonds."},
+  VYM:{name:'Vanguard High Dividend Yield ETF',type:'ETF',sector:'Dividends',risk:'Low',ar:0.089,div:true,yield:2.9,why:"Holds 450+ large US companies known for paying solid, reliable dividends."},
+  SCHD:{name:'Schwab US Dividend Equity ETF',type:'ETF',sector:'Dividends',risk:'Low',ar:0.112,div:true,yield:3.6,why:"Screens for companies with 10+ years of consistent dividends and strong cash flow."},
+  JEPI:{name:'JPMorgan Equity Premium Income ETF',type:'ETF',sector:'Covered Calls',risk:'Low',ar:0.082,div:true,yield:7.8,why:"Generates high monthly income by selling options on S&P 500 stocks — trades off some upside for cash."},
+  VNQ:{name:'Vanguard Real Estate ETF',type:'ETF',sector:'Real Estate',risk:'Medium',ar:0.088,div:true,yield:3.8,why:"Owns a basket of real estate companies (REITs), which by law pay out most of their income as dividends."},
+  GLD:{name:'SPDR Gold Shares ETF',type:'ETF',sector:'Commodities',risk:'Medium',ar:0.081,div:false,yield:0.0,why:"Tracks the price of physical gold. A classic hedge against inflation and market stress."},
+  SLV:{name:'iShares Silver Trust',type:'ETF',sector:'Commodities',risk:'High',ar:0.064,div:false,yield:0.0,why:"Tracks the price of physical silver — similar idea to GLD but historically more volatile."},
+  SOXX:{name:'iShares Semiconductor ETF',type:'ETF',sector:'Semiconductors',risk:'High',ar:0.221,div:false,yield:0.8,why:"Holds the major chipmakers — NVIDIA, AMD, Broadcom, Qualcomm, and more — in one fund."},
+  ARKK:{name:'ARK Innovation ETF',type:'ETF',sector:'Disruptive Tech',risk:'High',ar:0.142,div:false,yield:0.0,why:"Actively bets on emerging tech themes like genomics, AI, and EVs. Historically very volatile."},
+  MTUM:{name:'iShares MSCI Momentum Factor ETF',type:'ETF',sector:'Momentum',risk:'High',ar:0.152,div:false,yield:1.1,why:"Automatically rotates into stocks with the strongest recent price trends."},
+  TQQQ:{name:'ProShares UltraPro QQQ (3x)',type:'ETF',sector:'Leveraged',risk:'High',ar:0.31,div:false,yield:0.0,why:"A leveraged fund that aims for 3x the Nasdaq-100's daily move — amplifies gains AND losses sharply."},
+};
+
+// Common company-name aliases → ticker, so typing "Apple" finds AAPL.
+const LOOKUP_ALIASES={
+  apple:'AAPL',microsoft:'MSFT',google:'GOOGL',alphabet:'GOOGL',amazon:'AMZN',nvidia:'NVDA',
+  meta:'META',facebook:'META',tesla:'TSLA',berkshire:'BRK.B','berkshire hathaway':'BRK.B',
+  'johnson and johnson':'JNJ','johnson & johnson':'JNJ',coke:'KO',coca:'KO','coca-cola':'KO','coca cola':'KO',
+  procter:'PG',pepsi:'PEP',pepsico:'PEP',verizon:'VZ',att:'T','at&t':'T',disney:'DIS',netflix:'NFLX',
+  palantir:'PLTR',amd:'AMD',intel:'INTC','super micro':'SMCI',supermicro:'SMCI',salesforce:'CRM',
+  oracle:'ORCL',adobe:'ADBE',uber:'UBER',shopify:'SHOP',starbucks:'SBUX',mcdonalds:'MCD',"mcdonald's":'MCD',
+  nike:'NKE',walmart:'WMT',costco:'COST',exxon:'XOM','exxon mobil':'XOM',chevron:'CVX',
+  jpmorgan:'JPM','jp morgan':'JPM','chase':'JPM',visa:'V',mastercard:'MA',pfizer:'PFE',
+  unitedhealth:'UNH',boeing:'BA','general electric':'GE',ibm:'IBM','realty income':'O',
+  vanguard:'VTI','s&p 500':'VOO','sp500':'VOO',nasdaq:'QQQ',gold:'GLD',silver:'SLV',
+};
+
 // PRICE FETCH
-async function fetchPrice(ticker){
+//
+// ⚠️ SECURITY NOTE (read before making this repo public):
+// FINNHUB_API_KEY below is embedded in client-side code, so it is visible
+// to anyone who views this page's source. That's an accepted tradeoff for
+// now (private prototype, two known users) — but before this repo or site
+// is ever made public, this key must be moved server-side (e.g. a small
+// Cloudflare Worker / Vercel function that holds the key and proxies the
+// request) so it isn't exposed. Free-tier-only key — rotate periodically.
+const FINNHUB_API_KEY='d8s9pjpr01qkn75cfn4gd8s9pjpr01qkn75cfn50';
+
+// Primary source: Yahoo Finance's free, unofficial chart endpoint, routed
+// through a public CORS proxy (browsers can't call it directly). Real data
+// when it works — but the proxy can go down or rate-limit independently of
+// Yahoo itself, which is the main source of "Estimated" prices showing up.
+async function fetchPriceYahoo(ticker){
   try{
     const url=`https://query1.finance.yahoo.com/v8/finance/chart/${ticker}?interval=1d&range=5d`;
     const r=await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
@@ -1252,10 +1445,334 @@ async function fetchPrice(ticker){
   }catch{return null;}
 }
 
+// Fallback source: Finnhub's free real-time quote endpoint. Supports CORS
+// directly (no proxy needed), 60 calls/min free. Used only when Yahoo fails.
+async function fetchPriceFinnhub(ticker){
+  try{
+    const r=await fetch(`https://finnhub.io/api/v1/quote?symbol=${encodeURIComponent(ticker)}&token=${FINNHUB_API_KEY}`);
+    if(!r.ok)return null;
+    const d=await r.json();
+    // Finnhub returns c:0 for invalid/unknown symbols rather than an error
+    if(d&&typeof d.c==='number'&&d.c>0) return +d.c.toFixed(2);
+    return null;
+  }catch{return null;}
+}
+
+async function fetchPrice(ticker){
+  const yahoo=await fetchPriceYahoo(ticker);
+  if(yahoo!=null) return yahoo;
+  return await fetchPriceFinnhub(ticker);
+}
+
+// Real fundamentals from Finnhub (free tier): today's high/low (from /quote,
+// which we may already be calling for price), plus 52-week range, beta,
+// P/E, and trading volume (from /stock/metric). Only meaningful for stocks
+// and ETFs Finnhub actually has fundamentals for — many fields come back
+// null/undefined for newer or smaller tickers, which callers must handle.
+async function fetchRealMetrics(ticker){
+  try{
+    const [quoteRes,metricRes]=await Promise.all([
+      fetch(`https://finnhub.io/api/v1/quote?symbol=${encodeURIComponent(ticker)}&token=${FINNHUB_API_KEY}`),
+      fetch(`https://finnhub.io/api/v1/stock/metric?symbol=${encodeURIComponent(ticker)}&metric=all&token=${FINNHUB_API_KEY}`),
+    ]);
+    const quote=quoteRes.ok?await quoteRes.json():null;
+    const metricData=metricRes.ok?await metricRes.json():null;
+    const m=metricData?.metric||null;
+    if(!quote && !m) return null;
+    return{
+      dayHigh:(quote&&quote.h>0)?quote.h:null,
+      dayLow:(quote&&quote.l>0)?quote.l:null,
+      week52High:m?.['52WeekHigh']??null,
+      week52Low:m?.['52WeekLow']??null,
+      beta:typeof m?.beta==='number'?m.beta:null,
+      peTTM:typeof m?.peBasicExclExtraTTM==='number'?m.peBasicExclExtraTTM:null,
+      // Finnhub reports average daily volume in millions of shares
+      avgVolumeM:typeof m?.['3MonthAverageTradingVolume']==='number'?m['3MonthAverageTradingVolume']:null,
+      yearReturnPct:typeof m?.['52WeekPriceReturnDaily']==='number'?m['52WeekPriceReturnDaily']:null,
+    };
+  }catch{return null;}
+}
+
+// Recent headlines for a ticker, via Finnhub's free company-news endpoint.
+// Only meaningful for real, recognized US-listed tickers — returns an empty
+// array (not fake headlines) for anything Finnhub doesn't have news on.
+async function fetchCompanyNews(ticker){
+  try{
+    const to=new Date();
+    const from=new Date(to.getTime()-7*24*60*60*1000); // last 7 days
+    const fmt=d=>d.toISOString().slice(0,10);
+    const r=await fetch(`https://finnhub.io/api/v1/company-news?symbol=${encodeURIComponent(ticker)}&from=${fmt(from)}&to=${fmt(to)}&token=${FINNHUB_API_KEY}`);
+    if(!r.ok) return [];
+    const articles=await r.json();
+    if(!Array.isArray(articles)) return [];
+    // Most-recent first, capped to a reasonable number
+    return articles
+      .filter(a=>a&&a.headline&&a.url)
+      .sort((a,b)=>(b.datetime||0)-(a.datetime||0))
+      .slice(0,6);
+  }catch{return [];}
+}
+
 async function fetchAllPrices(tickers){
   const prices={};
   await Promise.all(tickers.map(async t=>{prices[t]=await fetchPrice(t);}));
   return prices;
+}
+
+// ══════════════════════════════════════════
+// STOCK / ETF LOOKUP
+// Search any ticker or known company name. Looks it up against the curated
+// picks (DB/DIV_PICKS), then the broader LOOKUP_DB, then falls back to a
+// clearly-labeled generic guess for anything unrecognized. Tries to fetch a
+// real live price; everything else (range, beta, P/E, etc.) is illustrative,
+// same approach as the "What do these numbers mean?" panels on pick cards.
+// ══════════════════════════════════════════
+let lookupDebounce=null;
+let lastLookupResult=null;
+
+function allKnownTickerEntries(){
+  // Flatten every curated pick (DB + DIV_PICKS) plus LOOKUP_DB into one
+  // ticker -> info map, deduping by ticker (curated picks win, since they
+  // have hand-written "why" blurbs).
+  const map={};
+  Object.keys(LOOKUP_DB).forEach(t=>{ map[t]={ticker:t,...LOOKUP_DB[t]}; });
+  Object.values(DB).flat().forEach(p=>{ map[p.ticker]={ticker:p.ticker,name:p.name,type:p.type,sector:p.sector,risk:p.risk,ar:p.ar,div:p.div,yield:p.yield,why:p.why}; });
+  DIV_PICKS.forEach(p=>{ map[p.ticker]={ticker:p.ticker,name:p.name,type:p.type,sector:p.sector,risk:p.risk,ar:p.ar,div:p.div,yield:p.yield,why:p.why}; });
+  return map;
+}
+
+function onLookupInput(){
+  clearTimeout(lookupDebounce);
+  const q=document.getElementById('lookupInput').value.trim();
+  if(!q){ hideLookupSuggestions(); return; }
+  lookupDebounce=setTimeout(()=>showLookupSuggestions(q),120);
+}
+
+function showLookupSuggestions(q){
+  const ql=q.toLowerCase();
+  const known=allKnownTickerEntries();
+  const matches=[];
+  // Ticker prefix matches first
+  Object.values(known).forEach(p=>{
+    if(p.ticker.toLowerCase().startsWith(ql)) matches.push(p);
+  });
+  // Then name-contains matches
+  Object.values(known).forEach(p=>{
+    if(!matches.includes(p) && p.name && p.name.toLowerCase().includes(ql)) matches.push(p);
+  });
+  // Then alias matches
+  Object.keys(LOOKUP_ALIASES).forEach(alias=>{
+    if(alias.startsWith(ql)){
+      const t=LOOKUP_ALIASES[alias];
+      const p=known[t];
+      if(p&&!matches.includes(p)) matches.push(p);
+    }
+  });
+  const top=matches.slice(0,8);
+  const box=document.getElementById('lookupSuggestList');
+  if(!top.length){ box.classList.remove('show'); return; }
+  box.innerHTML=top.map(p=>`<div class="lookup-suggest-item" onclick="quickLookup('${p.ticker}')">
+    <span class="lookup-suggest-ticker">${p.ticker}</span><span class="lookup-suggest-name">${p.name||''}</span>
+  </div>`).join('');
+  box.classList.add('show');
+}
+function hideLookupSuggestions(){
+  document.getElementById('lookupSuggestList').classList.remove('show');
+}
+document.addEventListener('click',e=>{
+  const wrap=document.getElementById('lookupInput');
+  const box=document.getElementById('lookupSuggestList');
+  if(wrap && box && !wrap.contains(e.target) && !box.contains(e.target)) box.classList.remove('show');
+});
+
+function quickLookup(q){
+  document.getElementById('lookupInput').value=q;
+  hideLookupSuggestions();
+  runLookup();
+}
+
+function resolveLookupQuery(q){
+  const raw=q.trim();
+  const upper=raw.toUpperCase();
+  const lower=raw.toLowerCase();
+  const known=allKnownTickerEntries();
+
+  // 1. Exact ticker match
+  if(known[upper]) return{...known[upper],ticker:upper,isKnown:true};
+
+  // 2. Alias (company name) match
+  if(LOOKUP_ALIASES[lower]){
+    const t=LOOKUP_ALIASES[lower];
+    if(known[t]) return{...known[t],ticker:t,isKnown:true};
+  }
+  // partial alias match (e.g. "berkshire hathaway inc")
+  const aliasHit=Object.keys(LOOKUP_ALIASES).find(a=>lower.includes(a)||a.includes(lower));
+  if(aliasHit){
+    const t=LOOKUP_ALIASES[aliasHit];
+    if(known[t]) return{...known[t],ticker:t,isKnown:true};
+  }
+
+  // 3. Unknown — generate a generic, clearly-labeled placeholder.
+  // Use the typed text as the "ticker" if it looks ticker-shaped, else a guess.
+  const looksLikeTicker=/^[A-Z.]{1,6}$/.test(upper);
+  const seed=[...upper].reduce((s,ch)=>(s*31+ch.charCodeAt(0))%99991,0);
+  const risk=['Low','Medium','High'][seed%3];
+  const ar=[0.06,0.10,0.16][seed%3];
+  return{
+    ticker:looksLikeTicker?upper:upper.slice(0,5)||'???',
+    name:looksLikeTicker?null:raw,
+    type:'Stock',sector:'Unknown',risk,ar,div:seed%2===0,yield:seed%2===0?+((seed%400)/100).toFixed(1):0,
+    why:null,isKnown:false,
+  };
+}
+
+async function runLookup(){
+  const input=document.getElementById('lookupInput');
+  const q=input.value.trim();
+  if(!q) return;
+  const errBox=document.getElementById('lookupError');
+  const resultBox=document.getElementById('lookupResult');
+  const loading=document.getElementById('lookupLoading');
+  const goBtn=document.getElementById('lookupGoBtn');
+  errBox.classList.remove('show');
+  resultBox.classList.remove('show');
+  loading.classList.add('show');
+  goBtn.disabled=true;
+
+  try{
+    const pick=resolveLookupQuery(q);
+    if(!pick.ticker || pick.ticker==='???'){
+      loading.classList.remove('show');
+      goBtn.disabled=false;
+      errBox.textContent="Couldn't figure out a ticker from that — try a symbol like AAPL or a company name like Apple.";
+      errBox.classList.add('show');
+      return;
+    }
+    const [price,realMetrics,news]=await Promise.all([
+      fetchPrice(pick.ticker),
+      fetchRealMetrics(pick.ticker),
+      fetchCompanyNews(pick.ticker),
+    ]);
+    renderLookupResult(pick,price,realMetrics,news);
+  }catch(e){
+    console.error('Lookup failed',e);
+    errBox.textContent='Something went wrong looking that up. Please try again.';
+    errBox.classList.add('show');
+  }
+  loading.classList.remove('show');
+  goBtn.disabled=false;
+}
+
+function renderLookupResult(pick,price,realMetrics,news){
+  lastLookupResult={...pick,price};
+  const stats=deriveStats(pick,price,realMetrics);
+  const isLive=price!=null;
+  const rc={Low:'t-low',Medium:'t-med',High:'t-high'}[pick.risk];
+  const tb=pick.type==='ETF'?'etf-b':'stk-b';
+  const displayName=pick.name||`"${pick.ticker}" — not in Vestly's database`;
+
+  const whyHtml=pick.isKnown && pick.why
+    ? pick.why
+    : `Vestly doesn't have specific research on "${pick.ticker}", so the sector, risk level, and historical return shown here are a generic placeholder — not real facts about this company. ${isLive?"The price above, though, is real — fetched live just like any other ticker.":"The price above is also estimated right now, since it couldn't be fetched live."} Double-check the company details and full picture on your broker's app or Yahoo Finance before acting on any of this."`;
+
+  document.getElementById('lookupResult').innerHTML=`
+    <div class="lookup-result-hdr">
+      <div class="lookup-result-id">
+        <div>
+          <div class="lookup-result-ticker">${pick.ticker}<span class="tbadge ${tb}" style="margin-left:8px;">${pick.type}</span></div>
+          <div class="lookup-result-name">${displayName}</div>
+        </div>
+      </div>
+      <div class="lookup-result-price-block">
+        <div class="lookup-result-price">${isLive?'$'+(price*1).toFixed(2):'$'+(100).toFixed(2)}</div>
+        <span class="lookup-price-tag ${isLive?'lookup-price-live':'lookup-price-est'}">${isLive?'● Live price':'Estimated'}</span>
+      </div>
+    </div>
+    <div class="lookup-result-tags">
+      <span class="tag">${pick.sector||'Unknown sector'}</span>
+      <span class="tag ${rc}">${pick.risk} risk</span>
+      <span class="tag">~${(pick.ar*100).toFixed(0)}%/yr hist.</span>
+      ${pick.div?`<span class="tag t-div">💰 ${pick.yield}% yield</span>`:''}
+      ${!pick.isKnown?`<span class="tag" style="border-color:var(--ink4);color:var(--ink4);">⚠ Sector/name not verified</span>`:''}
+    </div>
+    <div class="lookup-explain-card">${whyHtml}</div>
+    <div class="stats-grid lookup-stats-grid">
+      <div class="stat-box">
+        <div class="stat-box-label-row"><span class="stat-box-label">52-week range</span><span class="stat-source-tag ${stats.week52Real?'stat-source-real':'stat-source-est'}">${stats.week52Real?'Real':'Est.'}</span></div>
+        <div class="stat-box-val">${stats.lowRange}–${stats.highRange}</div>
+        <div class="stat-box-explain">The lowest and highest price over the past year. ${stats.rangeExplain}</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-label-row"><span class="stat-box-label">Today's range</span><span class="stat-source-tag ${stats.dayRangeReal?'stat-source-real':'stat-source-est'}">${stats.dayRangeReal?'Real':'Est.'}</span></div>
+        <div class="stat-box-val">${stats.dayLow}–${stats.dayHigh}</div>
+        <div class="stat-box-explain">${stats.dayExplain}</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-label-row"><span class="stat-box-label">Company size</span></div>
+        <div class="stat-box-val">${stats.capTier}</div>
+        <div class="stat-box-explain">${stats.capExplain}</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-label-row"><span class="stat-box-label">${pick.type==='ETF'?'Annual fee':'Price tag (P/E)'}</span>${pick.type!=='ETF'?`<span class="stat-source-tag ${stats.peReal?'stat-source-real':'stat-source-est'}">${stats.peReal?'Real':'Est.'}</span>`:''}</div>
+        <div class="stat-box-val">${stats.peOrExpense}</div>
+        <div class="stat-box-explain">${stats.peExplain}</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-label-row"><span class="stat-box-label">Dividend payout</span></div>
+        <div class="stat-box-val ${pick.yield>0?'up':''}">${pick.yield>0?pick.yield.toFixed(2)+'% per year':'None'}</div>
+        <div class="stat-box-explain">${stats.yieldExplain}</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-label-row"><span class="stat-box-label">How bumpy the ride is</span><span class="stat-source-tag ${stats.betaReal?'stat-source-real':'stat-source-est'}">${stats.betaReal?'Real':'Est.'}</span></div>
+        <div class="stat-box-val">${stats.beta}</div>
+        <div class="stat-box-explain">${stats.betaExplain}</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-label-row"><span class="stat-box-label">Daily trading volume</span><span class="stat-source-tag ${stats.volumeReal?'stat-source-real':'stat-source-est'}">${stats.volumeReal?'Real':'Est.'}</span></div>
+        <div class="stat-box-val">${stats.volume}</div>
+        <div class="stat-box-explain">${stats.volumeExplain}</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-label-row"><span class="stat-box-label">Past year's return</span><span class="stat-source-tag ${stats.oneYrReal?'stat-source-real':'stat-source-est'}">${stats.oneYrReal?'Real':'Est.'}</span></div>
+        <div class="stat-box-val ${stats.oneYrChange>=0?'up':'down'}">${stats.oneYrChange>=0?'+':''}${stats.oneYrChange.toFixed(1)}%</div>
+        <div class="stat-box-explain">${stats.oneYrExplain}</div>
+      </div>
+    </div>
+    <div class="lookup-actions">
+      <button class="lookup-action-btn lookup-add-holding-btn" onclick="addLookupToHoldings()">+ Add to my existing holdings</button>
+      <button class="lookup-action-btn lookup-sim-btn-result" onclick="simulateLookupResult()">📈 Paper trade this</button>
+    </div>
+    ${!pick.isKnown?`<div class="lookup-unknown-note">"${pick.ticker}" isn't one of the stocks/ETFs Vestly has specific research on. The price above is fetched the same real way as any other ticker, so it should be accurate if it's a valid symbol — but the sector, company name, risk level, and "why" explanation are just a generic guess, not real research on this company.</div>`:''}
+    <div class="lookup-news-section">
+      <div class="sec-heading" style="margin-bottom:10px;">Recent headlines</div>
+      <div class="lookup-news-list">
+        ${news&&news.length?news.map(a=>`
+          <a class="lookup-news-item" href="${a.url}" target="_blank" rel="noopener noreferrer">
+            <div class="lookup-news-headline">${escapeHtml(a.headline)}</div>
+            <div class="lookup-news-meta">${escapeHtml(a.source||'')}${a.datetime?' · '+new Date(a.datetime*1000).toLocaleDateString('en-US',{month:'short',day:'numeric'}):''}</div>
+          </a>`).join(''):`<div class="lookup-news-empty">No recent headlines found for "${pick.ticker}" in the last 7 days.</div>`}
+      </div>
+    </div>
+  `;
+  document.getElementById('lookupResult').classList.add('show');
+  document.getElementById('lookupResult').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function addLookupToHoldings(){
+  if(!lastLookupResult) return;
+  document.getElementById('portfolioBody').classList.add('open');
+  document.getElementById('pToggleIcon').classList.add('open');
+  addHolding(lastLookupResult.ticker,lastLookupResult.name||'',0);
+  document.querySelector('.portfolio-section').scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function simulateLookupResult(){
+  if(!lastLookupResult) return;
+  openSimModal(null,{
+    ticker:lastLookupResult.ticker,
+    name:lastLookupResult.name||lastLookupResult.ticker,
+    type:lastLookupResult.type,
+  });
 }
 
 async function retryPrices(){
@@ -1274,23 +1791,42 @@ const CAP_TIERS={
   PG:'Large ($380B+)',PEP:'Large ($230B+)',VZ:'Large ($170B+)',AGNC:'Mid ($8B+)',SMCI:'Mid ($25B+)',
   PLTR:'Large ($90B+)',O:'Large ($45B+)',
 };
-function deriveStats(p,price){
+function deriveStats(p,price,real){
   // Use a stable seed from the ticker so numbers don't jump around between renders
   let seed=0; for(const ch of p.ticker) seed=(seed*31+ch.charCodeAt(0))%99991;
   const rnd=(min,max)=>{seed=(seed*1103515245+12345)%2147483648; return min+(seed/2147483648)*(max-min);};
   const base=price||100;
   const vol=p.risk==='High'?0.32:p.risk==='Medium'?0.18:0.09;
-  const highRange=base*(1+vol*rnd(0.6,1.1));
-  const lowRange=base*(1-vol*rnd(0.5,0.9));
-  const dayHigh=base*(1+0.01*rnd(0.3,1));
-  const dayLow=base*(1-0.01*rnd(0.3,1));
-  const betaNum=p.type==='ETF'?(p.risk==='High'?1.4:p.risk==='Medium'?1.0:0.5):(p.risk==='High'?1.7:p.risk==='Medium'?1.15:0.65);
-  const beta=p.type==='ETF'?(p.risk==='High'?'1.2–1.6':p.risk==='Medium'?'0.9–1.1':'0.3–0.7'):(p.risk==='High'?'1.4–2.1':p.risk==='Medium'?'1.0–1.3':'0.5–0.8');
-  const volume=p.type==='ETF'?(p.risk==='High'?'8–20M/day':'3–10M/day'):(['AAPL','NVDA','TSLA','MSFT'].includes(p.ticker)?'40–90M/day':'5–25M/day');
-  const peNum=p.risk==='High'?25+rnd(0,40):15+rnd(0,15);
-  const peOrExpense=p.type==='ETF'?(p.div&&p.yield>3?'0.05–0.06%':'0.03–0.20%'):peNum.toFixed(0)+'x';
+
+  // 52-week range: real if Finnhub has it, otherwise estimated
+  const has52w=real&&real.week52High!=null&&real.week52Low!=null;
+  const highRange=has52w?real.week52High:base*(1+vol*rnd(0.6,1.1));
+  const lowRange=has52w?real.week52Low:base*(1-vol*rnd(0.5,0.9));
+
+  // Today's range: real if Finnhub's /quote returned it, otherwise estimated
+  const hasDayRange=real&&real.dayHigh!=null&&real.dayLow!=null;
+  const dayHigh=hasDayRange?real.dayHigh:base*(1+0.01*rnd(0.3,1));
+  const dayLow=hasDayRange?real.dayLow:base*(1-0.01*rnd(0.3,1));
+
+  // Beta: real if Finnhub has it, otherwise estimated from risk tier
+  const hasBeta=real&&real.beta!=null;
+  const betaNum=hasBeta?real.beta:(p.type==='ETF'?(p.risk==='High'?1.4:p.risk==='Medium'?1.0:0.5):(p.risk==='High'?1.7:p.risk==='Medium'?1.15:0.65));
+  const beta=hasBeta?betaNum.toFixed(2):(p.type==='ETF'?(p.risk==='High'?'1.2–1.6':p.risk==='Medium'?'0.9–1.1':'0.3–0.7'):(p.risk==='High'?'1.4–2.1':p.risk==='Medium'?'1.0–1.3':'0.5–0.8'));
+
+  // Trading volume: real if Finnhub has it (in millions), otherwise estimated range
+  const hasVolume=real&&real.avgVolumeM!=null;
+  const volume=hasVolume?`~${real.avgVolumeM>=1?real.avgVolumeM.toFixed(1)+'M/day':(real.avgVolumeM*1000).toFixed(0)+'K/day'}`:(p.type==='ETF'?(p.risk==='High'?'8–20M/day':'3–10M/day'):(['AAPL','NVDA','TSLA','MSFT'].includes(p.ticker)?'40–90M/day':'5–25M/day'));
+
+  // P/E: real if Finnhub has it AND it's a stock (ETFs don't have a P/E — fee stays estimated either way)
+  const hasPE=real&&real.peTTM!=null&&p.type!=='ETF';
+  const peNum=hasPE?real.peTTM:(p.risk==='High'?25+rnd(0,40):15+rnd(0,15));
+  const peOrExpense=p.type==='ETF'?(p.div&&p.yield>3?'0.05–0.06%':'0.03–0.20%'):(hasPE?peNum.toFixed(1)+'x':peNum.toFixed(0)+'x');
+
   const capTier=CAP_TIERS[p.ticker]||(p.type==='ETF'?'ETF (N/A)':'Large-cap');
-  const oneYrChange=(p.ar*100)+rnd(-8,8);
+
+  // Past year's return: real if Finnhub has it, otherwise estimated from historical avg
+  const hasYearReturn=real&&real.yearReturnPct!=null;
+  const oneYrChange=hasYearReturn?real.yearReturnPct:(p.ar*100)+rnd(-8,8);
 
   // Plain-English explanations, written to react to the actual numbers shown
   const rangePosition=(base-lowRange)/(highRange-lowRange);
@@ -1339,11 +1875,13 @@ function deriveStats(p,price){
     : "Has lost value over the past year. Worth understanding why before buying more.";
 
   return{
-    highRange:'$'+highRange.toFixed(2), lowRange:'$'+lowRange.toFixed(2), rangeExplain,
-    dayHigh:'$'+dayHigh.toFixed(2), dayLow:'$'+dayLow.toFixed(2), dayExplain,
-    beta, betaExplain, volume, volumeExplain,
-    peOrExpense, peExplain, capTier, capExplain,
-    oneYrChange, oneYrExplain, yieldExplain,
+    highRange:'$'+highRange.toFixed(2), lowRange:'$'+lowRange.toFixed(2), rangeExplain, week52Real:has52w,
+    dayHigh:'$'+dayHigh.toFixed(2), dayLow:'$'+dayLow.toFixed(2), dayExplain, dayRangeReal:hasDayRange,
+    beta, betaExplain, betaReal:hasBeta,
+    volume, volumeExplain, volumeReal:hasVolume,
+    peOrExpense, peExplain, peReal:hasPE,
+    capTier, capExplain,
+    oneYrChange, oneYrExplain, yieldExplain, oneYrReal:hasYearReturn,
   };
 }
 function toggleStats(btn){
@@ -1928,15 +2466,35 @@ function runCompare(){
 // ══════════════════════════════════════════
 
 let simModalTicker=null; // if opened from a single pick's "Simulate" button, pre-checks just that one
+let simModalPicks=[]; // the picks currently shown in the sim modal (curPicks, or a standalone lookup pick)
 
-function openSimModal(onlyTicker){
+function openSimModal(onlyTicker,standalonePick){
   if(!currentUser){
     alert('Sign in first — paper trades are saved to your account so you can track them over time.');
     openAuthModal();
     return;
   }
+  if(standalonePick){
+    simModalTicker=standalonePick.ticker;
+    const rows=document.getElementById('simPickRows');
+    const defaultAmt=100;
+    rows.innerHTML=`<div class="sim-pick-row" id="simRow-${standalonePick.ticker}">
+      <input type="checkbox" id="simChk-${standalonePick.ticker}" checked onchange="onSimRowToggle('${standalonePick.ticker}')">
+      <div class="sim-pick-info">
+        <div class="sim-pick-ticker">${standalonePick.ticker}</div>
+        <div class="sim-pick-meta">${standalonePick.name}</div>
+      </div>
+      <div class="sim-pick-amt"><span class="prefix">$</span><input type="number" id="simAmt-${standalonePick.ticker}" value="${defaultAmt}" min="0" step="50" oninput="updateSimTotal()"></div>
+    </div>`;
+    simModalPicks=[standalonePick];
+    updateSimTotal();
+    document.getElementById('simNameInput').value='';
+    document.getElementById('simModalBg').classList.add('open');
+    return;
+  }
   if(!curPicks.length){ alert('Build a plan first, then you can simulate it.'); return; }
   simModalTicker=onlyTicker||null;
+  simModalPicks=curPicks;
 
   const rows=document.getElementById('simPickRows');
   rows.innerHTML=curPicks.map(p=>{
@@ -1966,7 +2524,7 @@ function onSimRowToggle(ticker){
 }
 function updateSimTotal(){
   let total=0;
-  curPicks.forEach(p=>{
+  simModalPicks.forEach(p=>{
     const chk=document.getElementById('simChk-'+p.ticker);
     if(chk&&chk.checked) total+=parseFloat(document.getElementById('simAmt-'+p.ticker).value)||0;
   });
@@ -1980,7 +2538,7 @@ async function startSimulation(){
     openAuthModal();
     return;
   }
-  const selected=curPicks.filter(p=>{
+  const selected=simModalPicks.filter(p=>{
     const chk=document.getElementById('simChk-'+p.ticker);
     return chk&&chk.checked;
   }).map(p=>({

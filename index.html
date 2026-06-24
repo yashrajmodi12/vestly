@@ -31,12 +31,15 @@
 html{scroll-behavior:smooth;}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;font-size:15px;line-height:1.6;transition:background .25s,color .25s;}
 nav{position:sticky;top:0;z-index:100;background:var(--nav-bg);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:58px;transition:background .25s,border-color .25s;}
+@media(max-width:640px){nav{padding:0 1rem;}}
 .nav-logo{font-family:'DM Serif Display',serif;font-size:22px;color:var(--ink);letter-spacing:-.3px;}
 .nav-logo span{color:var(--accent);}
 .nav-right{display:flex;align-items:center;gap:12px;}
+@media(max-width:640px){.nav-right{gap:6px;}}
 .nav-tag{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);}
 .theme-btn{display:flex;align-items:center;gap:7px;padding:5px 12px;border-radius:20px;border:1.5px solid var(--border2);background:var(--surface);cursor:pointer;font-size:12px;font-weight:600;color:var(--ink2);transition:all .15s;font-family:inherit;}
 .theme-btn:hover{border-color:var(--accent);color:var(--accent);}
+@media(max-width:480px){.theme-btn .tb-label,.share-btn .sb-label{display:none;}.theme-btn,.share-btn{padding:7px 10px;}}
 .ticker-bar{background:var(--ticker);overflow:hidden;padding:8px 0;white-space:nowrap;}
 .ticker-track{display:inline-flex;gap:2.5rem;animation:scroll-left 32s linear infinite;}
 @keyframes scroll-left{from{transform:translateX(0)}to{transform:translateX(-50%)}}
@@ -44,45 +47,55 @@ nav{position:sticky;top:0;z-index:100;background:var(--nav-bg);backdrop-filter:b
 .tick-item .sym{color:rgba(255,255,255,.85);}
 .tick-up{color:#f08c00;}.tick-dn{color:#f87171;}
 .hero{max-width:760px;margin:0 auto;padding:4rem 1.5rem 2rem;text-align:center;}
+@media(max-width:640px){.hero{padding:2.5rem 1.25rem 1.5rem;}}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);background:var(--accent-light);border-radius:20px;padding:4px 12px;margin-bottom:1.25rem;border:1px solid var(--accent)33;}
 .hero-eyebrow::before{content:'●';font-size:8px;}
 h1{font-family:'DM Serif Display',serif;font-size:clamp(32px,5vw,52px);line-height:1.15;letter-spacing:-.5px;color:var(--ink);margin-bottom:1rem;}
 h1 em{font-style:normal;color:var(--accent);}
 .hero-sub{font-size:16px;color:var(--ink3);max-width:520px;margin:0 auto 2.5rem;line-height:1.7;}
+@media(max-width:640px){.hero-sub{font-size:14.5px;margin-bottom:1.75rem;}}
 .planner-card{max-width:920px;margin:0 auto 3rem;background:var(--surface);border:1px solid var(--border);border-radius:24px;overflow:hidden;box-shadow:var(--shadow);transition:background .25s,border-color .25s;}
+@media(max-width:640px){.planner-card,.lookup-section,.movers-section{margin-left:.75rem;margin-right:.75rem;border-radius:18px;}}
 .planner-header{background:var(--hdr);padding:1.5rem 2rem;}
 .planner-header h2{font-family:'DM Serif Display',serif;font-size:20px;color:#fff;font-weight:400;}
 .planner-header p{font-size:13px;color:rgba(255,255,255,.4);margin-top:2px;}
 .planner-body{padding:2rem;}
+@media(max-width:640px){.planner-header,.lookup-header,.movers-header{padding:1.25rem 1.5rem;}.planner-body,.lookup-body,.movers-body{padding:1.25rem;}}
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.5rem;}
 @media(max-width:580px){.form-grid{grid-template-columns:1fr;}}
 .field{display:flex;flex-direction:column;gap:6px;}
 .field label{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--ink3);}
+.field label.proj-label-tip{display:inline-flex;align-items:center;gap:5px;}
 .input-wrap{position:relative;}
 .input-wrap .prefix{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:15px;color:var(--ink3);pointer-events:none;}
-input[type="number"],input[type="text"],select{width:100%;height:48px;border:1.5px solid var(--border2);border-radius:10px;font-size:15px;font-family:inherit;color:var(--ink);background:var(--surface2);transition:border-color .15s,background .25s;appearance:none;-webkit-appearance:none;}
-input[type="number"]{padding:0 14px 0 30px;}
+input[type="number"],input[type="text"],select{width:100%;height:48px;border:1.5px solid var(--border2);border-radius:10px;font-size:15px;font-family:inherit;color:var(--ink);background:var(--surface2);transition:border-color .15s,background .25s;appearance:none;-webkit-appearance:none;-moz-appearance:textfield;}
+input[type="number"]{padding:0 14px 0 30px;font-variant-numeric:tabular-nums;}
+input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
 input[type="text"]{padding:0 14px;}
 select{padding:0 40px 0 14px;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;background-color:var(--surface2);}
 input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent)22;}
 /* DIVIDEND TOGGLE */
-.div-toggle{display:flex;align-items:center;justify-content:space-between;background:var(--accent-light);border:2px solid var(--accent)44;border-radius:12px;padding:14px 18px;margin-bottom:1.5rem;cursor:pointer;transition:all .15s;user-select:none;}
+.div-toggle{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--accent-light);border:2px solid var(--accent)44;border-radius:12px;padding:14px 18px;margin-bottom:1.5rem;cursor:pointer;transition:all .15s;user-select:none;flex-wrap:wrap;}
 .div-toggle:hover{border-color:var(--accent)88;}
 .div-toggle.active{border-color:var(--accent);background:var(--accent-light);}
-.div-toggle-left{display:flex;align-items:center;gap:12px;}
-.div-icon{font-size:24px;}
+.div-toggle-left{display:flex;align-items:center;gap:12px;min-width:0;flex:1;}
+.div-toggle-left>div:last-child{min-width:0;}
+.div-icon{font-size:24px;flex-shrink:0;}
 .div-label{font-size:14px;font-weight:600;color:var(--ink);}
-.div-sub{font-size:12px;color:var(--ink3);margin-top:1px;}
-.div-pill{font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;background:var(--surface2);color:var(--ink3);border:1.5px solid var(--border2);transition:all .2s;}
+.div-sub{font-size:12px;color:var(--ink3);margin-top:1px;line-height:1.45;}
+.div-pill{font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;background:var(--surface2);color:var(--ink3);border:1.5px solid var(--border2);transition:all .2s;flex-shrink:0;}
 .div-toggle.active .div-pill{background:var(--accent);color:#fff;border-color:var(--accent);}
+@media(max-width:480px){.div-toggle{padding:12px 14px;}.div-icon{font-size:20px;}.div-label{font-size:13px;}.div-sub{font-size:11px;}}
 /* PORTFOLIO */
 .portfolio-section{border:1.5px solid var(--border);border-radius:14px;margin-bottom:1.5rem;overflow:hidden;}
-.portfolio-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:var(--surface2);cursor:pointer;user-select:none;}
+.portfolio-header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 18px;background:var(--surface2);cursor:pointer;user-select:none;}
+.portfolio-header>div:first-child{min-width:0;flex:1;}
 .portfolio-label{font-size:14px;font-weight:600;color:var(--ink);}
-.portfolio-sublabel{font-size:12px;color:var(--ink3);}
-.portfolio-badge{font-size:11px;font-weight:600;background:var(--accent-light);color:var(--accent);padding:3px 10px;border-radius:20px;border:1px solid var(--accent)33;margin-left:8px;}
-.p-toggle-icon{transition:transform .2s;font-size:18px;color:var(--ink3);}
+.portfolio-sublabel{font-size:12px;color:var(--ink3);line-height:1.45;}
+.portfolio-badge{font-size:11px;font-weight:600;background:var(--accent-light);color:var(--accent);padding:3px 10px;border-radius:20px;border:1px solid var(--accent)33;margin-left:8px;white-space:nowrap;}
+.p-toggle-icon{transition:transform .2s;font-size:18px;color:var(--ink3);flex-shrink:0;}
 .p-toggle-icon.open{transform:rotate(180deg);}
+@media(max-width:480px){.portfolio-header{padding:12px 14px;}.portfolio-label{font-size:13px;}.portfolio-sublabel{font-size:11px;}}
 .portfolio-body{padding:16px 18px;border-top:1px solid var(--border);display:none;}
 .portfolio-body.open{display:block;}
 .holdings-list{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
@@ -99,7 +112,7 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
 /* CHIPS */
 .chips-wrap{margin-bottom:1.75rem;}
 .chips-main-label{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--ink3);margin-bottom:10px;}
-.chip-section-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);padding:8px 0 4px;display:block;}
+.chip-section-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);padding:8px 0 4px;display:flex;align-items:center;gap:6px;}
 .chip-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:2px;}
 .chip{padding:8px 16px;border-radius:20px;border:1.5px solid var(--border2);font-size:13px;font-weight:500;color:var(--ink2);background:var(--surface);cursor:pointer;transition:all .15s;}
 .chip:hover{border-color:var(--accent);color:var(--accent);}
@@ -140,6 +153,10 @@ hr.div{border:none;border-top:1px solid var(--border);margin:2rem 0;}
 .risk-med{background:var(--accent-light);color:var(--accent);}
 .risk-high{background:var(--red-light);color:var(--red);}
 .strategy-note{font-size:14px;color:var(--ink2);line-height:1.7;padding:14px 18px;background:var(--accent-light);border-radius:10px;border-left:3px solid var(--accent);margin-bottom:1.5rem;}
+.concentration-note{font-size:13px;color:var(--ink2);line-height:1.6;padding:12px 16px;background:var(--surface2);border-radius:10px;border-left:3px solid var(--ink4);margin:1rem 0 1.5rem;display:flex;align-items:flex-start;gap:10px;}
+.concentration-note.high{background:var(--red-light);border-left-color:var(--red);}
+.concentration-note-icon{font-size:16px;flex-shrink:0;line-height:1.4;}
+.concentration-note strong{color:var(--ink);}
 .existing-summary{background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:14px 18px;margin-bottom:1.5rem;}
 .existing-summary-title{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3);margin-bottom:10px;}
 .existing-chips{display:flex;flex-wrap:wrap;gap:6px;}
@@ -152,18 +169,29 @@ hr.div{border:none;border-top:1px solid var(--border);margin:2rem 0;}
 .metric-val{font-size:22px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;}
 .metric-sub{font-size:11px;color:var(--ink4);margin-top:2px;}
 .sec-heading{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin-bottom:12px;}
-.chart-layout{display:grid;grid-template-columns:200px 1fr;gap:1.5rem;align-items:center;margin-bottom:2rem;}
-@media(max-width:560px){.chart-layout{grid-template-columns:1fr;}}
-.donut-wrap{position:relative;width:200px;height:200px;}
-@media(max-width:560px){.donut-wrap{width:160px;height:160px;margin:0 auto;}}
+.alloc-toggle-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:1.25rem;}
+.alloc-view-tabs{display:flex;gap:6px;background:var(--surface2);border-radius:10px;padding:4px;}
+.alloc-view-tab{padding:7px 16px;border-radius:8px;font-size:13px;font-weight:600;color:var(--ink3);cursor:pointer;transition:all .15s;border:none;background:none;font-family:inherit;}
+.alloc-view-tab.active{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.08);}
+.chart-layout{display:grid;grid-template-columns:280px 1fr;gap:2rem;align-items:center;margin-bottom:2.5rem;}
+@media(max-width:680px){.chart-layout{grid-template-columns:1fr;gap:1.25rem;}}
+.donut-wrap{position:relative;width:280px;height:280px;flex-shrink:0;}
+@media(max-width:680px){.donut-wrap{width:240px;height:240px;margin:0 auto;}}
+@media(max-width:420px){.donut-wrap{width:208px;height:208px;}}
+.donut-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;}
+.donut-center-val{font-size:26px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1.1;}
+.donut-center-label{font-size:11px;color:var(--ink3);text-transform:uppercase;letter-spacing:.05em;margin-top:3px;}
+.legend-wrap{display:flex;flex-direction:column;gap:9px;}
 .legend-list{display:flex;flex-direction:column;gap:10px;}
 .legend-item{display:flex;align-items:center;gap:10px;}
 .legend-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0;}
-.legend-info{flex:1;}
+.legend-dot.sector-dot{border-radius:50%;}
+.legend-info{flex:1;min-width:0;}
 .legend-ticker{font-size:14px;font-weight:600;color:var(--ink);}
 .legend-name{font-size:11px;color:var(--ink3);}
-.legend-pct{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--ink2);}
-.perf-section{margin-bottom:2rem;}
+.legend-pct{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--ink2);flex-shrink:0;}
+.perf-section{margin-bottom:2.5rem;background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:1.5rem;}
+.perf-section .sec-heading{margin-bottom:14px;}
 .perf-controls{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:12px;}
 .perf-tabs{display:flex;flex-wrap:wrap;gap:6px;}
 .ptab{padding:5px 12px;border-radius:20px;border:1.5px solid var(--border2);font-size:12px;font-weight:600;cursor:pointer;font-family:'JetBrains Mono',monospace;background:var(--surface);color:var(--ink3);transition:all .15s;}
@@ -175,19 +203,41 @@ hr.div{border:none;border-top:1px solid var(--border);margin:2rem 0;}
 .perf-legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink3);}
 .perf-legend-line{width:24px;height:2px;}
 .perf-legend-line.dashed{background:repeating-linear-gradient(90deg,currentColor 0,currentColor 4px,transparent 4px,transparent 8px);}
-.whatif-section{background:var(--dark-card);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;color:#fff;}
-.whatif-title{font-family:'DM Serif Display',serif;font-size:18px;color:#fff;margin-bottom:4px;}
-.whatif-sub{font-size:13px;color:rgba(255,255,255,.4);margin-bottom:1.25rem;}
-.wi-row{display:flex;align-items:center;gap:14px;margin-bottom:1rem;}
-.wi-row label{font-size:12px;color:rgba(255,255,255,.5);min-width:80px;}
-input[type="range"]{flex:1;-webkit-appearance:none;height:4px;border-radius:2px;background:rgba(255,255,255,.12);outline:none;}
-input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.3);}
-.wi-val{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:500;min-width:54px;text-align:right;}
-.wi-val.pos{color:#f08c00;}.wi-val.neg{color:#f87171;}
-.wi-results{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:4px;}
-.wi-card{background:rgba(255,255,255,.06);border-radius:10px;padding:12px 14px;border:1px solid rgba(255,255,255,.06);}
-.wi-card-label{font-size:11px;color:rgba(255,255,255,.4);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em;}
-.wi-card-val{font-size:20px;font-weight:600;font-variant-numeric:tabular-nums;}
+/* PROJECTION CONTROLS — inline under the perf chart, replacing the old what-if + dividend-calc boxes */
+.proj-controls{margin-top:1.25rem;padding-top:1.25rem;border-top:1px dashed var(--border);}
+.proj-controls-hdr{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
+.proj-controls-title{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);}
+.proj-dca-field{display:flex;align-items:center;gap:8px;}
+.proj-dca-field label{font-size:11px;color:var(--ink3);white-space:nowrap;}
+.proj-dca-field .input-wrap{width:90px;}
+.proj-dca-field input{height:32px;font-size:12px;padding-left:22px;}
+.proj-dca-field .prefix{font-size:12px;}
+.proj-slider-row{display:flex;align-items:center;gap:14px;margin-bottom:.85rem;}
+.proj-slider-row label{font-size:12px;color:var(--ink2);min-width:84px;flex-shrink:0;}
+.proj-slider-row input[type="range"]{flex:1;-webkit-appearance:none;height:4px;border-radius:2px;background:var(--border2);outline:none;}
+.proj-slider-row input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;height:17px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.2);}
+.proj-slider-row input[type="range"]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;background:var(--accent);cursor:pointer;border:none;}
+@media(max-width:480px){.proj-slider-row label{min-width:64px;font-size:11px;}.proj-dca-field{width:100%;justify-content:space-between;}.proj-dca-field .input-wrap{width:80px;}}
+.proj-val{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;min-width:58px;text-align:right;flex-shrink:0;}
+.proj-val.pos{color:var(--green);}.proj-val.neg{color:var(--red);}
+.proj-drip-row{display:flex;align-items:center;gap:8px;margin-bottom:1rem;}
+.proj-drip-row input[type="checkbox"]{width:15px;height:15px;accent-color:var(--accent);cursor:pointer;}
+.proj-drip-row label{font-size:12px;color:var(--ink2);cursor:pointer;}
+.proj-stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;}
+.proj-stat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:10px 12px;}
+.proj-stat-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--ink4);margin-bottom:3px;}
+.proj-stat-label-row{display:flex;align-items:center;gap:5px;margin-bottom:3px;}
+.proj-stat-label-row .proj-stat-label{margin-bottom:0;}
+.proj-stat-val{font-size:16px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;}
+.proj-stat-val.pos{color:var(--green);}.proj-stat-val.neg{color:var(--red);}
+/* HOVER TOOLTIPS — small info icon + popover, used in the projection controls */
+.info-tip{position:relative;display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;background:var(--border2);color:var(--surface);font-size:9px;font-weight:700;font-style:normal;cursor:help;flex-shrink:0;vertical-align:middle;}
+.info-tip:hover,.info-tip:focus{background:var(--accent);}
+.info-tip .info-bubble{display:none;position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);width:220px;max-width:min(220px,calc(100vw - 32px));background:var(--ink);color:var(--bg);font-size:11.5px;font-weight:400;line-height:1.5;padding:9px 11px;border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,.25);z-index:50;text-align:left;white-space:normal;}
+.info-tip .info-bubble::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--ink);}
+.info-tip:hover .info-bubble,.info-tip:focus .info-bubble{display:block;}
+@media(max-width:480px){.info-tip .info-bubble{width:min(200px,calc(100vw - 32px));}}
+.proj-label-tip{display:inline-flex;align-items:center;gap:5px;}
 .picks-grid{display:flex;flex-direction:column;gap:12px;}
 .pick-card{border:1.5px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color .15s;}
 .pick-card:hover{border-color:var(--border2);}
@@ -213,6 +263,7 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;hei
 .t-div{background:var(--accent-light);color:var(--accent);border-color:var(--accent)44;}
 .pick-why{font-size:13px;color:var(--ink2);line-height:1.65;}
 .pick-bottom{background:var(--surface2);border-top:1px solid var(--border);padding:12px 18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+@media(max-width:480px){.pick-bottom{padding:12px 14px;}.pick-bottom>div{width:100%;justify-content:space-between;}}
 .buy-action{display:flex;align-items:center;gap:10px;}
 .buy-icon{width:32px;height:32px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .buy-icon svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2;}
@@ -257,7 +308,7 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;hei
 .plans-section{background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;}
 .plans-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:10px;}
 .plans-title-row{display:flex;align-items:center;gap:10px;}
-.plans-icon{font-size:20px;}
+.plans-icon{font-size:20px;flex-shrink:0;}
 .plans-title{font-family:'DM Serif Display',serif;font-size:18px;color:var(--ink);}
 .plans-sub{font-size:12px;color:var(--ink3);margin-top:1px;}
 .plans-list{display:flex;flex-direction:column;gap:8px;margin-bottom:1rem;}
@@ -271,7 +322,13 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;hei
 .plan-card-actions{display:flex;gap:6px;flex-shrink:0;}
 .plan-icon-btn{width:30px;height:30px;border:none;background:var(--surface2);border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink3);transition:all .15s;font-size:13px;}
 .plan-icon-btn:hover{background:var(--red-light);color:var(--red);}
-.plans-empty{font-size:13px;color:var(--ink3);text-align:center;padding:1.5rem 0;}
+.spinner-sm{width:24px;height:24px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 10px;}
+.inline-loading{text-align:center;padding:1.75rem 1rem;color:var(--ink3);font-size:13px;}
+.inline-empty{text-align:center;padding:1.75rem 1.25rem;}
+.inline-empty-icon{font-size:26px;margin-bottom:8px;opacity:.6;}
+.inline-empty-text{font-size:13px;color:var(--ink3);line-height:1.6;max-width:320px;margin:0 auto;}
+.inline-error{text-align:center;padding:1.25rem;background:var(--red-light);border:1px solid var(--red)44;border-radius:10px;font-size:13px;color:var(--red);}
+.inline-error button{display:block;margin:8px auto 0;font-size:12px;font-weight:600;color:var(--red);background:none;border:1.5px solid var(--red)55;border-radius:20px;padding:5px 14px;cursor:pointer;font-family:inherit;}
 .save-plan-row{display:flex;gap:8px;align-items:center;}
 .save-plan-row input{flex:1;}
 .save-plan-btn{height:48px;padding:0 18px;background:var(--accent);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;transition:background .15s;}
@@ -326,26 +383,6 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
 .stat-box-val.down{color:var(--red);}
 .stat-box-explain{font-size:11px;color:var(--ink3);line-height:1.45;}
 
-/* DIVIDEND CALCULATOR */
-.divcalc-section{background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:2rem;}
-.divcalc-header{display:flex;align-items:center;gap:10px;margin-bottom:1.25rem;}
-.divcalc-icon{font-size:22px;}
-.divcalc-title{font-family:'DM Serif Display',serif;font-size:18px;color:var(--ink);}
-.divcalc-sub{font-size:12px;color:var(--ink3);margin-top:1px;}
-.divcalc-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:1.25rem;}
-@media(max-width:640px){.divcalc-grid{grid-template-columns:1fr 1fr;}}
-.divcalc-field label{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px;display:block;}
-.divcalc-results{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:1rem;}
-.dc-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 14px;}
-.dc-card-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--ink3);margin-bottom:4px;}
-.dc-card-val{font-size:19px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;}
-.dc-card-val.accent{color:var(--accent);}
-.dc-checkbox-row{display:flex;align-items:center;gap:8px;margin-bottom:1rem;}
-.dc-checkbox-row input[type="checkbox"]{width:16px;height:16px;accent-color:var(--accent);cursor:pointer;}
-.dc-checkbox-row label{font-size:13px;color:var(--ink2);cursor:pointer;}
-.dc-chart-wrap{position:relative;width:100%;height:200px;margin-top:.5rem;}
-.dc-note{font-size:11px;color:var(--ink4);margin-top:10px;line-height:1.5;}
-
 /* SHARE BUTTON & MODAL */
 .share-btn{display:flex;align-items:center;gap:6px;padding:5px 14px;border-radius:20px;border:1.5px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer;font-size:12px;font-weight:600;transition:all .15s;font-family:inherit;}
 .share-btn:hover{background:var(--accent-h);}
@@ -375,6 +412,7 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
 .sim-modal h3{font-family:'DM Serif Display',serif;font-size:20px;color:var(--ink);margin-bottom:6px;}
 .sim-modal-sub{font-size:13px;color:var(--ink3);margin-bottom:1.25rem;line-height:1.6;}
 .sim-pick-row{display:grid;grid-template-columns:28px 1fr 110px;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);}
+@media(max-width:420px){.sim-pick-row{grid-template-columns:22px 1fr 86px;gap:6px;}.sim-pick-ticker{font-size:13px;}.sim-pick-meta{font-size:10px;}}
 .sim-pick-row:last-child{border-bottom:none;}
 .sim-pick-row input[type="checkbox"]{width:18px;height:18px;accent-color:var(--accent);cursor:pointer;}
 .sim-pick-info{min-width:0;}
@@ -394,12 +432,14 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
 .sim-start-btn:disabled{background:var(--ink4);cursor:not-allowed;}
 .sim-close{width:100%;text-align:center;padding:10px;font-size:13px;color:var(--ink3);cursor:pointer;background:none;border:none;font-family:inherit;margin-top:6px;}
 .sim-note{font-size:11px;color:var(--ink4);line-height:1.55;margin-top:.75rem;}
+@media(max-width:480px){.auth-modal,.compare-modal,.share-modal,.sim-modal{padding:1.25rem;border-radius:14px;}.auth-modal-bg,.compare-modal-bg,.share-modal-bg,.sim-modal-bg{padding:.6rem;}}
 
 .sim-section{background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:2rem;}
-.sim-section-header{display:flex;align-items:center;gap:10px;margin-bottom:1rem;}
-.sim-section-icon{font-size:20px;}
+@media(max-width:480px){.sim-section{padding:1.1rem;}}
+.sim-section-header{display:flex;align-items:flex-start;gap:10px;margin-bottom:1rem;}
+.sim-section-icon{font-size:20px;flex-shrink:0;}
 .sim-section-title{font-family:'DM Serif Display',serif;font-size:18px;color:var(--ink);}
-.sim-section-sub{font-size:12px;color:var(--ink3);margin-top:1px;}
+.sim-section-sub{font-size:12px;color:var(--ink3);margin-top:1px;line-height:1.45;}
 .sim-list{display:flex;flex-direction:column;gap:14px;}
 .sim-card{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;overflow:hidden;}
 .sim-card-hdr{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 18px;cursor:pointer;flex-wrap:wrap;}
@@ -432,9 +472,49 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
 .sim-refresh-btn:hover{border-color:var(--accent);color:var(--accent);}
 .sim-delete-btn{padding:9px 14px;border-radius:10px;border:1.5px solid var(--red)44;background:none;color:var(--red);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;}
 .sim-delete-btn:hover{background:var(--red-light);}
-.sim-empty{font-size:13px;color:var(--ink3);text-align:center;padding:1.25rem 0;}
 .sim-signin-prompt{text-align:center;padding:1rem;font-size:13px;color:var(--ink3);}
 .sim-signin-prompt button{color:var(--accent);font-weight:600;background:none;border:none;cursor:pointer;font-family:inherit;font-size:13px;text-decoration:underline;}
+
+/* DAILY MOVERS / NEWS FEED */
+.movers-section{background:var(--surface);border:1px solid var(--border);border-radius:24px;box-shadow:var(--shadow);max-width:920px;margin:0 auto 2.5rem;overflow:hidden;}
+.movers-header{background:var(--hdr);padding:1.5rem 2rem;}
+.movers-header h2{font-family:'DM Serif Display',serif;font-size:20px;color:#fff;font-weight:400;}
+.movers-header p{font-size:13px;color:rgba(255,255,255,.4);margin-top:2px;}
+.movers-body{padding:2rem;}
+.movers-loading{text-align:center;padding:2rem;color:var(--ink3);}
+.movers-loading .spinner{margin:0 auto 12px;}
+.movers-error{display:none;background:var(--red-light);border:1px solid var(--red)44;border-radius:10px;padding:12px 16px;font-size:13px;color:var(--red);}
+.movers-error.show{display:block;}
+.movers-summary{font-size:14px;color:var(--ink2);line-height:1.7;background:var(--accent-light);border-left:3px solid var(--accent);border-radius:10px;padding:16px 20px;margin-bottom:1.5rem;}
+@media(max-width:480px){.movers-summary{font-size:13px;padding:13px 15px;}}
+.movers-summary .mv-stat{font-weight:700;color:var(--ink);font-family:'JetBrains Mono',monospace;}
+.movers-summary .mv-up{color:var(--green);}
+.movers-summary .mv-down{color:var(--red);}
+.movers-asof{font-size:11px;color:var(--ink4);margin-bottom:1.25rem;}
+.movers-grid{display:flex;flex-direction:column;gap:10px;}
+.mover-card{display:flex;align-items:center;gap:14px;border:1.5px solid var(--border);border-radius:14px;padding:14px 16px;cursor:pointer;transition:all .15s;background:var(--surface);font-family:inherit;outline:none;}
+.mover-card:focus-visible{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent)22;}
+.mover-card:hover{border-color:var(--accent);background:var(--accent-light);}
+.mover-rank{font-family:'DM Serif Display',serif;font-size:20px;color:var(--ink4);width:22px;flex-shrink:0;text-align:center;}
+.mover-id{min-width:90px;flex-shrink:0;}
+.mover-ticker{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:600;color:var(--ink);}
+.mover-name{font-size:11px;color:var(--ink3);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:90px;}
+.mover-price-block{text-align:right;flex-shrink:0;min-width:88px;}
+.mover-price{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:600;color:var(--ink);}
+.mover-chg{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;}
+.mover-chg.up{color:var(--green);}
+.mover-chg.down{color:var(--red);}
+.mover-headline{flex:1;min-width:0;font-size:13px;color:var(--ink2);line-height:1.45;}
+.mover-headline a{color:var(--ink2);text-decoration:none;}
+.mover-headline a:hover{color:var(--accent);text-decoration:underline;}
+.mover-headline .mh-empty{color:var(--ink4);font-style:italic;}
+.mover-arrow{color:var(--ink4);font-size:18px;flex-shrink:0;}
+@media(max-width:640px){.mover-card{flex-wrap:wrap;}.mover-headline{order:3;width:100%;flex-basis:100%;margin-top:4px;}.mover-arrow{display:none;}}
+.movers-note{font-size:11px;color:var(--ink4);line-height:1.6;margin-top:1.25rem;padding-top:1rem;border-top:1px dashed var(--border);}
+.movers-refresh-btn{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--accent);background:none;border:1.5px solid var(--border2);border-radius:20px;padding:5px 14px;cursor:pointer;font-family:inherit;transition:all .15s;}
+.movers-refresh-btn:hover{border-color:var(--accent);}
+.movers-refresh-btn:disabled{opacity:.5;cursor:not-allowed;}
+.movers-top-row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:1.25rem;}
 
 /* STOCK LOOKUP */
 .lookup-section{background:var(--surface);border:1px solid var(--border);border-radius:24px;box-shadow:var(--shadow);max-width:920px;margin:0 auto 3rem;overflow:hidden;}
@@ -471,6 +551,7 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
 .lookup-result-ticker{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:600;color:var(--ink);}
 .lookup-result-name{font-size:14px;color:var(--ink3);margin-top:2px;}
 .lookup-result-price-block{text-align:right;}
+@media(max-width:480px){.lookup-result-hdr{gap:10px;}.lookup-result-price-block{text-align:left;}.lookup-result-ticker{font-size:22px;}.lookup-result-price{font-size:24px;}}
 .lookup-result-price{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:600;color:var(--ink);}
 .lookup-price-tag{font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;margin-top:4px;display:inline-block;}
 .lookup-price-live{background:var(--green-light);color:var(--green);}
@@ -494,7 +575,6 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
 .lookup-news-item:hover{border-color:var(--accent);background:var(--surface);}
 .lookup-news-headline{font-size:13px;font-weight:600;color:var(--ink);line-height:1.4;margin-bottom:3px;}
 .lookup-news-meta{font-size:11px;color:var(--ink3);}
-.lookup-news-empty{font-size:13px;color:var(--ink3);padding:1rem 0;text-align:center;}
 </style>
 </head>
 <body>
@@ -506,9 +586,9 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
     </div>
     <button class="share-btn" onclick="openShareModal()">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg>
-      Share
+      <span class="sb-label">Share</span>
     </button>
-    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">☀ Light mode</button>
+    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()"><span id="themeBtnIcon">☀</span> <span class="tb-label" id="themeBtnLabel">Light mode</span></button>
   </div>
 </nav>
 <div class="ticker-bar"><div class="ticker-track" id="tickerTrack"></div></div>
@@ -516,6 +596,26 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
   <div class="hero-eyebrow">Personal investment planner</div>
   <h1>Put in your budget.<br>Get a <em>real plan</em>.</h1>
   <p class="hero-sub">Enter your budget, add your existing holdings, choose a strategy — and get a full plan built around you. Live prices, historical charts, what-if simulator, dividend income estimates.</p>
+</div>
+
+<!-- DAILY MOVERS / NEWS -->
+<div class="movers-section">
+  <div class="movers-header">
+    <h2>Today's biggest movers</h2>
+    <p>Real prices &amp; real headlines from a basket of widely-held stocks — whichever moved most, today</p>
+  </div>
+  <div class="movers-body">
+    <div class="movers-top-row">
+      <div style="font-size:12px;color:var(--ink3);">Ranked by today's % price change</div>
+      <button class="movers-refresh-btn" id="moversRefreshBtn" onclick="loadDailyMovers()">🔄 Refresh</button>
+    </div>
+    <div class="movers-loading" id="moversLoading">
+      <div class="spinner"></div>
+      Pulling live prices and headlines…
+    </div>
+    <div class="movers-error" id="moversError"></div>
+    <div id="moversContent"></div>
+  </div>
 </div>
 
 <!-- STOCK LOOKUP -->
@@ -589,10 +689,12 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
     <div class="form-grid">
       <div class="field">
         <label for="budget">New money to invest</label>
-        <div class="input-wrap"><span class="prefix">$</span><input type="number" id="budget" placeholder="e.g. 2,000" min="100" step="100"></div>
+        <div class="input-wrap"><span class="prefix">$</span><input type="number" id="budget" placeholder="e.g. 2,000" min="100" max="100000000" step="100" oninput="autoShrinkNumberInput(this)"></div>
       </div>
       <div class="field">
-        <label for="horizon">Time horizon</label>
+        <label for="horizon" class="proj-label-tip">Time horizon
+          <span class="info-tip" tabindex="0">i<span class="info-bubble">How long before you'd need this money. Shorter horizons lean toward steadier, lower-risk picks since there's less time to recover from a downturn; longer horizons can afford more growth-focused, higher-risk picks.</span></span>
+        </label>
         <div class="input-wrap">
           <select id="horizon">
             <option value="short">Short-term — 1 to 2 years</option>
@@ -607,7 +709,9 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
       <div class="div-toggle-left">
         <div class="div-icon">💰</div>
         <div>
-          <div class="div-label">All-Dividends Mode</div>
+          <div class="div-label" style="display:flex;align-items:center;gap:6px;">All-Dividends Mode
+            <span class="info-tip" tabindex="0" onclick="event.stopPropagation()">i<span class="info-bubble">Switches every pick in your plan to a dividend payer, ignoring whatever strategy is selected below. Good if steady cash income matters more to you than maximizing growth. Turn it off to go back to picking a strategy.</span></span>
+          </div>
           <div class="div-sub">100% dividend-focused — every pick pays regular income. Overrides strategy selection below.</div>
         </div>
       </div>
@@ -635,7 +739,9 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
     <div class="portfolio-section">
       <div class="portfolio-header" onclick="togglePortfolio()">
         <div>
-          <div class="portfolio-label">Existing holdings<span class="portfolio-badge" id="hBadge" style="display:none"></span></div>
+          <div class="portfolio-label" style="display:flex;align-items:center;gap:6px;">Existing holdings<span class="portfolio-badge" id="hBadge" style="display:none"></span>
+            <span class="info-tip" tabindex="0" onclick="event.stopPropagation()">i<span class="info-bubble">Anything you list here gets excluded from your new picks — Vestly won't suggest buying more of something you already own, and your existing dollar amounts factor into the "combined" totals shown after you build a plan.</span></span>
+          </div>
           <div class="portfolio-sublabel">Add stocks or ETFs you already own — we'll plan around them</div>
         </div>
         <span class="p-toggle-icon" id="pToggleIcon">▾</span>
@@ -649,24 +755,32 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
     <!-- STRATEGY CHIPS -->
     <div class="chips-wrap" id="chipsWrap">
       <div class="chips-main-label">Investing strategy</div>
-      <span class="chip-section-label">Long-term growth — buy and hold</span>
+      <span class="chip-section-label">Long-term growth — buy and hold
+        <span class="info-tip" tabindex="0">i<span class="info-bubble">Picks you buy once and mostly leave alone for years. Designed to ride out short-term dips rather than react to them — historically the lowest-effort, most evidence-backed approach for long time horizons.</span></span>
+      </span>
       <div class="chip-row">
         <button class="chip active" data-f="balanced">Balanced growth</button>
         <button class="chip" data-f="bluechip">Blue-chip steady</button>
         <button class="chip" data-f="index">Index funds only</button>
       </div>
-      <span class="chip-section-label">Active / faster moving growth</span>
+      <span class="chip-section-label">Active / faster moving growth
+        <span class="info-tip" tabindex="0">i<span class="info-bubble">More concentrated bets on specific companies or trends with higher growth potential — but also bigger swings in value. These tend to need closer attention and a higher tolerance for short-term losses.</span></span>
+      </span>
       <div class="chip-row">
         <button class="chip" data-f="growth">Aggressive growth</button>
         <button class="chip" data-f="momentum">Momentum stocks</button>
         <button class="chip" data-f="swing">Swing / active mix</button>
       </div>
-      <span class="chip-section-label">Income</span>
+      <span class="chip-section-label">Income
+        <span class="info-tip" tabindex="0">i<span class="info-bubble">Prioritizes regular cash payouts (dividends) over fast price growth. Good fit if generating ongoing income matters more to you than maximizing long-term growth.</span></span>
+      </span>
       <div class="chip-row">
         <button class="chip" data-f="income">Dividend income</button>
         <button class="chip" data-f="safe">Safe &amp; steady</button>
       </div>
-      <span class="chip-section-label">Sector bets</span>
+      <span class="chip-section-label">Sector bets
+        <span class="info-tip" tabindex="0">i<span class="info-bubble">Concentrated in one part of the economy (like technology or global markets) rather than spread evenly across everything. Higher potential reward if that sector does well, but less diversified if it doesn't.</span></span>
+      </span>
       <div class="chip-row">
         <button class="chip" data-f="tech">Tech-heavy</button>
         <button class="chip" data-f="global">Global diversified</button>
@@ -704,11 +818,28 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
       <div class="strategy-note" id="stratNote"></div>
       <div id="exBox"></div>
       <div class="metrics-row" id="metricsRow"></div>
-      <div class="sec-heading">Portfolio allocation</div>
-      <div class="chart-layout">
-        <div class="donut-wrap"><canvas id="allocChart"></canvas></div>
-        <div class="legend-list" id="legendList"></div>
+      <div class="sec-heading" style="display:flex;align-items:center;gap:6px;">Portfolio allocation
+        <span class="info-tip" tabindex="0">i<span class="info-bubble">Shows what % of your budget goes into each pick. Switch the tabs below to view the same breakdown grouped by individual ticker, or rolled up by sector (industry group) instead.</span></span>
       </div>
+      <div class="alloc-toggle-row">
+        <div class="alloc-view-tabs">
+          <button class="alloc-view-tab active" id="allocTabTicker" onclick="setAllocView('ticker')">By ticker</button>
+          <button class="alloc-view-tab" id="allocTabSector" onclick="setAllocView('sector')">By sector</button>
+        </div>
+      </div>
+      <div class="chart-layout">
+        <div class="donut-wrap">
+          <canvas id="allocChart"></canvas>
+          <div class="donut-center">
+            <div class="donut-center-val" id="donutCenterVal"></div>
+            <div class="donut-center-label" id="donutCenterLabel">positions</div>
+          </div>
+        </div>
+        <div class="legend-wrap">
+          <div class="legend-list" id="legendList"></div>
+        </div>
+      </div>
+      <div class="concentration-note" id="concentrationNote" style="display:none;"></div>
       <div class="perf-section">
         <div class="sec-heading">Historical performance + projection</div>
         <div class="perf-controls">
@@ -722,55 +853,42 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
         <div class="perf-chart-wrap"><canvas id="perfChart"></canvas></div>
         <div class="perf-legend">
           <div class="perf-legend-item"><div class="perf-legend-line" style="background:var(--accent);height:2.5px;"></div>Historical (indexed to 100)</div>
-          <div class="perf-legend-item"><div class="perf-legend-line dashed" style="color:var(--accent);opacity:.5;"></div>Projection</div>
+          <div class="perf-legend-item"><div class="perf-legend-line dashed" style="color:var(--accent);opacity:.5;"></div>Projection — adjust below</div>
         </div>
-      </div>
-      <div class="whatif-section">
-        <div class="whatif-title">What-if simulator</div>
-        <div class="whatif-sub">Drag the sliders to see how market moves &amp; time affect your portfolio</div>
-        <div class="wi-row">
-          <label>Market move</label>
-          <input type="range" id="mktSlider" min="-50" max="100" value="0" step="1" oninput="updateWhatif()">
-          <span class="wi-val" id="mktVal">0%</span>
-        </div>
-        <div class="wi-row">
-          <label>Years held</label>
-          <input type="range" id="yrsSlider" min="1" max="15" value="4" step="1" oninput="updateWhatif()">
-          <span class="wi-val" id="yrsVal" style="color:rgba(255,255,255,.6);">4 yrs</span>
-        </div>
-        <div class="wi-results" id="wiResults"></div>
-      </div>
 
-      <!-- DIVIDEND CALCULATOR -->
-      <div class="divcalc-section">
-        <div class="divcalc-header">
-          <div class="divcalc-icon">🧮</div>
-          <div>
-            <div class="divcalc-title">Dividend reinvestment calculator</div>
-            <div class="divcalc-sub">See how dividend income compounds over time on this portfolio</div>
+        <!-- UNIFIED PROJECTION CONTROLS (replaces the old separate what-if simulator + dividend calculator) -->
+        <div class="proj-controls">
+          <div class="proj-controls-hdr">
+            <div class="proj-controls-title">Adjust the projection</div>
+            <div class="proj-dca-field">
+              <label for="projDca" class="proj-label-tip">Add monthly
+                <span class="info-tip" tabindex="0">i<span class="info-bubble">Extra cash you'd invest every month going forward, on top of your starting amount. Assumed to be invested at the start of each year in this model — it adds up in "Total contributed" below.</span></span>
+              </label>
+              <div class="input-wrap"><span class="prefix">$</span><input type="number" id="projDca" value="0" min="0" step="50" oninput="autoShrinkNumberInput(this);updateProjection()"></div>
+            </div>
           </div>
+          <div class="proj-slider-row">
+            <label class="proj-label-tip">Market move
+              <span class="info-tip" tabindex="0">i<span class="info-bubble">A one-time hypothetical swing — "what if the market also moved this much" — spread evenly across your years held. Slide right to test a boom scenario, left to stress-test a downturn. 0% means no extra tilt, just the typical historical-average return.</span></span>
+            </label>
+            <input type="range" id="mktSlider" min="-50" max="100" value="0" step="1" oninput="updateProjection()">
+            <span class="proj-val" id="mktVal">0%</span>
+          </div>
+          <div class="proj-slider-row">
+            <label class="proj-label-tip">Years held
+              <span class="info-tip" tabindex="0">i<span class="info-bubble">How many years you plan to stay invested before cashing out. Longer holding periods generally smooth out short-term ups and downs — this also controls how far the dashed projection line stretches on the chart above.</span></span>
+            </label>
+            <input type="range" id="yrsSlider" min="1" max="20" value="4" step="1" oninput="updateProjection()">
+            <span class="proj-val" id="yrsVal">4 yrs</span>
+          </div>
+          <div class="proj-drip-row">
+            <input type="checkbox" id="dcReinvest" checked onchange="updateProjection()">
+            <label for="dcReinvest" class="proj-label-tip">Reinvest dividends automatically (DRIP)
+              <span class="info-tip" tabindex="0">i<span class="info-bubble">DRIP = Dividend Reinvestment Plan. When checked, any dividend income gets automatically used to buy more shares instead of being paid out as cash — so it compounds along with your principal. Only matters for picks that actually pay a dividend.</span></span>
+            </label>
+          </div>
+          <div class="proj-stats-row" id="projStatsRow"></div>
         </div>
-        <div class="divcalc-grid">
-          <div class="divcalc-field">
-            <label for="dcYears">Years to project</label>
-            <input type="number" id="dcYears" value="10" min="1" max="40" oninput="updateDivCalc()">
-          </div>
-          <div class="divcalc-field">
-            <label for="dcContribution">Add per month ($)</label>
-            <input type="number" id="dcContribution" value="0" min="0" step="50" oninput="updateDivCalc()">
-          </div>
-          <div class="divcalc-field">
-            <label for="dcGrowth">Annual dividend growth (%)</label>
-            <input type="number" id="dcGrowth" value="5" min="0" max="20" step="0.5" oninput="updateDivCalc()">
-          </div>
-        </div>
-        <div class="dc-checkbox-row">
-          <input type="checkbox" id="dcReinvest" checked onchange="updateDivCalc()">
-          <label for="dcReinvest">Reinvest dividends automatically (DRIP)</label>
-        </div>
-        <div class="divcalc-results" id="dcResults"></div>
-        <div class="dc-chart-wrap"><canvas id="dcChart"></canvas></div>
-        <div class="dc-note">Assumes dividend yield stays constant on cost basis plus the entered annual growth rate, and that share price grows at this portfolio's blended historical rate. Illustrative only — actual dividend payments vary and are not guaranteed.</div>
       </div>
 
       <div class="sec-heading" style="margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
@@ -1039,6 +1157,8 @@ async function submitAuth(){
 // ── PLAN STORAGE ──
 async function loadUserPlans(){
   if(!currentUser) return;
+  const list=document.getElementById('plansList');
+  if(list) list.innerHTML=`<div class="inline-loading"><div class="spinner-sm"></div>Loading your saved plans…</div>`;
   try{
     const{data,error}=await sb.from('plans').select('*').order('updated_at',{ascending:false});
     if(error) throw error;
@@ -1046,12 +1166,13 @@ async function loadUserPlans(){
     renderPlansList();
   }catch(e){
     console.error('Failed to load plans',e);
+    if(list) list.innerHTML=`<div class="inline-error">Couldn't load your saved plans right now.<button onclick="loadUserPlans()">Retry</button></div>`;
   }
 }
 function renderPlansList(){
   const list=document.getElementById('plansList');
   if(!userPlans.length){
-    list.innerHTML=`<div class="plans-empty">No saved plans yet — build one below, then save it here.</div>`;
+    list.innerHTML=`<div class="inline-empty"><div class="inline-empty-icon">📋</div><div class="inline-empty-text">No saved plans yet — build one below, then save it here so you can come back to it anytime.</div></div>`;
     return;
   }
   list.innerHTML=userPlans.map(p=>{
@@ -1157,9 +1278,9 @@ function toggleTheme(){
   const h=document.documentElement;
   const isDark=h.dataset.theme==='dark';
   h.dataset.theme=isDark?'light':'dark';
-  document.getElementById('themeBtn').textContent=isDark?'☀ Light mode':'🌙 Dark mode';
+  document.getElementById('themeBtnIcon').textContent=isDark?'☀':'🌙';
+  document.getElementById('themeBtnLabel').textContent=isDark?'Light mode':'Dark mode';
   if(perfChartInst) refreshChartColors();
-  if(typeof dcChartInst!=='undefined' && dcChartInst) updateDivCalc();
 }
 function refreshChartColors(){
   const dark=document.documentElement.dataset.theme==='dark';
@@ -1217,7 +1338,7 @@ function addHolding(t='',l='',v=''){
   const row=document.createElement('div');row.className='holding-row';row.id='hr'+id;
   row.innerHTML=`<input type="text" class="t-in" placeholder="AAPL" value="${t}" oninput="updateBadge()">
     <input type="text" placeholder="Note (optional)" value="${l}">
-    <div class="input-wrap"><span class="prefix">$</span><input type="number" placeholder="0" min="0" step="100" value="${v}" style="padding-left:26px;" oninput="updateBadge()"></div>
+    <div class="input-wrap"><span class="prefix">$</span><input type="number" placeholder="0" min="0" step="100" value="${v}" style="padding-left:26px;" oninput="autoShrinkNumberInput(this);updateBadge()"></div>
     <button class="rm-btn" onclick="rmHolding(${id})">×</button>`;
   document.getElementById('holdingsList').appendChild(row);updateBadge();
 }
@@ -1403,6 +1524,32 @@ const LOOKUP_DB={
   TQQQ:{name:'ProShares UltraPro QQQ (3x)',type:'ETF',sector:'Leveraged',risk:'High',ar:0.31,div:false,yield:0.0,why:"A leveraged fund that aims for 3x the Nasdaq-100's daily move — amplifies gains AND losses sharply."},
 };
 
+// Groups the granular .sector strings above into broader, intuitive categories —
+// used ONLY by the concentration warning check below, so the allocation donut's
+// "by sector" view keeps showing the original, more specific labels untouched.
+const SECTOR_CATEGORY_MAP={
+  'AI Hardware':'Technology','Cloud/AI':'Technology','Data/AI':'Technology','Search/Cloud':'Technology',
+  'Semiconductors':'Technology','Software':'Technology','Tech':'Technology','Tech/Growth':'Technology',
+  'Technology':'Technology','Disruptive':'Technology','Disruptive Tech':'Technology',
+  'Tech/Retail':'Technology & Retail','E-commerce':'Technology & Retail','Retail':'Consumer & Retail',
+  'Tech/Transport':'Technology & Transport',
+  'Consumer':'Consumer & Retail',
+  'EV/Energy':'Energy','Energy':'Energy',
+  'Healthcare':'Healthcare',
+  'Financials':'Financials','Covered Calls':'Financials',
+  'Industrials':'Industrials',
+  'Media/Entertainment':'Media & Entertainment','Media/Streaming':'Media & Entertainment',
+  'Telecom':'Telecom',
+  'Real Estate':'Real Estate','REITs':'Real Estate',
+  'Bonds':'Bonds',
+  'Dividends':'Dividends (mixed sectors)',
+  'Broad Market':'Broad Market (diversified)','US':'Broad Market (diversified)','US Broad':'Broad Market (diversified)',
+  'International':'International','Dev. International':'International','Dev. Intl':'International',
+  'Emerging':'International','Emerging Markets':'International',
+  'Commodities':'Commodities','Leveraged':'Leveraged/Speculative','Momentum':'Momentum (mixed sectors)',
+  'Conglomerate':'Conglomerate','Unknown':'Unknown',
+};
+
 // Common company-name aliases → ticker, so typing "Apple" finds AAPL.
 const LOOKUP_ALIASES={
   apple:'AAPL',microsoft:'MSFT',google:'GOOGL',alphabet:'GOOGL',amazon:'AMZN',nvidia:'NVDA',
@@ -1493,7 +1640,25 @@ async function fetchRealMetrics(ticker){
   }catch{return null;}
 }
 
-// Recent headlines for a ticker, via Finnhub's free company-news endpoint.
+// Real quote with today's % change, for the "biggest movers" feed. Finnhub's
+// /quote endpoint returns c (current price), dp (percent change today), and
+// pc (previous close) directly — all real, none derived/invented. Returns
+// null if the ticker can't be fetched (handled by callers, never faked).
+async function fetchQuoteWithChange(ticker){
+  try{
+    const r=await fetch(`https://finnhub.io/api/v1/quote?symbol=${encodeURIComponent(ticker)}&token=${FINNHUB_API_KEY}`);
+    if(!r.ok) return null;
+    const d=await r.json();
+    if(!d || typeof d.c!=='number' || d.c<=0) return null;
+    return{
+      price:+d.c.toFixed(2),
+      changePct:typeof d.dp==='number'?d.dp:null,
+      prevClose:typeof d.pc==='number'?d.pc:null,
+    };
+  }catch{return null;}
+}
+
+
 // Only meaningful for real, recognized US-listed tickers — returns an empty
 // array (not fake headlines) for anything Finnhub doesn't have news on.
 async function fetchCompanyNews(ticker){
@@ -1520,7 +1685,124 @@ async function fetchAllPrices(tickers){
 }
 
 // ══════════════════════════════════════════
-// STOCK / ETF LOOKUP
+// DAILY MOVERS / NEWS FEED
+// On page load, pulls REAL quotes (price + % change today) for a basket of
+// widely-held, liquid large-cap tickers via Finnhub's free /quote endpoint,
+// ranks them by actual % move, and shows the top 5 — each with REAL recent
+// headlines from Finnhub's /company-news endpoint (same source the stock
+// lookup tool already uses). Nothing here is invented: if Finnhub can't be
+// reached, or a ticker has no news, that's shown plainly rather than faked.
+// ══════════════════════════════════════════
+const MOVERS_CANDIDATES=['AAPL','MSFT','GOOGL','AMZN','NVDA','META','TSLA','JPM','V','WMT','XOM','JNJ','UNH','NFLX','AMD','DIS'];
+
+async function fetchMoverCandidate(ticker){
+  const [quote,news]=await Promise.all([fetchQuoteWithChange(ticker),fetchCompanyNews(ticker)]);
+  if(!quote) return null;
+  const info=LOOKUP_DB[ticker]||{};
+  return{
+    ticker,
+    name:info.name||ticker,
+    sector:info.sector||'Unknown',
+    type:info.type||'Stock',
+    price:quote.price,
+    changePct:quote.changePct,
+    prevClose:quote.prevClose,
+    topHeadline:news&&news.length?news[0]:null,
+  };
+}
+
+function buildMoversSummary(top5){
+  // Built entirely from the real numbers/headlines just fetched — no invented claims.
+  const gainers=top5.filter(m=>m.changePct!=null&&m.changePct>0).length;
+  const losers=top5.filter(m=>m.changePct!=null&&m.changePct<0).length;
+  const lead=top5[0];
+  const leadDir=lead.changePct>=0?'up':'down';
+  const leadPct=lead.changePct!=null?Math.abs(lead.changePct).toFixed(1)+'%':'an unreported amount';
+  let leadReason='';
+  if(lead.topHeadline){
+    leadReason=` Recent coverage: "${truncateHeadline(lead.topHeadline.headline)}"`;
+  }
+  const tone=gainers>=4?'Markets among this basket leaned green today.':losers>=4?'Markets among this basket leaned red today.':'A mixed day across this basket — gainers and losers split fairly evenly.';
+  return `${tone} <span class="mv-stat">${lead.ticker}</span> moved the most, <span class="mv-stat ${leadDir==='up'?'mv-up':'mv-down'}">${leadDir} ${leadPct}</span> to $${lead.price.toFixed(2)}.${leadReason} Below are the 5 biggest movers from a basket of ${MOVERS_CANDIDATES.length} widely-held large-cap stocks — ${gainers} up, ${losers} down, ranked by today's real % price change.`;
+}
+
+function truncateHeadline(h){
+  if(!h) return '';
+  return h.length>90?h.slice(0,87).trim()+'…':h;
+}
+
+async function loadDailyMovers(){
+  const loading=document.getElementById('moversLoading');
+  const errBox=document.getElementById('moversError');
+  const content=document.getElementById('moversContent');
+  const btn=document.getElementById('moversRefreshBtn');
+  loading.style.display='block';
+  errBox.classList.remove('show');
+  content.innerHTML='';
+  if(btn){btn.disabled=true;btn.textContent='Refreshing…';}
+
+  try{
+    const results=await Promise.all(MOVERS_CANDIDATES.map(t=>fetchMoverCandidate(t).catch(()=>null)));
+    const valid=results.filter(Boolean);
+    if(!valid.length){
+      loading.style.display='none';
+      errBox.textContent="Couldn't reach live market data right now — this is usually a temporary network or rate-limit issue. Try refreshing in a moment.";
+      errBox.classList.add('show');
+      if(btn){btn.disabled=false;btn.textContent='🔄 Refresh';}
+      return;
+    }
+    // Rank by absolute value of REAL % change today; tickers with no change data sort last.
+    valid.sort((a,b)=>{
+      const av=a.changePct!=null?Math.abs(a.changePct):-1;
+      const bv=b.changePct!=null?Math.abs(b.changePct):-1;
+      return bv-av;
+    });
+    const top5=valid.slice(0,5);
+    const now=new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+
+    content.innerHTML=`
+      <div class="movers-summary">${buildMoversSummary(top5)}</div>
+      <div class="movers-asof">Live prices as of ${now} · ${valid.length} of ${MOVERS_CANDIDATES.length} tracked tickers reachable right now</div>
+      <div class="movers-grid">
+        ${top5.map((m,i)=>{
+          const up=m.changePct!=null&&m.changePct>=0;
+          const chgText=m.changePct!=null?`${up?'+':''}${m.changePct.toFixed(2)}%`:'—';
+          const headlineHtml=m.topHeadline
+            ? `<a href="${escapeHtml(m.topHeadline.url)}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">${escapeHtml(truncateHeadline(m.topHeadline.headline))}</a>`
+            : `<span class="mh-empty">No recent headline found for ${m.ticker} in the last 7 days.</span>`;
+          return `<div class="mover-card" role="button" tabindex="0" onclick="openMoverInLookup('${m.ticker}')" onkeydown="if(event.key==='Enter')openMoverInLookup('${m.ticker}')">
+            <div class="mover-rank">${i+1}</div>
+            <div class="mover-id">
+              <div class="mover-ticker">${m.ticker}</div>
+              <div class="mover-name">${escapeHtml(m.name)}</div>
+            </div>
+            <div class="mover-price-block">
+              <div class="mover-price">$${m.price.toFixed(2)}</div>
+              <div class="mover-chg ${up?'up':'down'}">${chgText}</div>
+            </div>
+            <div class="mover-headline">${headlineHtml}</div>
+            <div class="mover-arrow">→</div>
+          </div>`;
+        }).join('')}
+      </div>
+      <div class="movers-note">Prices and % change via Finnhub's live quote feed; headlines via Finnhub's company news feed — same real data sources used in the stock lookup tool below. This is a fixed basket of well-known large caps, not the entire market, so "biggest movers" here means biggest movers <em>within this basket</em>, not the whole exchange. Click any row to see the full plain-English breakdown (52-week range, P/E, beta, and more) in the lookup tool below.</div>
+    `;
+    loading.style.display='none';
+  }catch(e){
+    console.error('Failed to load daily movers',e);
+    loading.style.display='none';
+    errBox.textContent='Something went wrong loading today\'s movers. Please try refreshing.';
+    errBox.classList.add('show');
+  }
+  if(btn){btn.disabled=false;btn.textContent='🔄 Refresh';}
+}
+
+function openMoverInLookup(ticker){
+  quickLookup(ticker);
+  document.querySelector('.lookup-section').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+
 // Search any ticker or known company name. Looks it up against the curated
 // picks (DB/DIV_PICKS), then the broader LOOKUP_DB, then falls back to a
 // clearly-labeled generic guess for anything unrecognized. Tries to fetch a
@@ -1750,7 +2032,7 @@ function renderLookupResult(pick,price,realMetrics,news){
           <a class="lookup-news-item" href="${a.url}" target="_blank" rel="noopener noreferrer">
             <div class="lookup-news-headline">${escapeHtml(a.headline)}</div>
             <div class="lookup-news-meta">${escapeHtml(a.source||'')}${a.datetime?' · '+new Date(a.datetime*1000).toLocaleDateString('en-US',{month:'short',day:'numeric'}):''}</div>
-          </a>`).join(''):`<div class="lookup-news-empty">No recent headlines found for "${pick.ticker}" in the last 7 days.</div>`}
+          </a>`).join(''):`<div class="inline-empty"><div class="inline-empty-icon">📰</div><div class="inline-empty-text">No recent headlines found for "${pick.ticker}" in the last 7 days.</div></div>`}
       </div>
     </div>
   `;
@@ -1921,6 +2203,7 @@ let lastPrices={};
 let userSims=[];
 let simChartInsts={};
 let activeTicker=null,activeRange='3y';
+let curAllocPicks=[],curSectorMap={},curAllocBudget=0,allocView='ticker';
 
 function stepDone(id,d){return new Promise(r=>setTimeout(()=>{document.getElementById(id).classList.add('done');r();},d));}
 
@@ -2043,22 +2326,44 @@ function render(budget,horizon,picks,prices,existing,ownedPicks){
     ${avgYield>0.5?`<div class="metric"><div class="metric-label">Est. annual income</div><div class="metric-val" style="color:var(--accent)">$${Math.round(annIncome).toLocaleString()}</div><div class="metric-sub">${avgYield.toFixed(1)}% avg yield</div></div>`:''}
   `;
 
-  // Donut
-  if(allocChartInst)allocChartInst.destroy();
-  const dark=document.documentElement.dataset.theme==='dark';
-  allocChartInst=new Chart(document.getElementById('allocChart'),{
-    type:'doughnut',
-    data:{labels:picks.map(p=>p.ticker),datasets:[{data:picks.map(p=>p.pct),backgroundColor:COLORS.slice(0,picks.length),borderWidth:3,borderColor:dark?'#1a1a1a':'#fff'}]},
-    options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>` ${ctx.label}: ${ctx.parsed}% · $${Math.round(budget*ctx.parsed/100).toLocaleString()}`}}}}
+  // Allocation donut — single ring, toggles between "by ticker" and "by sector" views.
+  // Sector totals are aggregated from the real .sector field already on each pick.
+  const sectorMap={};
+  picks.forEach((p,i)=>{
+    if(!sectorMap[p.sector]) sectorMap[p.sector]={pct:0,color:COLORS[i]};
+    sectorMap[p.sector].pct+=p.pct;
   });
+  curAllocPicks=picks;
+  curSectorMap=sectorMap;
+  curAllocBudget=budget;
+  allocView='ticker';
+  document.getElementById('allocTabTicker').classList.add('active');
+  document.getElementById('allocTabSector').classList.remove('active');
+  renderAllocDonut();
 
-  // Legend
-  document.getElementById('legendList').innerHTML=picks.map((p,i)=>`
-    <div class="legend-item">
-      <div class="legend-dot" style="background:${COLORS[i]}"></div>
-      <div class="legend-info"><div class="legend-ticker">${p.ticker}</div><div class="legend-name">${p.type} · ${p.sector}</div></div>
-      <div class="legend-pct">${p.pct}%</div>
-    </div>`).join('');
+  // Sector concentration check — flags when one broad CATEGORY dominates the NEW picks in this plan.
+  // Uses SECTOR_CATEGORY_MAP to group granular sector labels (e.g. "Semiconductors", "Cloud/AI",
+  // "Tech/Growth") into one intuitive bucket ("Technology"), so the check actually fires on genuinely
+  // concentrated plans — the donut's "by sector" view above still shows the original granular labels.
+  // Scoped honestly to what's actually knowable: existing holdings don't have sector data stored,
+  // so this reflects concentration within the new money only, not your combined real-world portfolio.
+  const categoryMap={};
+  picks.forEach(p=>{
+    const cat=SECTOR_CATEGORY_MAP[p.sector]||p.sector;
+    categoryMap[cat]=(categoryMap[cat]||0)+p.pct;
+  });
+  const sortedCats=Object.entries(categoryMap).sort((a,b)=>b[1]-a[1]);
+  const topCat=sortedCats[0];
+  const noteBox=document.getElementById('concentrationNote');
+  if(topCat && sortedCats.length>1 && topCat[1]>=40){
+    const isHigh=topCat[1]>=60;
+    noteBox.className='concentration-note'+(isHigh?' high':'');
+    noteBox.innerHTML=`<span class="concentration-note-icon">${isHigh?'⚠️':'ℹ️'}</span>
+      <span><strong>${topCat[1]}%</strong> of this plan's new money is in <strong>${topCat[0]}</strong>${isHigh?' — that\'s fairly concentrated.':'.'} Diversification spreads risk across industries so one sector's bad year doesn't hit your whole portfolio as hard. This reflects only the new picks above, not any existing holdings you've listed (Vestly doesn't currently track sectors for those).</span>`;
+    noteBox.style.display='flex';
+  } else {
+    noteBox.style.display='none';
+  }
 
   // Perf tabs
   document.getElementById('perfTabs').innerHTML=picks.map((p,i)=>`
@@ -2066,16 +2371,15 @@ function render(budget,horizon,picks,prices,existing,ownedPicks){
       style="${i===0?'background:'+COLORS[0]+';color:#fff;border-color:'+COLORS[0]:''}"
       onclick="selectPerf('${p.ticker}',${i},this)">${p.ticker}</button>`).join('');
   activeTicker=picks[0].ticker;
-  renderPerf(picks[0],activeRange,Math.ceil(curHrzYrs),0);
 
-  // What-if
-  document.getElementById('yrsSlider').value=Math.round(yrs);
-  document.getElementById('yrsVal').textContent=Math.round(yrs)+' yrs';
-  updateWhatif();
-
-  // Dividend calculator
-  document.getElementById('dcYears').value=Math.max(1,Math.round(yrs));
-  updateDivCalc();
+  // Unified projection controls — reset to sensible defaults for this plan's horizon, then draw
+  document.getElementById('mktSlider').value=0;
+  document.getElementById('yrsSlider').value=Math.min(20,Math.max(1,Math.round(yrs)));
+  document.getElementById('projDca').value=0;
+  document.getElementById('dcReinvest').checked=true;
+  lastHistCache=null;
+  renderPerf(picks[0],activeRange,0);
+  updateProjection();
 
   // Picks
   document.getElementById('picksList').innerHTML=picks.map((p,i)=>{
@@ -2186,30 +2490,110 @@ function render(budget,horizon,picks,prices,existing,ownedPicks){
   fireConfetti();
 }
 
+// ALLOCATION DONUT — single ring, toggled between "by ticker" and "by sector" views
+function setAllocView(view){
+  if(view===allocView) return;
+  allocView=view;
+  document.getElementById('allocTabTicker').classList.toggle('active',view==='ticker');
+  document.getElementById('allocTabSector').classList.toggle('active',view==='sector');
+  renderAllocDonut();
+}
+function renderAllocDonut(){
+  if(!curAllocPicks.length) return;
+  if(allocChartInst) allocChartInst.destroy();
+  const dark=document.documentElement.dataset.theme==='dark';
+  const borderCol=dark?'#1a1a1a':'#fff';
+  const budget=curAllocBudget;
+
+  let labels,values,colors,tooltipFn;
+  if(allocView==='sector'){
+    const sectorNames=Object.keys(curSectorMap);
+    labels=sectorNames;
+    values=sectorNames.map(s=>curSectorMap[s].pct);
+    colors=sectorNames.map(s=>curSectorMap[s].color);
+    tooltipFn=ctx=>` ${ctx.label}: ${ctx.parsed}% · $${Math.round(budget*ctx.parsed/100).toLocaleString()}`;
+  } else {
+    labels=curAllocPicks.map(p=>p.ticker);
+    values=curAllocPicks.map(p=>p.pct);
+    colors=COLORS.slice(0,curAllocPicks.length);
+    tooltipFn=ctx=>` ${ctx.label}: ${ctx.parsed}% · $${Math.round(budget*ctx.parsed/100).toLocaleString()}`;
+  }
+
+  allocChartInst=new Chart(document.getElementById('allocChart'),{
+    type:'doughnut',
+    data:{labels,datasets:[{data:values,backgroundColor:colors,borderWidth:3,borderColor:borderCol}]},
+    options:{
+      responsive:true,maintainAspectRatio:false,cutout:'62%',
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:tooltipFn}}},
+    }
+  });
+
+  document.getElementById('donutCenterVal').textContent=allocView==='sector'?Object.keys(curSectorMap).length:curAllocPicks.length;
+  document.getElementById('donutCenterLabel').textContent=allocView==='sector'?'sectors':'positions';
+
+  // Legend matches whichever view is active
+  if(allocView==='sector'){
+    const sectorNames=Object.keys(curSectorMap);
+    document.getElementById('legendList').innerHTML=sectorNames.map(s=>`
+      <div class="legend-item">
+        <div class="legend-dot sector-dot" style="background:${curSectorMap[s].color}"></div>
+        <div class="legend-info"><div class="legend-ticker">${s}</div></div>
+        <div class="legend-pct">${curSectorMap[s].pct}%</div>
+      </div>`).join('');
+  } else {
+    document.getElementById('legendList').innerHTML=curAllocPicks.map((p,i)=>`
+      <div class="legend-item">
+        <div class="legend-dot" style="background:${COLORS[i]}"></div>
+        <div class="legend-info"><div class="legend-ticker">${p.ticker}</div><div class="legend-name">${p.type} · ${p.sector}</div></div>
+        <div class="legend-pct">${p.pct}%</div>
+      </div>`).join('');
+  }
+}
+
 // PERF CHART
+let lastHistCache=null; // {hist, pick, range, cIdx} — avoids regenerating the historical line on every slider tick
 function selectPerf(ticker,idx,btn){
   activeTicker=ticker;
   document.querySelectorAll('.ptab').forEach(t=>{t.classList.remove('active');t.style.background='';t.style.color='';t.style.borderColor='';});
   btn.classList.add('active');btn.style.background=COLORS[idx];btn.style.color='#fff';btn.style.borderColor=COLORS[idx];
   const p=curPicks.find(x=>x.ticker===ticker);
-  if(p) renderPerf(p,activeRange,Math.ceil(curHrzYrs),idx);
+  lastHistCache=null;
+  if(p) renderPerf(p,activeRange,idx);
 }
 function setRange(r){
   activeRange=r;
   document.querySelectorAll('.rtab').forEach(t=>t.classList.toggle('active',t.dataset.r===r));
   const idx=curPicks.findIndex(p=>p.ticker===activeTicker);
   const p=curPicks.find(x=>x.ticker===activeTicker);
-  if(p) renderPerf(p,r,Math.ceil(curHrzYrs),idx>=0?idx:0);
+  lastHistCache=null;
+  if(p) renderPerf(p,r,idx>=0?idx:0);
 }
-function renderPerf(pick,range,hYrs,cIdx){
+// hYrs/marketMovePct/reinvest are read live from the projection controls (or sensible defaults if not yet built)
+function renderPerf(pick,range,cIdx){
   const back=range==='1y'?1:range==='3y'?3:5;
+  const hYrs=Math.max(1,parseInt(document.getElementById('yrsSlider')?.value)||Math.ceil(curHrzYrs)||4);
+  const mktMove=parseFloat(document.getElementById('mktSlider')?.value)||0;
   const color=COLORS[cIdx]||COLORS[0];
   const dark=document.documentElement.dataset.theme==='dark';
   const gc=dark?'rgba(255,255,255,.04)':'rgba(0,0,0,.05)';
   const tc=dark?'#555':'#aaa';
-  const hist=genHist(pick.ar,back,cIdx*137+1);
-  const proj=genProj(hist[hist.length-1],pick.ar,hYrs,cIdx*71+42);
+
+  // Historical line: cached per ticker/range so dragging sliders doesn't reshuffle the random walk
+  let hist;
+  if(lastHistCache && lastHistCache.pick===pick.ticker && lastHistCache.range===range && lastHistCache.cIdx===cIdx){
+    hist=lastHistCache.hist;
+  } else {
+    hist=genHist(pick.ar,back,cIdx*137+1);
+    lastHistCache={hist,pick:pick.ticker,range,cIdx};
+  }
+
+  // Projection: base annual return shifted by the market-move slider, spread evenly across the years held.
+  // mktMove is a one-time cumulative tilt (e.g. "what if there's a +20% or -30% move over this whole period"),
+  // so we convert it into an annualized adjustment added on top of the pick's own historical average return.
+  const adjAnnualReturn=pick.ar+(mktMove/100)/hYrs;
+  const proj=genProj(hist[hist.length-1],adjAnnualReturn,hYrs,cIdx*71+42);
   const labels=makeLabels(back,hYrs);
+
   if(perfChartInst)perfChartInst.destroy();
   perfChartInst=new Chart(document.getElementById('perfChart'),{
     type:'line',
@@ -2229,91 +2613,97 @@ function renderPerf(pick,range,hYrs,cIdx){
       }
     }
   });
+
+  // Keep the dollar-figure stats strip in sync with whatever's now on the chart
+  updateProjectionStats(pick,hYrs,mktMove);
 }
 
-// WHAT-IF
-function updateWhatif(){
+// UNIFIED PROJECTION CONTROLS
+// Replaces the old separate "what-if simulator" + "dividend reinvestment calculator".
+// Drives the live chart above AND a compact stats strip, from the same three inputs:
+// market-move slider, years-held slider, and a DRIP toggle (+ optional monthly add-on).
+function updateProjection(){
   const mkt=parseFloat(document.getElementById('mktSlider').value);
   const yrs=parseInt(document.getElementById('yrsSlider').value);
   const mEl=document.getElementById('mktVal');
   mEl.textContent=(mkt>=0?'+':'')+mkt+'%';
-  mEl.className='wi-val '+(mkt>=0?'pos':'neg');
+  mEl.className='proj-val '+(mkt>=0?'pos':'neg');
   document.getElementById('yrsVal').textContent=yrs+' yr'+(yrs!==1?'s':'');
-  if(!curPicks.length||!curBudget)return;
+  if(!curPicks.length||!curBudget) return;
+
+  // Redraw the currently-selected ticker's chart with the new slider values
+  const idx=curPicks.findIndex(p=>p.ticker===activeTicker);
+  const pick=curPicks.find(p=>p.ticker===activeTicker)||curPicks[0];
+  renderPerf(pick,activeRange,idx>=0?idx:0); // this also calls updateProjectionStats at the end
+}
+
+function updateProjectionStats(pick,yrs,mktMove){
+  const monthlyAdd=Math.max(0,parseFloat(document.getElementById('projDca')?.value)||0);
+  const reinvest=document.getElementById('dcReinvest')?.checked;
+  const statsBox=document.getElementById('projStatsRow');
+  if(!statsBox||!curBudget) return;
+
+  // Whole-portfolio dollar projection (not just the selected ticker), so the stats reflect the actual plan,
+  // using the same blended risk-tier rates as the rest of the app, tilted by the market-move slider.
   const rates={Conservative:[0.04,0.07],Moderate:[0.06,0.10],Aggressive:[0.07,0.15]};
   const [lo,hi]=rates[curRisk]||rates.Moderate;
-  const base=(lo+hi)/2;
-  const ann=base+mkt/100/yrs;
-  const val=Math.round(curBudget*Math.pow(1+ann,yrs));
-  const gain=val-curBudget;
-  const crash=Math.round(curBudget*(1+mkt/100)*Math.pow(1+lo,yrs));
-  const boom=Math.round(curBudget*(1+mkt/100)*Math.pow(1+hi,yrs));
-  document.getElementById('wiResults').innerHTML=`
-    <div class="wi-card"><div class="wi-card-label">Portfolio value</div><div class="wi-card-val" style="color:${val>=curBudget?'#f08c00':'#f87171'}">$${val.toLocaleString()}</div></div>
-    <div class="wi-card"><div class="wi-card-label">Gain / loss</div><div class="wi-card-val" style="color:${gain>=0?'#f08c00':'#f87171'}">${gain>=0?'+':''}$${Math.abs(gain).toLocaleString()}</div></div>
-    <div class="wi-card"><div class="wi-card-label">Conservative end</div><div class="wi-card-val">$${crash.toLocaleString()}</div></div>
-    <div class="wi-card"><div class="wi-card-label">Optimistic end</div><div class="wi-card-val" style="color:#f08c00;">$${boom.toLocaleString()}</div></div>`;
+  const baseAnn=(lo+hi)/2;
+  const annAdj=baseAnn+(mktMove/100)/yrs;
+
+  const avgYield=curPicks.reduce((s,p)=>s+p.pct*p.yield/100,0)/100; // weighted dividend yield, decimal
+  let principal=curBudget;
+  let totalDividends=0;
+  let totalContributed=curBudget;
+  for(let y=1;y<=yrs;y++){
+    principal*=(1+annAdj);
+    principal+=monthlyAdd*12;
+    totalContributed+=monthlyAdd*12;
+    const divThisYear=principal*avgYield;
+    totalDividends+=divThisYear;
+    if(reinvest) principal+=divThisYear;
+  }
+  const finalValue=Math.round(principal);
+  const gain=finalValue-Math.round(totalContributed);
+  const annualIncomeNow=Math.round(curBudget*avgYield);
+
+  statsBox.innerHTML=`
+    <div class="proj-stat">
+      <div class="proj-stat-label-row"><span class="proj-stat-label">Projected value</span><span class="info-tip" tabindex="0">i<span class="info-bubble">Your whole portfolio's estimated worth after the years held you picked, using this risk level's typical historical return, tilted by the market-move slider and grown by any monthly contributions (and reinvested dividends, if checked).</span></span></div>
+      <div class="proj-stat-val ${gain>=0?'pos':'neg'}">$${finalValue.toLocaleString()}</div>
+    </div>
+    <div class="proj-stat">
+      <div class="proj-stat-label-row"><span class="proj-stat-label">Gain / loss</span><span class="info-tip" tabindex="0">i<span class="info-bubble">Projected value minus everything you actually put in (your starting budget plus every monthly contribution along the way). A positive number means the projection grew faster than you contributed.</span></span></div>
+      <div class="proj-stat-val ${gain>=0?'pos':'neg'}">${gain>=0?'+':''}$${Math.abs(gain).toLocaleString()}</div>
+    </div>
+    <div class="proj-stat">
+      <div class="proj-stat-label-row"><span class="proj-stat-label">Total contributed</span><span class="info-tip" tabindex="0">i<span class="info-bubble">The plain sum of cash you put in yourself — your starting budget plus (monthly add × 12 × years held). This does not include any market growth or dividends, just money out of your pocket.</span></span></div>
+      <div class="proj-stat-val">$${Math.round(totalContributed).toLocaleString()}</div>
+    </div>
+    ${avgYield>0.005?`<div class="proj-stat">
+      <div class="proj-stat-label-row"><span class="proj-stat-label">Dividends ${reinvest?'reinvested':'paid out'}</span><span class="info-tip" tabindex="0">i<span class="info-bubble">${reinvest?"The total dividend cash this portfolio is estimated to generate over the years held — automatically used to buy more shares (DRIP), so it's already baked into the projected value above.":"The total dividend cash this portfolio is estimated to pay you over the years held. Since DRIP is unchecked, this is paid out to you rather than reinvested, so it's on top of \u2014 not included in \u2014 the projected value above."}</span></span></div>
+      <div class="proj-stat-val pos">$${Math.round(totalDividends).toLocaleString()}</div>
+    </div>
+    <div class="proj-stat">
+      <div class="proj-stat-label-row"><span class="proj-stat-label">Income today</span><span class="info-tip" tabindex="0">i<span class="info-bubble">What this portfolio's dividends would pay you per year right now, at today's budget and today's average yield — before any growth, reinvestment, or contributions are factored in.</span></span></div>
+      <div class="proj-stat-val">$${annualIncomeNow.toLocaleString()}/yr</div>
+    </div>`:''}
+  `;
+}
+
+// Long numbers (lots of zeros) can visually overflow a fixed-size number input
+// since number inputs can't wrap. This shrinks the font just enough to keep the
+// full value visible and never clipped, then restores normal size for short values.
+function autoShrinkNumberInput(el){
+  const len=(el.value||'').length;
+  if(len>9) el.style.fontSize='12px';
+  else if(len>7) el.style.fontSize='13px';
+  else if(len>5) el.style.fontSize='14px';
+  else el.style.fontSize='';
 }
 
 function showErr(m){const e=document.getElementById('errorBox');e.textContent=m;e.classList.add('show');}
 function hideErr(){document.getElementById('errorBox').classList.remove('show');}
 document.getElementById('budget').addEventListener('keydown',e=>{if(e.key==='Enter')buildPlan();});
-
-// ── DIVIDEND CALCULATOR ──
-let dcChartInst=null;
-function updateDivCalc(){
-  if(!curPicks.length||!curBudget) return;
-  const years=Math.max(1,parseInt(document.getElementById('dcYears').value)||10);
-  const monthlyAdd=Math.max(0,parseFloat(document.getElementById('dcContribution').value)||0);
-  const divGrowth=Math.max(0,parseFloat(document.getElementById('dcGrowth').value)||0)/100;
-  const reinvest=document.getElementById('dcReinvest').checked;
-
-  const avgYield=curPicks.reduce((s,p)=>s+p.pct*p.yield/100,0)/100; // weighted avg yield as decimal
-  const avgGrowth=curPicks.reduce((s,p)=>s+p.pct*p.ar/100,0)/100;   // weighted avg price appreciation
-
-  let principal=curBudget;
-  let totalDividendsPaid=0;
-  let yieldOnCost=avgYield;
-  const series=[principal];
-
-  for(let y=1;y<=years;y++){
-    // price appreciation for the year
-    principal*=(1+avgGrowth);
-    // add monthly contributions (added at year-avg, simplified)
-    principal+=monthlyAdd*12;
-    // dividend income this year, based on yield-on-cost growing with divGrowth
-    const divThisYear=curBudget*yieldOnCost; // approx: yield applies to original cost basis, growing
-    totalDividendsPaid+=divThisYear;
-    if(reinvest) principal+=divThisYear;
-    yieldOnCost*=(1+divGrowth);
-    series.push(Math.round(principal));
-  }
-
-  const finalValue=Math.round(principal);
-  const totalContributed=curBudget+monthlyAdd*12*years;
-  const totalGain=finalValue-totalContributed;
-  const finalAnnualIncome=Math.round(curBudget*yieldOnCost/(1+divGrowth));
-
-  document.getElementById('dcResults').innerHTML=`
-    <div class="dc-card"><div class="dc-card-label">Final portfolio value</div><div class="dc-card-val accent">$${finalValue.toLocaleString()}</div></div>
-    <div class="dc-card"><div class="dc-card-label">Total contributed</div><div class="dc-card-val">$${Math.round(totalContributed).toLocaleString()}</div></div>
-    <div class="dc-card"><div class="dc-card-label">Total dividends ${reinvest?'reinvested':'paid out'}</div><div class="dc-card-val accent">$${Math.round(totalDividendsPaid).toLocaleString()}</div></div>
-    <div class="dc-card"><div class="dc-card-label">Year ${years} annual income</div><div class="dc-card-val">$${finalAnnualIncome.toLocaleString()}/yr</div></div>
-  `;
-
-  const labels=series.map((_,i)=>'Yr '+i);
-  const dark=document.documentElement.dataset.theme==='dark';
-  const gc=dark?'rgba(255,255,255,.04)':'rgba(0,0,0,.05)';
-  const tc=dark?'#555':'#aaa';
-  if(dcChartInst) dcChartInst.destroy();
-  dcChartInst=new Chart(document.getElementById('dcChart'),{
-    type:'line',
-    data:{labels,datasets:[{label:'Portfolio value',data:series,borderColor:'#e07b00',backgroundColor:'#e07b0022',borderWidth:2.5,pointRadius:0,tension:.3,fill:true}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`$${ctx.parsed.y.toLocaleString()}`}}},
-      scales:{x:{grid:{color:gc},ticks:{font:{size:11},color:tc,maxTicksLimit:8},border:{display:false}},
-               y:{grid:{color:gc},ticks:{font:{size:11},color:tc,callback:v=>'$'+(v>=1000?(v/1000).toFixed(0)+'k':v)},border:{display:false}}}}
-  });
-}
 
 // ── SHARE MODAL ──
 function openShareModal(){
@@ -2484,7 +2874,7 @@ function openSimModal(onlyTicker,standalonePick){
         <div class="sim-pick-ticker">${standalonePick.ticker}</div>
         <div class="sim-pick-meta">${standalonePick.name}</div>
       </div>
-      <div class="sim-pick-amt"><span class="prefix">$</span><input type="number" id="simAmt-${standalonePick.ticker}" value="${defaultAmt}" min="0" step="50" oninput="updateSimTotal()"></div>
+      <div class="sim-pick-amt"><span class="prefix">$</span><input type="number" id="simAmt-${standalonePick.ticker}" value="${defaultAmt}" min="0" step="50" oninput="autoShrinkNumberInput(this);updateSimTotal()"></div>
     </div>`;
     simModalPicks=[standalonePick];
     updateSimTotal();
@@ -2506,7 +2896,7 @@ function openSimModal(onlyTicker,standalonePick){
         <div class="sim-pick-ticker">${p.ticker}</div>
         <div class="sim-pick-meta">${p.name} · ${p.pct}% of plan</div>
       </div>
-      <div class="sim-pick-amt"><span class="prefix">$</span><input type="number" id="simAmt-${p.ticker}" value="${dollars}" min="0" step="50" oninput="updateSimTotal()"></div>
+      <div class="sim-pick-amt"><span class="prefix">$</span><input type="number" id="simAmt-${p.ticker}" value="${dollars}" min="0" step="50" oninput="autoShrinkNumberInput(this);updateSimTotal()"></div>
     </div>`;
   }).join('');
   updateSimTotal();
@@ -2603,6 +2993,8 @@ async function startSimulation(){
 
 async function loadUserSims(){
   if(!currentUser) return;
+  const list=document.getElementById('simList');
+  if(list) list.innerHTML=`<div class="inline-loading"><div class="spinner-sm"></div>Loading your paper trades…</div>`;
   try{
     const{data,error}=await sb.from('sim_portfolios').select('*').order('created_at',{ascending:false});
     if(error) throw error;
@@ -2610,6 +3002,7 @@ async function loadUserSims(){
     renderSimList();
   }catch(e){
     console.error('Failed to load paper trades',e);
+    if(list) list.innerHTML=`<div class="inline-error">Couldn't load your paper trades right now.<button onclick="loadUserSims()">Retry</button></div>`;
   }
 }
 
@@ -2631,7 +3024,7 @@ function calcSimPL(sim,livePrices){
 function renderSimList(){
   const list=document.getElementById('simList');
   if(!userSims.length){
-    list.innerHTML=`<div class="sim-empty">No paper trades yet — open a plan above and click "Simulate" on any pick or the whole plan.</div>`;
+    list.innerHTML=`<div class="inline-empty"><div class="inline-empty-icon">📈</div><div class="inline-empty-text">No paper trades yet — open a plan above and click "Simulate" on any pick or the whole plan to test it with fake cash.</div></div>`;
     return;
   }
   list.innerHTML=userSims.map(sim=>{
@@ -2803,6 +3196,9 @@ async function deleteSim(simId){
     alert('Could not delete: '+(e.message||'unknown error'));
   }
 }
+
+// Kick off the real daily-movers feed once everything above is defined
+loadDailyMovers();
 </script>
 </body>
 </html>

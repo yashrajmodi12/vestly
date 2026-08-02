@@ -64,6 +64,17 @@ h1{font-family:'DM Serif Display',serif;font-size:clamp(28px,4vw,40px);line-heig
 
 footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);border-top:1px solid var(--border);background:var(--surface);margin-top:2rem;}
 footer a{color:var(--accent);text-decoration:none;font-weight:600;}
+
+@media(max-width:600px){
+  body{overflow-x:hidden;}
+  nav{padding:8px 12px;height:auto;min-height:52px;flex-wrap:wrap;row-gap:8px;}
+  .back-link{font-size:12px;padding:5px 11px;}
+  .theme-btn{font-size:11px;padding:5px 10px;}
+  .page{padding:2.25rem 1.1rem 3rem;}
+  .card{padding:1.25rem 1.35rem;}
+  .source-table{font-size:12px;}
+  .source-table th,.source-table td{padding:8px 6px;}
+}
 </style>
 </head>
 <body>
@@ -71,38 +82,39 @@ footer a{color:var(--accent);text-decoration:none;font-weight:600;}
   <a href="index.html" class="nav-logo">Ve<span>stly</span></a>
   <div class="nav-right">
     <a href="index.html" class="back-link">← Back to planner</a>
+    <button class="theme-btn" id="dumbBtn" onclick="toggleDumbMode()">🧠 Dumb It Down</button>
     <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">☀ Light mode</button>
   </div>
 </nav>
 
 <div class="page">
-  <div class="page-eyebrow">About & disclaimer</div>
-  <h1>What Vestly is — and isn't</h1>
-  <p class="page-sub">A clear, honest explanation of how this tool works, where its data comes from, and what it can't do for you.</p>
+  <div class="page-eyebrow" data-simple="The honest truth">About &amp; disclaimer</div>
+  <h1 data-simple="What this site can (and can't) do for you">What Vestly is — and isn't</h1>
+  <p class="page-sub" data-simple="A plain explanation of how this works, where the numbers come from, and what it won't do for you.">A clear, honest explanation of how this tool works, where its data comes from, and what it can't do for you.</p>
 
   <div class="card">
-    <h2><span class="icon">🎯</span>What Vestly is</h2>
-    <p>Vestly is a free educational tool that helps you think through what a diversified stock and ETF portfolio could look like for a given budget, time horizon, and risk preference. It pulls live prices where possible, simulates historical performance patterns, and shows you the math behind different strategies — all in plain language.</p>
-    <p>It's meant to be a <strong>starting point for learning</strong>, not a final answer.</p>
+    <h2><span class="icon">🎯</span><span data-simple="What Vestly does">What Vestly is</span></h2>
+    <p data-simple="Vestly is a free tool for learning what a mixed stock/fund portfolio could look like for your budget, timeline, and comfort with risk. It uses real prices where it can, simplified illustrations for history and projections, and explains the math in plain words.">Vestly is a free educational tool that helps you think through what a diversified stock and ETF portfolio could look like for a given budget, time horizon, and risk preference. It pulls live prices where possible, simulates historical performance patterns, and shows you the math behind different strategies — all in plain language.</p>
+    <p data-simple="It's meant to be a <strong>starting point for learning</strong>, not a final answer.">It's meant to be a <strong>starting point for learning</strong>, not a final answer.</p>
   </div>
 
   <div class="card">
-    <h2><span class="icon">🚫</span>What Vestly is not</h2>
-    <div class="callout warn">
+    <h2><span class="icon">🚫</span><span data-simple="What Vestly doesn't do">What Vestly is not</span></h2>
+    <div class="callout warn" data-simple="Vestly is <strong>not a licensed financial advisor</strong>, and nothing here is personal financial, tax, or legal advice made just for you.">
       Vestly is <strong>not a licensed financial advisor</strong>, registered investment advisor (RIA), or broker-dealer. Nothing on this site is personalized financial, investment, tax, or legal advice.
     </div>
-    <ul>
+    <ul data-simple="<li>It doesn't know your full money situation — debt, savings, insurance, or taxes.</li><li>It doesn't factor in fees your specific broker might charge.</li><li>It can't predict the future. Every projection here is just illustrative math, not a forecast.</li><li>The picks shown are a simplified list — not a claim that they're the best or only options for you.</li>">
       <li>It does not know your full financial picture — debt, emergency savings, insurance needs, or tax situation.</li>
       <li>It does not account for fees your specific broker may charge.</li>
       <li>It cannot predict the future. Every projection shown is illustrative math, not a forecast.</li>
       <li>The "picks" suggested are a curated, simplified list — not a recommendation that these are the best or only options for you.</li>
     </ul>
-    <p>Before making real investment decisions, especially with significant money, consider talking to a licensed financial advisor who can look at your complete situation.</p>
+    <p data-simple="Before making real investment moves, especially with a lot of money, talk to a licensed financial advisor who can look at your whole situation.">Before making real investment decisions, especially with significant money, consider talking to a licensed financial advisor who can look at your complete situation.</p>
   </div>
 
   <div class="card">
-    <h2><span class="icon">📊</span>Where the data comes from</h2>
-    <p>Transparency on data sources, broken down by feature:</p>
+    <h2><span class="icon">📊</span><span data-simple="Where the numbers come from">Where the data comes from</span></h2>
+    <p data-simple="Being upfront about each feature's source:">Transparency on data sources, broken down by feature:</p>
     <table class="source-table">
       <tr><th>Feature</th><th>Source</th><th>Type</th></tr>
       <tr><td>Current stock/ETF prices</td><td>Yahoo Finance (public chart API)</td><td><span class="tag-live">Live</span></td></tr>
@@ -112,15 +124,15 @@ footer a{color:var(--accent);text-decoration:none;font-weight:600;}
       <tr><td>Dividend yields</td><td>Manually curated, approximate</td><td><span class="tag-sim">Simulated</span></td></tr>
       <tr><td>"Why this pick" explanations</td><td>Written by hand, fact-checked at time of writing</td><td><span class="tag-sim">Static</span></td></tr>
     </table>
-    <div class="callout">
+    <div class="callout" data-simple="<strong>Why not pull everything live?</strong> Real-time company details (P/E, market cap, beta, volume) cost money through paid data services. Vestly is free, so these numbers are reasonable estimates meant to teach the concept — always check the exact numbers on your broker's app before trading.">
       <strong>Why simulate instead of pulling everything live?</strong> Real-time fundamentals (P/E ratios, market cap, beta, volume) require paid financial data APIs. Vestly is free to use, so these figures are reasonable estimates meant to illustrate the concept — always verify exact numbers on your broker's app or a source like Yahoo Finance before trading.
     </div>
   </div>
 
   <div class="card">
-    <h2><span class="icon">⚠️</span>Investing risk, in plain terms</h2>
-    <p>All investing involves risk, including the possible loss of the money you put in. A few things worth internalizing:</p>
-    <ul>
+    <h2><span class="icon">⚠️</span><span data-simple="Investing risk, made simple">Investing risk, in plain terms</span></h2>
+    <p data-simple="All investing has risk — you could lose money you put in. A few things worth remembering:">All investing involves risk, including the possible loss of the money you put in. A few things worth internalizing:</p>
+    <ul data-simple="<li><strong>Doing well before doesn't mean it'll keep happening.</strong> A stock that grew 20%/year for 5 years can still drop next year.</li><li><strong>Spreading your money around lowers risk, but doesn't erase it.</strong> Markets can fall broadly during a recession or crisis.</li><li><strong>Bigger potential gains come with bigger potential losses.</strong> No strategy is both high-growth and risk-free.</li><li><strong>Only invest money you won't need soon.</strong> Money you need within 1–2 years usually shouldn't be in stocks.</li>">
       <li><strong>Past performance doesn't guarantee future results.</strong> A stock that grew 20%/year for the last 5 years can still drop next year.</li>
       <li><strong>Diversification reduces risk but doesn't eliminate it.</strong> Markets can decline broadly during recessions or crises.</li>
       <li><strong>Higher potential returns come with higher potential losses.</strong> There's no strategy that's both high-growth and risk-free.</li>
@@ -129,14 +141,14 @@ footer a{color:var(--accent);text-decoration:none;font-weight:600;}
   </div>
 
   <div class="card">
-    <h2><span class="icon">🔒</span>Your data & privacy</h2>
-    <p>If you create an account, your saved plans (budget, strategy, holdings) are stored securely using Supabase and are never visible to other users or sold to third parties. Vestly doesn't run ads and doesn't share your data with advertisers.</p>
-    <p>You can delete any saved plan at any time from the "My Plans" panel.</p>
+    <h2><span class="icon">🔒</span><span data-simple="Your info &amp; privacy">Your data &amp; privacy</span></h2>
+    <p data-simple="If you make an account, your saved plans are stored securely and never shown to other people or sold to anyone. Vestly has no ads and doesn't share your info with advertisers.">If you create an account, your saved plans (budget, strategy, holdings) are stored securely using Supabase and are never visible to other users or sold to third parties. Vestly doesn't run ads and doesn't share your data with advertisers.</p>
+    <p data-simple="You can delete any saved plan whenever you want, from the 'My Plans' panel.">You can delete any saved plan at any time from the "My Plans" panel.</p>
   </div>
 
   <div class="card">
-    <h2><span class="icon">✉️</span>Questions or feedback?</h2>
-    <p>Vestly is an independent, free project. If you spot something inaccurate or have a suggestion, feedback is always welcome — this tool is meant to keep improving.</p>
+    <h2><span class="icon">✉️</span><span data-simple="Questions or feedback?">Questions or feedback?</span></h2>
+    <p data-simple="Vestly is a small, independent, free project. Spot something wrong, or have an idea? Feedback is always welcome — this thing is meant to keep getting better.">Vestly is an independent, free project. If you spot something inaccurate or have a suggestion, feedback is always welcome — this tool is meant to keep improving.</p>
   </div>
 </div>
 
@@ -148,6 +160,20 @@ function toggleTheme(){
   const isDark=h.dataset.theme==='dark';
   h.dataset.theme=isDark?'light':'dark';
   document.getElementById('themeBtn').textContent=isDark?'☀ Light mode':'🌙 Dark mode';
+}
+
+// Same lightweight "Dumb It Down" toggle as the main planner page — purely
+// cosmetic text swaps via [data-simple] attributes, no persistence.
+let dumbMode=false;
+function toggleDumbMode(){
+  dumbMode=!dumbMode;
+  const btn=document.getElementById('dumbBtn');
+  btn.textContent=dumbMode?'🎓 Back to Normal':'🧠 Dumb It Down';
+  btn.classList.toggle('active',dumbMode);
+  document.querySelectorAll('[data-simple]').forEach(el=>{
+    if(el.dataset.normal===undefined) el.dataset.normal=el.innerHTML;
+    el.innerHTML = dumbMode ? el.dataset.simple : el.dataset.normal;
+  });
 }
 </script>
 </body>

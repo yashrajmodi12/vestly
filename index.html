@@ -11,22 +11,22 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root,[data-theme="light"]{
-  --bg:#f2f2f2; --surface:#ffffff; --surface2:#ebebeb; --border:#dedede; --border2:#cccccc;
-  --ink:#1a1a1a; --ink2:#3d3d3d; --ink3:#6e6e6e; --ink4:#aaaaaa;
-  --accent:#e07b00; --accent-h:#c96e00; --accent-light:#fff4e6; --accent2:#f59e0b;
-  --green:#166534; --green-light:#f0fdf4; --red:#b91c1c; --red-light:#fef2f2;
-  --hdr:#111111; --ticker:#0a0a0a; --dark-card:#111111;
-  --shadow:0 1px 3px rgba(0,0,0,0.08),0 4px 16px rgba(0,0,0,0.05);
-  --nav-bg:rgba(242,242,242,0.93); --grid:rgba(0,0,0,0.05); --tick:#aaa;
+  --bg:#faf7f2; --surface:#ffffff; --surface2:#f3efe7; --border:#e9e2d5; --border2:#dccfb8;
+  --ink:#2b2620; --ink2:#584f42; --ink3:#8d8171; --ink4:#b7ac99;
+  --accent:#e8825a; --accent-h:#d66f47; --accent-light:#fdece3; --accent2:#f0a875;
+  --green:#3f7d5c; --green-light:#eaf5ee; --red:#c1584a; --red-light:#fbeeec;
+  --hdr:#2b2620; --ticker:#231f1a; --dark-card:#2b2620;
+  --shadow:0 2px 8px rgba(43,38,32,0.06),0 10px 28px rgba(43,38,32,0.05);
+  --nav-bg:rgba(250,247,242,0.93); --grid:rgba(43,38,32,0.05); --tick:#b7ac99;
 }
 [data-theme="dark"]{
-  --bg:#101010; --surface:#1a1a1a; --surface2:#222222; --border:#2d2d2d; --border2:#393939;
-  --ink:#f0f0f0; --ink2:#cccccc; --ink3:#888888; --ink4:#555555;
-  --accent:#f08c00; --accent-h:#e07b00; --accent-light:#251800; --accent2:#f59e0b;
-  --green:#22c55e; --green-light:#0d2e1a; --red:#ef4444; --red-light:#2d0f0f;
-  --hdr:#080808; --ticker:#080808; --dark-card:#080808;
-  --shadow:0 1px 3px rgba(0,0,0,0.5),0 4px 20px rgba(0,0,0,0.4);
-  --nav-bg:rgba(16,16,16,0.95); --grid:rgba(255,255,255,0.04); --tick:#555;
+  --bg:#17130f; --surface:#211c17; --surface2:#2a241d; --border:#382f26; --border2:#463b2e;
+  --ink:#f2ede4; --ink2:#d7cfc1; --ink3:#a29685; --ink4:#615746;
+  --accent:#f0956e; --accent-h:#e8825a; --accent-light:#2f2015; --accent2:#f0a875;
+  --green:#66b28c; --green-light:#182620; --red:#e2887a; --red-light:#2e1e1a;
+  --hdr:#110d0a; --ticker:#110d0a; --dark-card:#110d0a;
+  --shadow:0 2px 10px rgba(0,0,0,.35),0 12px 32px rgba(0,0,0,.3);
+  --nav-bg:rgba(23,19,15,.95); --grid:rgba(255,255,255,0.04); --tick:#615746;
 }
 html{scroll-behavior:smooth;}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;font-size:15px;line-height:1.6;transition:background .25s,color .25s;}
@@ -43,19 +43,57 @@ nav{position:sticky;top:0;z-index:100;background:var(--nav-bg);backdrop-filter:b
 @keyframes scroll-left{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .tick-item{font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(255,255,255,.4);display:inline-flex;gap:8px;}
 .tick-item .sym{color:rgba(255,255,255,.85);}
-.tick-up{color:#f08c00;}.tick-dn{color:#f87171;}
+.tick-up{color:#f0956e;}.tick-dn{color:#e2887a;}
 .hero{max-width:760px;margin:0 auto;padding:4rem 1.5rem 2rem;text-align:center;}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);background:var(--accent-light);border-radius:20px;padding:4px 12px;margin-bottom:1.25rem;border:1px solid var(--accent)33;}
 .hero-eyebrow::before{content:'●';font-size:8px;}
 h1{font-family:'DM Serif Display',serif;font-size:clamp(32px,5vw,52px);line-height:1.15;letter-spacing:-.5px;color:var(--ink);margin-bottom:1rem;}
 h1 em{font-style:normal;color:var(--accent);}
 .hero-sub{font-size:16px;color:var(--ink3);max-width:520px;margin:0 auto 2.5rem;line-height:1.7;}
+
+/* MAIN TABS (progressive disclosure: Build vs Explore) */
+.main-tabs{max-width:420px;margin:0 auto 2rem;display:flex;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:6px;}
+.main-tab{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:11px 14px;border-radius:12px;border:none;background:none;font-size:13px;font-weight:600;color:var(--ink3);cursor:pointer;font-family:inherit;transition:all .18s;}
+.main-tab-icon{font-size:15px;}
+.main-tab.active{background:var(--surface);color:var(--ink);box-shadow:var(--shadow);}
+.main-tab:not(.active):hover{color:var(--ink2);}
+.main-tab-panel{display:none;}
+.main-tab-panel.active{display:block;animation:tab-fade-in .2s ease;}
+@keyframes tab-fade-in{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
 .planner-card{max-width:920px;margin:0 auto 3rem;background:var(--surface);border:1px solid var(--border);border-radius:24px;overflow:hidden;box-shadow:var(--shadow);transition:background .25s,border-color .25s;}
-.planner-header{background:var(--hdr);padding:1.5rem 2rem;}
+.planner-header{background:var(--hdr);padding:1.5rem 2rem;display:flex;align-items:center;gap:14px;}
 .planner-header h2{font-family:'DM Serif Display',serif;font-size:20px;color:#fff;font-weight:400;}
 .planner-header p{font-size:13px;color:rgba(255,255,255,.4);margin-top:2px;}
+.header-icon-circle{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
 .planner-body{padding:2rem;}
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.5rem;}
+
+/* WIZARD (guided 3-step flow) */
+.wizard-header-row{display:flex;align-items:center;justify-content:flex-end;margin-bottom:.75rem;}
+.wizard-learn-btn{display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:20px;border:1.5px solid var(--border2);background:var(--surface2);color:var(--ink2);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;}
+.wizard-learn-btn:hover{border-color:var(--accent);color:var(--accent);}
+.wizard-stepper{display:flex;align-items:flex-start;justify-content:center;gap:0;margin-bottom:2rem;}
+.wizard-dot{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;flex-shrink:0;}
+.wizard-dot-num{width:32px;height:32px;border-radius:50%;background:var(--surface2);border:2px solid var(--border2);color:var(--ink3);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;transition:all .2s;}
+.wizard-dot.active .wizard-dot-num{background:var(--accent);border-color:var(--accent);color:#fff;}
+.wizard-dot.completed .wizard-dot-num{background:var(--green-light);border-color:var(--green);color:var(--green);}
+.wizard-dot-label{font-size:10.5px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.03em;}
+.wizard-dot.active .wizard-dot-label{color:var(--ink);}
+.wizard-line{width:56px;height:2px;background:var(--border2);margin:0 6px;margin-top:15px;}
+.wizard-step{display:none;}
+.wizard-step.active{display:block;animation:tab-fade-in .2s ease;}
+.wizard-step-title{font-family:'DM Serif Display',serif;font-size:19px;color:var(--ink);margin-bottom:4px;}
+.wizard-step-sub{font-size:13px;color:var(--ink3);margin-bottom:1.25rem;}
+.wizard-nav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:1.5rem;}
+.wizard-back-btn{padding:12px 20px;border-radius:10px;border:1.5px solid var(--border2);background:var(--surface2);color:var(--ink2);font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;}
+.wizard-back-btn:hover{border-color:var(--accent);color:var(--accent);}
+.wizard-next-btn{padding:12px 22px;border-radius:10px;border:none;background:var(--accent);color:#fff;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .15s;margin-left:auto;}
+.wizard-next-btn:hover{background:var(--accent-h);}
+.wizard-review-box{background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:1rem 1.25rem;margin:1.25rem 0;}
+.wizard-review-title{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);margin-bottom:.6rem;}
+.wizard-review-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;font-size:13px;color:var(--ink2);border-bottom:1px solid var(--border);}
+.wizard-review-row:last-child{border-bottom:none;}
+.wizard-review-row strong{color:var(--ink);}
 @media(max-width:580px){.form-grid{grid-template-columns:1fr;}}
 .field{display:flex;flex-direction:column;gap:6px;}
 .field label{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--ink3);}
@@ -184,7 +222,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:2rem 0;}
 input[type="range"]{flex:1;-webkit-appearance:none;height:4px;border-radius:2px;background:rgba(255,255,255,.12);outline:none;}
 input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.3);}
 .wi-val{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:500;min-width:54px;text-align:right;}
-.wi-val.pos{color:#f08c00;}.wi-val.neg{color:#f87171;}
+.wi-val.pos{color:#f0956e;}.wi-val.neg{color:#e2887a;}
 .wi-results{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:4px;}
 .wi-card{background:rgba(255,255,255,.06);border-radius:10px;padding:12px 14px;border:1px solid rgba(255,255,255,.06);}
 .wi-card-label{font-size:11px;color:rgba(255,255,255,.4);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em;}
@@ -235,6 +273,53 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;hei
 .user-chip{display:flex;align-items:center;gap:8px;padding:4px 6px 4px 12px;border-radius:20px;background:var(--surface2);border:1.5px solid var(--border2);cursor:pointer;font-size:12px;font-weight:600;color:var(--ink2);font-family:inherit;transition:all .15s;}
 .user-chip:hover{border-color:var(--accent);}
 .user-avatar{width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;}
+
+/* USER ACCOUNT DROPDOWN */
+.user-menu-wrap{position:relative;}
+.user-chip-caret{font-size:10px;transition:transform .2s;display:inline-block;}
+.user-chip-caret.open{transform:rotate(180deg);}
+.user-dropdown{display:none;position:absolute;top:calc(100% + 8px);right:0;width:260px;max-width:calc(100vw - 32px);background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:0 12px 32px rgba(0,0,0,.18);z-index:200;overflow:hidden;}
+.user-dropdown.open{display:block;animation:user-dd-in .15s ease;}
+@keyframes user-dd-in{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:translateY(0);}}
+.user-dd-accent{height:4px;width:100%;}
+.user-dd-body{padding:1rem;}
+.user-dd-header{display:flex;align-items:center;gap:12px;margin-bottom:.9rem;}
+.user-dd-avatar{width:40px;height:40px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;flex-shrink:0;}
+.user-dd-info{min-width:0;flex:1;}
+.user-dd-email{font-size:13px;font-weight:600;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:flex;align-items:center;gap:5px;}
+.user-dd-joined{font-size:11px;color:var(--ink3);margin-top:2px;display:flex;align-items:center;gap:5px;}
+.user-dd-edit-btn{width:26px;height:26px;border-radius:8px;border:none;background:var(--surface2);cursor:pointer;font-size:12px;flex-shrink:0;transition:all .15s;}
+.user-dd-edit-btn:hover{background:var(--accent-light);}
+.user-dd-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:.9rem;}
+.user-dd-stat{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:8px 6px;text-align:center;cursor:pointer;font-family:inherit;transition:all .15s;}
+.user-dd-stat:hover{border-color:var(--accent);}
+.user-dd-stat-icon{font-size:14px;margin-bottom:2px;}
+.user-dd-stat-val{font-size:15px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums;}
+.user-dd-stat-label{font-size:9.5px;color:var(--ink3);text-transform:uppercase;letter-spacing:.03em;margin-top:2px;}
+.user-dd-divider{height:1px;background:var(--border);margin-bottom:.9rem;}
+.user-dd-signout{width:100%;padding:10px;border-radius:10px;border:1.5px solid var(--border2);background:var(--surface2);color:var(--ink2);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;}
+.user-dd-signout:hover{border-color:var(--red);color:var(--red);background:var(--red-light);}
+.user-dd-confirm-text{font-size:12px;color:var(--ink2);margin-bottom:8px;text-align:center;}
+.user-dd-confirm-actions{display:flex;gap:8px;}
+.user-dd-cancel-btn,.user-dd-signout-confirm{flex:1;padding:9px;border-radius:9px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;border:1.5px solid var(--border2);background:var(--surface2);color:var(--ink2);}
+.user-dd-signout-confirm{background:var(--red);border-color:var(--red);color:#fff;}
+.user-dd-signout-confirm:hover{opacity:.9;}
+.user-dd-cancel-btn:hover{border-color:var(--accent);color:var(--accent);}
+.user-dd-clear-row{margin-top:8px;}
+.user-dd-clear-link{width:100%;padding:8px;border:none;background:none;color:var(--ink4);font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;transition:color .15s;text-align:center;}
+.user-dd-clear-link:hover{color:var(--red);}
+.user-dd-clear-confirm-btn{flex:1;padding:9px;border-radius:9px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;border:1.5px solid var(--red);background:var(--red);color:#fff;}
+.user-dd-clear-confirm-btn:hover{opacity:.9;}
+.user-dd-picker-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:.85rem;}
+.user-dd-picker-label{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink4);margin-bottom:8px;}
+.user-dd-swatch-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1rem;}
+.user-dd-swatch{width:26px;height:26px;border-radius:50%;border:2px solid transparent;cursor:pointer;padding:0;transition:all .15s;}
+.user-dd-swatch:hover{transform:scale(1.1);}
+.user-dd-swatch.active{border-color:var(--ink);box-shadow:0 0 0 2px var(--surface);}
+.user-dd-emoji-row{display:flex;flex-wrap:wrap;gap:6px;}
+.user-dd-emoji-opt{width:30px;height:30px;border-radius:8px;border:1.5px solid var(--border2);background:var(--surface2);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .15s;font-family:inherit;color:var(--ink3);}
+.user-dd-emoji-opt:hover{border-color:var(--accent);}
+.user-dd-emoji-opt.active{border-color:var(--accent);background:var(--accent-light);}
 .auth-modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;align-items:center;justify-content:center;padding:1rem;}
 .auth-modal-bg.open{display:flex;}
 .auth-modal{background:var(--surface);border-radius:18px;max-width:380px;width:100%;padding:1.75rem;box-shadow:0 20px 60px rgba(0,0,0,.3);}
@@ -258,7 +343,7 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;hei
 .plans-section{background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;}
 .plans-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:10px;}
 .plans-title-row{display:flex;align-items:center;gap:10px;}
-.plans-icon{font-size:20px;}
+.plans-icon{font-size:20px;width:40px;height:40px;border-radius:50%;background:var(--accent-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .plans-title{font-family:'DM Serif Display',serif;font-size:18px;color:var(--ink);}
 .plans-sub{font-size:12px;color:var(--ink3);margin-top:1px;}
 .plans-list{display:flex;flex-direction:column;gap:8px;margin-bottom:1rem;}
@@ -288,7 +373,48 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;hei
 footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);border-top:1px solid var(--border);background:var(--surface);margin-top:2rem;}
 
 /* CONFETTI */
-#confettiCanvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:2000;}
+#confettiCanvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:800;}
+
+/* TOAST */
+#toastContainer{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:3000;display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none;}
+.app-toast{background:var(--dark-card);color:#fff;padding:11px 20px;border-radius:20px;font-size:13px;font-weight:600;box-shadow:0 10px 28px rgba(0,0,0,.25);opacity:0;transform:translateY(10px);transition:opacity .25s ease,transform .25s ease;max-width:90vw;text-align:center;}
+.app-toast.show{opacity:1;transform:translateY(0);}
+
+/* ASK VESTLY CHAT WIDGET */
+.chat-fab{position:fixed;bottom:24px;right:24px;width:56px;height:56px;border-radius:50%;background:var(--accent);color:#fff;border:none;font-size:23px;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.25);z-index:900;display:flex;align-items:center;justify-content:center;transition:transform .15s,background .15s;}
+.chat-fab:hover{transform:scale(1.06);background:var(--accent-h);}
+.chat-panel{display:none;flex-direction:column;position:fixed;bottom:96px;right:24px;width:360px;max-width:calc(100vw - 32px);height:520px;max-height:calc(100vh - 140px);background:var(--surface);border:1px solid var(--border);border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.3);z-index:900;overflow:hidden;}
+.chat-panel.open{display:flex;animation:user-dd-in .2s ease;}
+.chat-panel-header{background:var(--hdr);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-shrink:0;}
+.chat-panel-header-left{display:flex;align-items:center;gap:10px;}
+.chat-avatar{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.chat-panel-title{font-size:14px;font-weight:600;color:#fff;}
+.chat-panel-sub{font-size:10.5px;color:rgba(255,255,255,.45);margin-top:1px;}
+.chat-close-btn{width:26px;height:26px;border-radius:8px;border:none;background:rgba(255,255,255,.12);color:#fff;cursor:pointer;font-size:12px;flex-shrink:0;}
+.chat-close-btn:hover{background:rgba(255,255,255,.22);}
+.chat-messages{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;}
+.chat-msg{max-width:82%;padding:9px 13px;border-radius:14px;font-size:13px;line-height:1.5;}
+.chat-msg.bot{align-self:flex-start;background:var(--surface2);color:var(--ink2);border-bottom-left-radius:4px;}
+.chat-msg.user{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:4px;}
+.chat-msg-lesson-btn{display:block;margin-top:8px;padding:6px 12px;border-radius:20px;border:1.5px solid var(--accent);background:none;color:var(--accent);font-size:11.5px;font-weight:600;cursor:pointer;font-family:inherit;width:fit-content;}
+.chat-msg-lesson-btn:hover{background:var(--accent-light);}
+.chat-typing{display:flex;gap:4px;padding:12px 14px;}
+.chat-typing span{width:6px;height:6px;border-radius:50%;background:var(--ink4);animation:chat-bounce 1.2s infinite ease-in-out;display:block;}
+.chat-typing span:nth-child(2){animation-delay:.15s;}
+.chat-typing span:nth-child(3){animation-delay:.3s;}
+@keyframes chat-bounce{0%,80%,100%{transform:translateY(0);opacity:.4;}40%{transform:translateY(-4px);opacity:1;}}
+.chat-suggestions{display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 10px;flex-shrink:0;}
+.chat-suggest-chip{padding:6px 12px;border-radius:20px;border:1.5px solid var(--border2);background:var(--surface2);color:var(--ink2);font-size:11.5px;cursor:pointer;font-family:inherit;transition:all .15s;}
+.chat-suggest-chip:hover{border-color:var(--accent);color:var(--accent);}
+.chat-input-row{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--border);flex-shrink:0;}
+.chat-input-row input{flex:1;height:38px;padding:0 12px;border-radius:20px;border:1.5px solid var(--border2);background:var(--surface2);color:var(--ink);font-size:13px;font-family:inherit;}
+.chat-input-row input:focus{outline:none;border-color:var(--accent);}
+.chat-send-btn{width:38px;height:38px;border-radius:50%;border:none;background:var(--accent);color:#fff;cursor:pointer;font-size:14px;flex-shrink:0;}
+.chat-send-btn:hover{background:var(--accent-h);}
+@media(max-width:480px){
+  .chat-panel{right:8px;left:8px;width:auto;bottom:88px;height:65vh;}
+  .chat-fab{right:16px;bottom:16px;width:50px;height:50px;font-size:20px;}
+}
 
 /* COMPARE STRATEGIES */
 .compare-btn{display:flex;align-items:center;gap:6px;padding:5px 14px;border-radius:20px;border:1.5px solid var(--border2);background:var(--surface);color:var(--ink2);cursor:pointer;font-size:12px;font-weight:600;transition:all .15s;font-family:inherit;}
@@ -330,7 +456,7 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
 /* DIVIDEND CALCULATOR */
 .divcalc-section{background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:2rem;}
 .divcalc-header{display:flex;align-items:center;gap:10px;margin-bottom:1.25rem;}
-.divcalc-icon{font-size:22px;}
+.divcalc-icon{font-size:22px;width:44px;height:44px;border-radius:50%;background:var(--accent-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .divcalc-title{font-family:'DM Serif Display',serif;font-size:18px;color:var(--ink);}
 .divcalc-sub{font-size:12px;color:var(--ink3);margin-top:1px;}
 .divcalc-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:1.25rem;}
@@ -346,26 +472,6 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
 .dc-checkbox-row label{font-size:13px;color:var(--ink2);cursor:pointer;}
 .dc-chart-wrap{position:relative;width:100%;height:200px;margin-top:.5rem;}
 .dc-note{font-size:11px;color:var(--ink4);margin-top:10px;line-height:1.5;}
-
-/* SHARE BUTTON & MODAL */
-.share-btn{display:flex;align-items:center;gap:6px;padding:5px 14px;border-radius:20px;border:1.5px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer;font-size:12px;font-weight:600;transition:all .15s;font-family:inherit;}
-.share-btn:hover{background:var(--accent-h);}
-.share-modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;align-items:center;justify-content:center;padding:1rem;}
-.share-modal-bg.open{display:flex;}
-.share-modal{background:var(--surface);border-radius:18px;max-width:440px;width:100%;padding:1.75rem;box-shadow:0 20px 60px rgba(0,0,0,.3);}
-.share-modal h3{font-family:'DM Serif Display',serif;font-size:20px;color:var(--ink);margin-bottom:6px;}
-.share-modal-sub{font-size:13px;color:var(--ink3);margin-bottom:1.25rem;line-height:1.6;}
-.share-option{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1.5px solid var(--border);border-radius:12px;margin-bottom:10px;cursor:pointer;transition:all .15s;background:var(--surface2);}
-.share-option:hover{border-color:var(--accent);}
-.share-opt-icon{width:36px;height:36px;border-radius:8px;background:var(--accent-light);color:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;}
-.share-opt-text{flex:1;}
-.share-opt-title{font-size:13px;font-weight:600;color:var(--ink);}
-.share-opt-sub{font-size:11px;color:var(--ink3);margin-top:1px;}
-.share-close{width:100%;text-align:center;padding:10px;font-size:13px;color:var(--ink3);cursor:pointer;background:none;border:none;font-family:inherit;margin-top:6px;}
-.share-link-box{display:flex;gap:8px;margin-top:4px;}
-.share-link-box input{flex:1;height:40px;font-size:12px;font-family:'JetBrains Mono',monospace;background:var(--surface2);}
-.share-copy-btn{height:40px;padding:0 16px;border-radius:10px;border:none;background:var(--accent);color:#fff;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;}
-.share-copy-btn.copied{background:var(--green);}
 
 /* PAPER TRADING SIM */
 .sim-btn{display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;border:1.5px solid var(--green)55;background:var(--green-light);color:var(--green);cursor:pointer;font-size:12px;font-weight:700;transition:all .15s;font-family:inherit;}
@@ -398,7 +504,7 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
 
 .sim-section{background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:2rem;}
 .sim-section-header{display:flex;align-items:center;gap:10px;margin-bottom:1rem;}
-.sim-section-icon{font-size:20px;}
+.sim-section-icon{font-size:20px;width:40px;height:40px;border-radius:50%;background:var(--green-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .sim-section-title{font-family:'DM Serif Display',serif;font-size:18px;color:var(--ink);}
 .sim-section-sub{font-size:12px;color:var(--ink3);margin-top:1px;}
 .sim-list{display:flex;flex-direction:column;gap:14px;}
@@ -437,9 +543,43 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
 .sim-signin-prompt{text-align:center;padding:1rem;font-size:13px;color:var(--ink3);}
 .sim-signin-prompt button{color:var(--accent);font-weight:600;background:none;border:none;cursor:pointer;font-family:inherit;font-size:13px;text-decoration:underline;}
 
+/* LEARN MODAL (Investing 101 lessons) */
+.learn-modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;align-items:center;justify-content:center;padding:1rem;overflow-y:auto;}
+.learn-modal-bg.open{display:flex;}
+.learn-modal{background:var(--surface);border-radius:18px;max-width:640px;width:100%;padding:1.75rem;box-shadow:0 20px 60px rgba(0,0,0,.3);max-height:88vh;overflow-y:auto;}
+.learn-modal-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:1rem;}
+.learn-modal-header h3{font-family:'DM Serif Display',serif;font-size:20px;color:var(--ink);margin-bottom:4px;}
+.learn-modal-sub{font-size:13px;color:var(--ink3);line-height:1.5;}
+.learn-close-x{width:30px;height:30px;border-radius:8px;border:none;background:var(--surface2);color:var(--ink3);cursor:pointer;font-size:14px;flex-shrink:0;}
+.learn-close-x:hover{background:var(--red-light);color:var(--red);}
+.learn-progress-row{display:flex;align-items:center;gap:10px;margin-bottom:1.25rem;}
+.learn-progress-bar{flex:1;height:8px;border-radius:4px;background:var(--surface2);overflow:hidden;}
+.learn-progress-fill{height:100%;background:var(--accent);border-radius:4px;transition:width .3s;}
+.learn-progress-text{font-size:11px;font-weight:600;color:var(--ink3);white-space:nowrap;}
+.learn-chapter-label{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4);padding:12px 0 6px;}
+.learn-chapter-label:first-child{padding-top:0;}
+.learn-lesson-row{display:flex;align-items:center;gap:12px;padding:11px 12px;border:1.5px solid var(--border);border-radius:12px;margin-bottom:7px;cursor:pointer;transition:all .15s;background:var(--surface2);}
+.learn-lesson-row:hover{border-color:var(--accent);}
+.learn-lesson-check{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;border:2px solid var(--border2);color:transparent;background:var(--surface);}
+.learn-lesson-row.done .learn-lesson-check{background:var(--green);border-color:var(--green);color:#fff;}
+.learn-lesson-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink4);width:18px;flex-shrink:0;}
+.learn-lesson-title{font-size:13px;font-weight:600;color:var(--ink);flex:1;}
+.learn-lesson-arrow{color:var(--ink4);font-size:14px;flex-shrink:0;}
+.learn-detail-back{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--accent);background:none;border:none;cursor:pointer;padding:0 0 1rem;font-family:inherit;}
+.learn-detail-title{font-family:'DM Serif Display',serif;font-size:20px;color:var(--ink);margin-bottom:4px;}
+.learn-detail-chapter{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink4);margin-bottom:1rem;}
+.learn-detail-body{font-size:14px;color:var(--ink2);line-height:1.75;margin-bottom:1.5rem;}
+.learn-detail-nav{display:flex;gap:10px;}
+.learn-nav-btn{flex:1;padding:12px;border-radius:10px;border:1.5px solid var(--border2);background:var(--surface2);color:var(--ink2);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;text-align:center;}
+.learn-nav-btn:hover{border-color:var(--accent);color:var(--accent);}
+.learn-nav-btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
+.learn-nav-btn.primary:hover{background:var(--accent-h);}
+.learn-nav-btn:disabled{opacity:.4;cursor:not-allowed;}
+.learn-done-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:var(--green);background:var(--green-light);padding:3px 10px;border-radius:20px;margin-bottom:1rem;}
+
 /* STOCK LOOKUP */
 .lookup-section{background:var(--surface);border:1px solid var(--border);border-radius:24px;box-shadow:var(--shadow);max-width:920px;margin:0 auto 3rem;overflow:hidden;}
-.lookup-header{background:var(--hdr);padding:1.5rem 2rem;}
+.lookup-header{background:var(--hdr);padding:1.5rem 2rem;display:flex;align-items:center;gap:14px;}
 .lookup-header h2{font-family:'DM Serif Display',serif;font-size:20px;color:#fff;font-weight:400;}
 .lookup-header p{font-size:13px;color:rgba(255,255,255,.4);margin-top:2px;}
 .lookup-body{padding:2rem;}
@@ -526,7 +666,14 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
   body{overflow-x:hidden;}
   nav{padding:8px 12px;height:auto;min-height:52px;flex-wrap:wrap;row-gap:8px;}
   .nav-right{gap:6px;flex-wrap:wrap;justify-content:flex-end;}
-  .theme-btn,.share-btn,.auth-btn,.user-chip,.compare-btn{font-size:11px;padding:5px 10px;}
+  .theme-btn,.auth-btn,.user-chip,.compare-btn{font-size:11px;padding:5px 10px;}
+  .user-dropdown{right:-8px;width:250px;}
+  .wizard-line{width:28px;}
+  .wizard-dot-num{width:26px;height:26px;font-size:11px;}
+  .wizard-dot-label{font-size:9px;}
+  .main-tabs{max-width:100%;}
+  .main-tab{font-size:12px;padding:9px 8px;}
+  .header-icon-circle{width:36px;height:36px;font-size:16px;}
   .hero{padding:2rem 1.1rem 1.25rem;}
   .hero-sub{font-size:13.5px;}
   .planner-header,.lookup-header{padding:1.1rem 1.25rem;}
@@ -545,7 +692,7 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
   .wi-row{gap:8px;}
   .wi-row label{min-width:60px;font-size:11px;}
   .wi-val{min-width:44px;font-size:13px;}
-  .compare-modal,.sim-modal,.share-modal,.auth-modal{padding:1.25rem;}
+  .compare-modal,.sim-modal,.auth-modal,.learn-modal{padding:1.25rem;}
   .compare-pickers{gap:8px;}
   .metric-val{font-size:19px;}
   .pick-main{padding:14px 14px;}
@@ -577,10 +724,7 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
     <div id="authArea">
       <button class="auth-btn" id="loginBtn" onclick="openAuthModal()">Sign in</button>
     </div>
-    <button class="share-btn" onclick="openShareModal()">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg>
-      Share
-    </button>
+    <button class="auth-btn" id="learnBtn" onclick="openLearnModal()">🎓 Learn</button>
     <button class="theme-btn" id="dumbBtn" onclick="toggleDumbMode()">🧠 Dumb It Down</button>
     <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">☀ Light mode</button>
   </div>
@@ -592,11 +736,24 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
   <p class="hero-sub" data-simple="Type in how much money you have, pick a style you like, and we'll build you a starter plan — in plain English, no finance degree needed.">Enter your budget, add your existing holdings, choose a strategy — and get a full plan built around you. Live prices, historical charts, what-if simulator, dividend income estimates.</p>
 </div>
 
+<div class="main-tabs" id="mainTabs">
+  <button class="main-tab active" data-tab="build" onclick="switchMainTab('build')">
+    <span class="main-tab-icon">🎯</span> Build My Plan
+  </button>
+  <button class="main-tab" data-tab="explore" onclick="switchMainTab('explore')">
+    <span class="main-tab-icon">🔍</span> Explore &amp; Learn
+  </button>
+</div>
+
+<div class="main-tab-panel" id="tabPanelExplore">
 <!-- STOCK LOOKUP -->
 <div class="lookup-section">
   <div class="lookup-header">
-    <h2 data-simple="Look up any stock or fund">Look up any stock or ETF</h2>
-    <p data-simple="Type a company name or symbol — we'll explain it in plain words">Search a ticker or company name — plain-English info, no jargon</p>
+    <div class="header-icon-circle">🔍</div>
+    <div>
+      <h2 data-simple="Look up any stock or fund">Look up any stock or ETF</h2>
+      <p data-simple="Type a company name or symbol — we'll explain it in plain words">Search a ticker or company name — plain-English info, no jargon</p>
+    </div>
   </div>
   <div class="lookup-body">
     <div class="lookup-bar">
@@ -659,11 +816,17 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
   <div class="dc-chart-wrap"><canvas id="ciChart"></canvas></div>
   <div class="dc-note" id="ciNote"></div>
 </div>
+</div>
+<!-- end tabPanelExplore -->
 
+<div class="main-tab-panel active" id="tabPanelBuild">
 <div class="planner-card">
   <div class="planner-header">
-    <h2 data-simple="Build your plan">Build your portfolio</h2>
-    <p data-simple="Takes 10 seconds · Uses real prices · Works around stuff you already own">Takes about 10 seconds · Live market data · Builds around your existing holdings</p>
+    <div class="header-icon-circle">🎯</div>
+    <div>
+      <h2 data-simple="Build your plan">Build your portfolio</h2>
+      <p data-simple="Takes 10 seconds · Uses real prices · Works around stuff you already own">Takes about 10 seconds · Live market data · Builds around your existing holdings</p>
+    </div>
   </div>
   <div class="planner-body">
 
@@ -696,35 +859,120 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
       </div>
     </div>
 
-    <div class="form-grid">
-      <div class="field">
-        <label for="budget">New money to invest</label>
-        <div class="input-wrap"><span class="prefix">$</span><input type="number" id="budget" placeholder="e.g. 2,000" min="100" step="100"></div>
-      </div>
-      <div class="field">
-        <label for="horizon">Time horizon</label>
-        <div class="input-wrap">
-          <select id="horizon">
-            <option value="short">Short-term — 1 to 2 years</option>
-            <option value="medium" selected>Medium-term — 3 to 5 years</option>
-            <option value="long">Long-term — 7+ years</option>
-          </select>
+    <!-- WIZARD STEPPER -->
+    <div class="wizard-header-row">
+      <div></div>
+      <button class="wizard-learn-btn" onclick="openLearnModal()">🎓 Need a refresher? Open Learn</button>
+    </div>
+    <div class="wizard-stepper" id="wizardStepper">
+      <div class="wizard-dot active" data-step="1" onclick="goToStep(1)"><span class="wizard-dot-num">1</span><span class="wizard-dot-label">Budget</span></div>
+      <div class="wizard-line"></div>
+      <div class="wizard-dot" data-step="2" onclick="goToStep(2)"><span class="wizard-dot-num">2</span><span class="wizard-dot-label">Holdings</span></div>
+      <div class="wizard-line"></div>
+      <div class="wizard-dot" data-step="3" onclick="goToStep(3)"><span class="wizard-dot-num">3</span><span class="wizard-dot-label">Strategy</span></div>
+    </div>
+
+    <!-- STEP 1: BUDGET & HORIZON -->
+    <div class="wizard-step active" data-step="1">
+      <div class="wizard-step-title">💰 What are you working with?</div>
+      <div class="wizard-step-sub">Just the basics to get started.</div>
+      <div class="form-grid">
+        <div class="field">
+          <label for="budget">New money to invest</label>
+          <div class="input-wrap"><span class="prefix">$</span><input type="number" id="budget" placeholder="e.g. 2,000" min="100" step="100"></div>
+        </div>
+        <div class="field">
+          <label for="horizon">Time horizon</label>
+          <div class="input-wrap">
+            <select id="horizon">
+              <option value="short">Short-term — 1 to 2 years</option>
+              <option value="medium" selected>Medium-term — 3 to 5 years</option>
+              <option value="long">Long-term — 7+ years</option>
+            </select>
+          </div>
         </div>
       </div>
+      <div class="wizard-nav">
+        <div></div>
+        <button class="wizard-next-btn" onclick="wizardNext()">Next: Existing holdings →</button>
+      </div>
     </div>
-    <!-- DIVIDEND TOGGLE -->
-    <div class="div-toggle" id="divToggle" onclick="toggleDivMode()">
-      <div class="div-toggle-left">
-        <div class="div-icon">💰</div>
-        <div>
-          <div class="div-label" data-simple="Cash-Paying Mode">All-Dividends Mode</div>
-          <div class="div-sub" data-simple="Every pick pays you cash regularly, just for holding it. Turns off the style picker below.">100% dividend-focused — every pick pays regular income. Overrides strategy selection below.</div>
+
+    <!-- STEP 2: EXISTING HOLDINGS -->
+    <div class="wizard-step" data-step="2">
+      <div class="wizard-step-title">📦 Already own anything?<span class="portfolio-badge" id="hBadge" style="display:none;margin-left:8px;"></span></div>
+      <div class="wizard-step-sub">Totally optional — skip ahead if you're starting fresh.</div>
+      <div class="portfolio-section" style="border:none;padding:0;">
+        <div class="portfolio-body open" id="portfolioBody" style="border-top:none;padding:0;">
+          <div class="h-header"><span>Ticker</span><span>Note</span><span>Value ($)</span><span></span></div>
+          <div class="holdings-list" id="holdingsList"></div>
+          <button class="add-h-btn" onclick="addHolding()">+ Add a holding</button>
         </div>
       </div>
-      <div class="div-pill" id="divPill">OFF</div>
+      <div class="wizard-nav">
+        <button class="wizard-back-btn" onclick="wizardBack()">← Back</button>
+        <button class="wizard-next-btn" onclick="wizardNext()">Next: Choose a style →</button>
+      </div>
     </div>
+
+    <!-- STEP 3: STRATEGY + REVIEW + BUILD -->
+    <div class="wizard-step" data-step="3">
+      <div class="wizard-step-title">🎯 Pick your style</div>
+      <div class="wizard-step-sub">Choose an approach below, then build your plan.</div>
+      <!-- DIVIDEND TOGGLE -->
+      <div class="div-toggle" id="divToggle" onclick="toggleDivMode()">
+        <div class="div-toggle-left">
+          <div class="div-icon">💰</div>
+          <div>
+            <div class="div-label" data-simple="Cash-Paying Mode">All-Dividends Mode</div>
+            <div class="div-sub" data-simple="Every pick pays you cash regularly, just for holding it. Turns off the style picker below.">100% dividend-focused — every pick pays regular income. Overrides strategy selection below.</div>
+          </div>
+        </div>
+        <div class="div-pill" id="divPill">OFF</div>
+      </div>
+      <!-- STRATEGY CHIPS -->
+      <div class="chips-wrap" id="chipsWrap">
+        <div class="chips-main-label" data-simple="Pick your style">Investing strategy</div>
+        <span class="chip-section-label" data-simple="Slow &amp; steady (hold for years)">Long-term growth — buy and hold</span>
+        <div class="chip-row">
+          <button class="chip active" data-f="balanced" data-simple="A little bit of everything">Balanced growth</button>
+          <button class="chip" data-f="bluechip" data-simple="Big, reliable companies">Blue-chip steady</button>
+          <button class="chip" data-f="index" data-simple="Just buy the whole market">Index funds only</button>
+        </div>
+        <span class="chip-section-label" data-simple="Faster &amp; riskier">Active / faster moving growth</span>
+        <div class="chip-row">
+          <button class="chip" data-f="growth" data-simple="Go big or go home">Aggressive growth</button>
+          <button class="chip" data-f="momentum" data-simple="Ride the winners">Momentum stocks</button>
+          <button class="chip" data-f="swing" data-simple="Active trading mix">Swing / active mix</button>
+        </div>
+        <span class="chip-section-label" data-simple="Get paid regularly">Income</span>
+        <div class="chip-row">
+          <button class="chip" data-f="income" data-simple="Get paid cash regularly">Dividend income</button>
+          <button class="chip" data-f="safe" data-simple="Extra safe &amp; calm">Safe &amp; steady</button>
+        </div>
+        <span class="chip-section-label" data-simple="Bet on one type of company">Sector bets</span>
+        <div class="chip-row">
+          <button class="chip" data-f="tech" data-simple="All about tech">Tech-heavy</button>
+          <button class="chip" data-f="global" data-simple="Spread around the world">Global diversified</button>
+        </div>
+      </div>
+      <div class="wizard-review-box" id="wizardReviewBox"></div>
+      <button class="build-btn" id="buildBtn" onclick="buildPlan()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 9l-5 5-4-4-6 6"/></svg>
+        <span data-simple="Build my plan!">Build my investment plan</span>
+      </button>
+      <button class="compare-btn" style="width:100%;justify-content:center;margin-top:10px;" onclick="openCompareModal()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>
+        <span data-simple="Compare two styles side by side">Compare two strategies side by side</span>
+      </button>
+      <div class="wizard-nav" style="margin-top:10px;">
+        <button class="wizard-back-btn" onclick="wizardBack()">← Back</button>
+        <div></div>
+      </div>
+    </div>
+
     <!-- PAPER TRADING SIMULATOR -->
-    <div class="sim-section" id="simSection" style="display:none;">
+    <div class="sim-section" id="simSection" style="display:none;margin-top:1.5rem;">
       <div class="sim-section-header">
         <div class="sim-section-icon">📈</div>
         <div>
@@ -734,62 +982,13 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
       </div>
       <div class="sim-list" id="simList"></div>
     </div>
-    <div class="sim-section" id="simSigninSection" style="display:none;">
+    <div class="sim-section" id="simSigninSection" style="display:none;margin-top:1.5rem;">
       <div class="sim-signin-prompt">
         <span style="font-size:20px;display:block;margin-bottom:6px;">📈</span>
         <button onclick="openAuthModal()">Sign in or create a free account</button> to paper-trade your picks with fake cash and track them against the real market.
       </div>
     </div>
 
-    <!-- EXISTING HOLDINGS -->
-    <div class="portfolio-section">
-      <div class="portfolio-header" onclick="togglePortfolio()">
-        <div>
-          <div class="portfolio-label"><span data-simple="Stuff you already own">Existing holdings</span><span class="portfolio-badge" id="hBadge" style="display:none"></span></div>
-          <div class="portfolio-sublabel" data-simple="Already own some stocks or funds? Add them and we'll build around it">Add stocks or ETFs you already own — we'll plan around them</div>
-        </div>
-        <span class="p-toggle-icon" id="pToggleIcon">▾</span>
-      </div>
-      <div class="portfolio-body" id="portfolioBody">
-        <div class="h-header"><span>Ticker</span><span>Note</span><span>Value ($)</span><span></span></div>
-        <div class="holdings-list" id="holdingsList"></div>
-        <button class="add-h-btn" onclick="addHolding()">+ Add a holding</button>
-      </div>
-    </div>
-    <!-- STRATEGY CHIPS -->
-    <div class="chips-wrap" id="chipsWrap">
-      <div class="chips-main-label" data-simple="Pick your style">Investing strategy</div>
-      <span class="chip-section-label" data-simple="Slow &amp; steady (hold for years)">Long-term growth — buy and hold</span>
-      <div class="chip-row">
-        <button class="chip active" data-f="balanced" data-simple="A little bit of everything">Balanced growth</button>
-        <button class="chip" data-f="bluechip" data-simple="Big, reliable companies">Blue-chip steady</button>
-        <button class="chip" data-f="index" data-simple="Just buy the whole market">Index funds only</button>
-      </div>
-      <span class="chip-section-label" data-simple="Faster &amp; riskier">Active / faster moving growth</span>
-      <div class="chip-row">
-        <button class="chip" data-f="growth" data-simple="Go big or go home">Aggressive growth</button>
-        <button class="chip" data-f="momentum" data-simple="Ride the winners">Momentum stocks</button>
-        <button class="chip" data-f="swing" data-simple="Active trading mix">Swing / active mix</button>
-      </div>
-      <span class="chip-section-label" data-simple="Get paid regularly">Income</span>
-      <div class="chip-row">
-        <button class="chip" data-f="income" data-simple="Get paid cash regularly">Dividend income</button>
-        <button class="chip" data-f="safe" data-simple="Extra safe &amp; calm">Safe &amp; steady</button>
-      </div>
-      <span class="chip-section-label" data-simple="Bet on one type of company">Sector bets</span>
-      <div class="chip-row">
-        <button class="chip" data-f="tech" data-simple="All about tech">Tech-heavy</button>
-        <button class="chip" data-f="global" data-simple="Spread around the world">Global diversified</button>
-      </div>
-    </div>
-    <button class="build-btn" id="buildBtn" onclick="buildPlan()">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 9l-5 5-4-4-6 6"/></svg>
-      <span data-simple="Build my plan!">Build my investment plan</span>
-    </button>
-    <button class="compare-btn" style="width:100%;justify-content:center;margin-top:10px;" onclick="openCompareModal()">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>
-      <span data-simple="Compare two styles side by side">Compare two strategies side by side</span>
-    </button>
     <div class="error-box" id="errorBox"></div>
     <div class="loading-state" id="loadingState">
       <div class="spinner"></div>
@@ -901,6 +1100,8 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
     </div>
   </div>
 </div>
+</div>
+<!-- end tabPanelBuild -->
 <footer>Vestly · Free investment planner · Data via Yahoo Finance · No ads · <a href="about.html" style="color:var(--accent);text-decoration:none;font-weight:600;">About & disclaimer</a></footer>
 
 <!-- AUTH MODAL -->
@@ -928,52 +1129,6 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
 
     <button class="auth-submit-btn" id="authSubmitBtn" onclick="submitAuth()">Sign in</button>
     <button class="auth-close" onclick="closeAuthModal()">Cancel</button>
-  </div>
-</div>
-
-<!-- SHARE MODAL -->
-<div class="share-modal-bg" id="shareModalBg" onclick="if(event.target===this)closeShareModal()">
-  <div class="share-modal">
-    <h3>Share Vestly</h3>
-    <div class="share-modal-sub">This is a single HTML file — no server needed. Pick how you'd like to share it.</div>
-
-    <div class="share-option" onclick="copyShareLink()">
-      <div class="share-opt-icon">🔗</div>
-      <div class="share-opt-text">
-        <div class="share-opt-title">Copy this page's link</div>
-        <div class="share-opt-sub">Works once it's hosted online (see below)</div>
-      </div>
-    </div>
-
-    <div class="share-link-box">
-      <input type="text" id="shareLinkInput" readonly value="">
-      <button class="share-copy-btn" id="copyBtn" onclick="copyShareLink()">Copy</button>
-    </div>
-
-    <div style="margin-top:1.25rem;font-size:12px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;">Free hosting options</div>
-    <div class="share-option" onclick="window.open('https://app.netlify.com/drop','_blank')" style="margin-top:10px;">
-      <div class="share-opt-icon">🌐</div>
-      <div class="share-opt-text">
-        <div class="share-opt-title">Netlify Drop</div>
-        <div class="share-opt-sub">Drag the HTML file in, get a live link in seconds — no account needed</div>
-      </div>
-    </div>
-    <div class="share-option" onclick="window.open('https://pages.github.com/','_blank')">
-      <div class="share-opt-icon">📁</div>
-      <div class="share-opt-text">
-        <div class="share-opt-title">GitHub Pages</div>
-        <div class="share-opt-sub">Free permanent hosting tied to a GitHub repo</div>
-      </div>
-    </div>
-    <div class="share-option" onclick="window.open('https://vercel.com/new','_blank')">
-      <div class="share-opt-icon">▲</div>
-      <div class="share-opt-text">
-        <div class="share-opt-title">Vercel</div>
-        <div class="share-opt-sub">Free hosting with a custom URL, great for sharing with friends</div>
-      </div>
-    </div>
-
-    <button class="share-close" onclick="closeShareModal()">Close</button>
   </div>
 </div>
 
@@ -1037,7 +1192,47 @@ footer{text-align:center;padding:2rem 1rem;font-size:12px;color:var(--ink4);bord
   </div>
 </div>
 
+<!-- LEARN MODAL (Investing 101) -->
+<div class="learn-modal-bg" id="learnModalBg" onclick="if(event.target===this)closeLearnModal()">
+  <div class="learn-modal">
+    <div class="learn-modal-header">
+      <div>
+        <h3>🎓 Investing 101</h3>
+        <div class="learn-modal-sub">20 short lessons to get comfortable with the basics — read them in any order.</div>
+      </div>
+      <button class="learn-close-x" onclick="closeLearnModal()">✕</button>
+    </div>
+    <div class="learn-progress-row">
+      <div class="learn-progress-bar"><div class="learn-progress-fill" id="learnProgressFill" style="width:0%;"></div></div>
+      <div class="learn-progress-text" id="learnProgressText">0/20 complete</div>
+    </div>
+    <div id="learnListView"></div>
+    <div id="learnDetailView" style="display:none;"></div>
+  </div>
+</div>
+
 <canvas id="confettiCanvas"></canvas>
+
+<!-- ASK VESTLY CHAT WIDGET (keyword-search FAQ + action commands) -->
+<button class="chat-fab" id="chatFab" onclick="toggleChatWidget()" title="Ask Vestly">💬</button>
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-panel-header">
+    <div class="chat-panel-header-left">
+      <div class="chat-avatar">💬</div>
+      <div>
+        <div class="chat-panel-title">Ask Vestly</div>
+        <div class="chat-panel-sub">Instant answers & quick actions</div>
+      </div>
+    </div>
+    <button class="chat-close-btn" onclick="toggleChatWidget()">✕</button>
+  </div>
+  <div class="chat-messages" id="chatMessages"></div>
+  <div class="chat-suggestions" id="chatSuggestions"></div>
+  <div class="chat-input-row">
+    <input type="text" id="chatInput" placeholder="Ask a question…" onkeydown="if(event.key==='Enter'){sendChatMessage();}">
+    <button class="chat-send-btn" onclick="sendChatMessage()">➤</button>
+  </div>
+</div>
 <script>
 // ── SUPABASE SETUP ──
 const SUPABASE_URL='https://mmpxhwbhgdmexmlehjqf.supabase.co';
@@ -1059,38 +1254,288 @@ sb.auth.onAuthStateChange((event,session)=>{
   if(event==='SIGNED_OUT') onSignOut();
 });
 
+const AVATAR_EMOJIS=['🐂','🐻','🚀','💰','📈','🦉','🐢','🦁','⭐','🔥','💎','🌱'];
+let justSignedUp=false; // set right before a brand-new signup completes, so onAuthSuccess knows to start fresh
+
 function onAuthSuccess(user){
   currentUser=user;
-  const initial=(user.email||'?').charAt(0).toUpperCase();
+  const disp=avatarDisplayFor(user);
   document.getElementById('authArea').innerHTML=`
-    <button class="user-chip" onclick="toggleUserMenu()">
-      <span class="user-avatar">${initial}</span>
-      <span style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${user.email}</span>
-      <span style="font-size:10px;">▾</span>
-    </button>`;
+    <div class="user-menu-wrap" id="userMenuWrap">
+      <button class="user-chip" onclick="toggleUserMenu()">
+        <span class="user-avatar" style="background:${disp.bg}">${disp.content}</span>
+        <span style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${user.email}</span>
+        <span class="user-chip-caret" id="userChipCaret">▾</span>
+      </button>
+      <div class="user-dropdown" id="userDropdown"></div>
+    </div>`;
   document.getElementById('plansSection').style.display='block';
   document.getElementById('signinPromptSection').style.display='none';
   document.getElementById('simSection').style.display='block';
   document.getElementById('simSigninSection').style.display='none';
   loadUserPlans();
   loadUserSims();
+  loadLearnProgress();
+  if(justSignedUp){
+    justSignedUp=false;
+    resetWizardToFresh();
+  }
 }
 function onSignOut(){
   currentUser=null;
   userPlans=[];
   userSims=[];
+  learnProgress={};
   document.getElementById('authArea').innerHTML=`<button class="auth-btn" id="loginBtn" onclick="openAuthModal()">Sign in</button>`;
   document.getElementById('plansSection').style.display='none';
   document.getElementById('signinPromptSection').style.display='block';
   document.getElementById('simSection').style.display='none';
   document.getElementById('simSigninSection').style.display='block';
 }
+
+// Deterministic avatar color from the email, so each account gets a
+// consistent (but varied) color from the app's existing palette by default.
+function avatarColorFor(email){
+  let seed=0; for(const ch of (email||'')) seed=(seed*31+ch.charCodeAt(0))%997;
+  return COLORS[seed%COLORS.length];
+}
+// The color used for the accent bar / swatch highlighting — always a real
+// color, regardless of whether the avatar itself is showing an emoji.
+function avatarAccentColor(user){
+  return user?.user_metadata?.avatarColor || avatarColorFor(user?.email);
+}
+// What actually renders inside the avatar circle: a chosen emoji (on a
+// neutral background) or an initial letter (on the accent color).
+function avatarDisplayFor(user){
+  const meta=user?.user_metadata||{};
+  if(meta.avatarEmoji) return{bg:'var(--surface2)',content:meta.avatarEmoji};
+  return{bg:avatarAccentColor(user),content:(user?.email||'?').charAt(0).toUpperCase()};
+}
+function updateNavChipAvatar(){
+  if(!currentUser) return;
+  const disp=avatarDisplayFor(currentUser);
+  const navAv=document.querySelector('#userMenuWrap > .user-chip .user-avatar');
+  if(navAv){ navAv.style.background=disp.bg; navAv.textContent=disp.content; }
+}
+async function applyAvatarChange(color,emoji){
+  if(!currentUser) return;
+  currentUser.user_metadata={...(currentUser.user_metadata||{}),avatarColor:color,avatarEmoji:emoji};
+  updateNavChipAvatar();
+  try{
+    const{data,error}=await sb.auth.updateUser({data:{avatarColor:color,avatarEmoji:emoji}});
+    if(error) throw error;
+    if(data?.user) currentUser=data.user;
+  }catch(e){
+    console.error('Could not save avatar preference (it will still work for this session)',e);
+  }
+}
+
 function toggleUserMenu(){
-  if(confirm('Sign out of Vestly?')) signOut();
+  try{
+    const dd=document.getElementById('userDropdown');
+    const caret=document.getElementById('userChipCaret');
+    if(!dd) return;
+    const opening=!dd.classList.contains('open');
+    if(opening) renderUserDropdown();
+    dd.classList.toggle('open',opening);
+    if(caret) caret.classList.toggle('open',opening);
+  }catch(err){
+    console.error('toggleUserMenu failed',err);
+    const dd=document.getElementById('userDropdown');
+    if(dd){
+      dd.innerHTML=`<div style="padding:1rem;font-size:12px;color:var(--red);line-height:1.5;">⚠ This menu hit an error opening:<br><code style="white-space:pre-wrap;word-break:break-word;font-size:11px;">${escapeHtml((err&&err.message)||String(err))}</code></div>`;
+      dd.classList.add('open');
+    }
+  }
+}
+function closeUserMenu(){
+  const dd=document.getElementById('userDropdown');
+  const caret=document.getElementById('userChipCaret');
+  if(dd) dd.classList.remove('open');
+  if(caret) caret.classList.remove('open');
+}
+function closeUserMenuThen(fn){
+  closeUserMenu();
+  setTimeout(fn,80);
+}
+document.addEventListener('click',e=>{
+  const wrap=document.getElementById('userMenuWrap');
+  const dd=document.getElementById('userDropdown');
+  if(wrap && dd && dd.classList.contains('open') && !wrap.contains(e.target)) closeUserMenu();
+});
+// Delegated listener for every button inside the account dropdown. Attached
+// once, unconditionally, at script load time (NOT inside onAuthSuccess) —
+// so it exists regardless of whether onAuthSuccess ever runs successfully.
+// #userDropdown doesn't need to exist yet for this to be safe: the handler
+// itself checks for a matching [data-action] target and no-ops otherwise.
+document.addEventListener('click',handleUserDropdownClick);
+
+// Every click inside the dropdown (in any of its views — main, avatar
+// picker, sign-out confirm, clear-data confirm) routes through here based
+// on the clicked element's data-action, rather than each button wiring up
+// its own inline onclick against freshly-injected HTML.
+function handleUserDropdownClick(e){
+  const btn=e.target.closest('[data-action]');
+  if(!btn) return;
+  const action=btn.dataset.action;
+  try{
+    if(action==='edit-avatar') showAvatarPicker();
+    else if(action==='back-to-main') renderUserDropdown();
+    else if(action==='pick-color') pickAvatarColor(btn.dataset.color);
+    else if(action==='pick-emoji') pickAvatarEmoji(btn.dataset.emoji||null);
+    else if(action==='goto-plans') closeUserMenuThen(()=>document.getElementById('plansSection').scrollIntoView({behavior:'smooth',block:'start'}));
+    else if(action==='goto-sims') closeUserMenuThen(()=>document.getElementById('simSection').scrollIntoView({behavior:'smooth',block:'start'}));
+    else if(action==='goto-learn') closeUserMenuThen(()=>openLearnModal());
+    else if(action==='signout-step') confirmSignoutStep();
+    else if(action==='signout-cancel') renderUserDropdown();
+    else if(action==='signout-confirm') signOut();
+    else if(action==='clear-step') confirmClearDataStep();
+    else if(action==='clear-cancel') renderUserDropdown();
+    else if(action==='clear-confirm') clearAccountData();
+  }catch(err){
+    console.error('Dropdown action "'+action+'" failed',err);
+    const body=document.querySelector('#userDropdown .user-dd-body')||document.getElementById('userDropdown');
+    if(body) body.innerHTML=`<div style="padding:1rem;font-size:12px;color:var(--red);line-height:1.5;">⚠ The "${escapeHtml(action)}" button hit an error:<br><code style="white-space:pre-wrap;word-break:break-word;font-size:11px;">${escapeHtml((err&&err.message)||String(err))}</code></div>`;
+  }
+}
+
+function renderUserDropdown(){
+  const dd=document.getElementById('userDropdown');
+  if(!dd || !currentUser) return;
+  const disp=avatarDisplayFor(currentUser);
+  const accent=avatarAccentColor(currentUser);
+  const joined=currentUser.created_at ? new Date(currentUser.created_at).toLocaleDateString('en-US',{month:'long',year:'numeric'}) : null;
+  const plansCount=userPlans.length;
+  const simsCount=userSims.length;
+  const lessonsCount=Object.keys(learnProgress).filter(k=>learnProgress[k]).length;
+  dd.innerHTML=`
+    <div class="user-dd-accent" style="background:${accent}"></div>
+    <div class="user-dd-body">
+      <div class="user-dd-header">
+        <div class="user-dd-avatar" style="background:${disp.bg}">${disp.content}</div>
+        <div class="user-dd-info">
+          <div class="user-dd-email">📧 ${escapeHtml(currentUser.email||'')}</div>
+          ${joined?`<div class="user-dd-joined">📅 Member since ${joined}</div>`:''}
+        </div>
+        <button class="user-dd-edit-btn" data-action="edit-avatar" title="Customize avatar">✏️</button>
+      </div>
+      <div class="user-dd-stats">
+        <button class="user-dd-stat" data-action="goto-plans">
+          <div class="user-dd-stat-icon">📂</div>
+          <div class="user-dd-stat-val">${plansCount}</div><div class="user-dd-stat-label">${plansCount!==1?'Plans':'Plan'}</div>
+        </button>
+        <button class="user-dd-stat" data-action="goto-sims">
+          <div class="user-dd-stat-icon">📈</div>
+          <div class="user-dd-stat-val">${simsCount}</div><div class="user-dd-stat-label">Trades</div>
+        </button>
+        <button class="user-dd-stat" data-action="goto-learn">
+          <div class="user-dd-stat-icon">🎓</div>
+          <div class="user-dd-stat-val">${lessonsCount}/${LESSONS.length}</div><div class="user-dd-stat-label">Lessons</div>
+        </button>
+      </div>
+      <div class="user-dd-divider"></div>
+      <div id="userDdSignoutRow">
+        <button class="user-dd-signout" data-action="signout-step">🚪 Sign out</button>
+      </div>
+      <div id="userDdClearRow" class="user-dd-clear-row">
+        <button class="user-dd-clear-link" data-action="clear-step">🗑️ Clear all my data</button>
+      </div>
+    </div>
+  `;
+}
+function showAvatarPicker(){
+  const body=document.querySelector('#userDropdown .user-dd-body');
+  if(!body || !currentUser) return;
+  const meta=currentUser.user_metadata||{};
+  const currentColor=avatarAccentColor(currentUser);
+  body.innerHTML=`
+    <div class="user-dd-picker-title">🎨 Customize your avatar</div>
+    <div class="user-dd-picker-label">Color</div>
+    <div class="user-dd-swatch-row">
+      ${COLORS.map(c=>`<button class="user-dd-swatch${currentColor===c?' active':''}" style="background:${c}" data-action="pick-color" data-color="${c}"></button>`).join('')}
+    </div>
+    <div class="user-dd-picker-label">Or pick an icon</div>
+    <div class="user-dd-emoji-row">
+      <button class="user-dd-emoji-opt${!meta.avatarEmoji?' active':''}" data-action="pick-emoji" title="Use my initial letter">Aa</button>
+      ${AVATAR_EMOJIS.map(e=>`<button class="user-dd-emoji-opt${meta.avatarEmoji===e?' active':''}" data-action="pick-emoji" data-emoji="${e}">${e}</button>`).join('')}
+    </div>
+    <button class="learn-detail-back" style="margin-top:.75rem;padding:0;" data-action="back-to-main">← Back</button>
+  `;
+}
+async function pickAvatarColor(color){
+  await applyAvatarChange(color, currentUser?.user_metadata?.avatarEmoji||null);
+  showAvatarPicker();
+}
+async function pickAvatarEmoji(emoji){
+  await applyAvatarChange(avatarAccentColor(currentUser), emoji);
+  showAvatarPicker();
+}
+function confirmSignoutStep(){
+  const row=document.getElementById('userDdSignoutRow');
+  if(!row) return;
+  row.innerHTML=`
+    <div class="user-dd-confirm-text">Sign out of Vestly?</div>
+    <div class="user-dd-confirm-actions">
+      <button class="user-dd-cancel-btn" data-action="signout-cancel">Cancel</button>
+      <button class="user-dd-signout-confirm" data-action="signout-confirm">🚪 Yes, sign out</button>
+    </div>`;
 }
 async function signOut(){
+  const row=document.getElementById('userDdSignoutRow');
+  if(row) row.innerHTML=`<div class="user-dd-confirm-text">🚪 Signing out…</div>`;
   await sb.auth.signOut();
+  closeUserMenu();
 }
+
+// Wipes saved plans, paper trades, and lesson progress, and resets the
+// avatar back to default — but leaves the actual login/email untouched.
+// A genuine "delete my account" (removing the auth user itself) requires
+// Supabase's admin API, which can't be called safely from the browser —
+// this is the closest safe equivalent: a clean slate on everything inside.
+function confirmClearDataStep(){
+  const row=document.getElementById('userDdClearRow');
+  if(!row) return;
+  row.innerHTML=`
+    <div class="user-dd-confirm-text">This deletes <strong>all</strong> your saved plans, paper trades, lesson progress, and avatar choice. Your sign-in stays — everything inside just starts fresh. This can't be undone.</div>
+    <div class="user-dd-confirm-actions">
+      <button class="user-dd-cancel-btn" data-action="clear-cancel">Cancel</button>
+      <button class="user-dd-clear-confirm-btn" data-action="clear-confirm">🗑️ Yes, clear everything</button>
+    </div>`;
+}
+async function clearAccountData(){
+  if(!currentUser) return;
+  const row=document.getElementById('userDdClearRow');
+  if(row) row.innerHTML=`<div class="user-dd-confirm-text">🗑️ Clearing your data…</div>`;
+  let hadError=false;
+  try{
+    await Promise.all([
+      sb.from('plans').delete().eq('user_id',currentUser.id),
+      sb.from('sim_portfolios').delete().eq('user_id',currentUser.id),
+      sb.from('lesson_progress').delete().eq('user_id',currentUser.id),
+    ]);
+    await sb.auth.updateUser({data:{avatarColor:null,avatarEmoji:null}});
+    currentUser.user_metadata={...(currentUser.user_metadata||{}),avatarColor:null,avatarEmoji:null};
+  }catch(e){
+    console.error('Could not fully clear account data',e);
+    hadError=true;
+  }
+  // Kept separate from the deletion try/catch above: even if something in
+  // this UI-reset phase throws, we still want the toast below to fire
+  // rather than silently stopping mid-function.
+  try{
+    updateNavChipAvatar();
+    await loadUserPlans();
+    await loadUserSims();
+    learnProgress={};
+    closeUserMenu();
+    resetWizardToFresh();
+  }catch(e){
+    console.error('Data was cleared, but resetting the UI ran into an issue',e);
+    hadError=true;
+  }
+  showToast(hadError?'⚠ Cleared most of your data — a couple of items may not have come through':'✓ All your data has been cleared');
+}
+
 
 // ── AUTH MODAL ──
 function openAuthModal(){
@@ -1135,6 +1580,7 @@ async function submitAuth(){
       });
       if(error) throw error;
       if(data.session){
+        justSignedUp=true;
         closeAuthModal();
       } else {
         okBox.textContent='Account created! Check your email to confirm, then sign in.';
@@ -1185,6 +1631,26 @@ function renderPlansList(){
 }
 function escapeHtml(s){
   const d=document.createElement('div'); d.textContent=s||''; return d.innerHTML;
+}
+
+// Small reusable toast for one-off confirmations (e.g. "data cleared").
+// Creates its container lazily so no extra static HTML is needed.
+function showToast(msg,ms=3200){
+  let c=document.getElementById('toastContainer');
+  if(!c){
+    c=document.createElement('div');
+    c.id='toastContainer';
+    document.body.appendChild(c);
+  }
+  const t=document.createElement('div');
+  t.className='app-toast';
+  t.textContent=msg;
+  c.appendChild(t);
+  requestAnimationFrame(()=>t.classList.add('show'));
+  setTimeout(()=>{
+    t.classList.remove('show');
+    setTimeout(()=>t.remove(),250);
+  },ms);
 }
 
 async function saveCurrentPlan(){
@@ -1250,7 +1716,7 @@ async function loadPlan(planId){
     selFocus=p.strategy;
   }
 
-  window.scrollTo({top:document.querySelector('.planner-card').offsetTop-80,behavior:'smooth'});
+  goToStepInternal(3);
   showPlanStatus('Loaded "'+p.name+'" — click Build to refresh live prices.',true);
 }
 
@@ -1266,6 +1732,14 @@ async function deletePlan(planId){
 }
 
 // THEME
+// MAIN TABS
+function switchMainTab(tab){
+  document.querySelectorAll('.main-tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
+  document.getElementById('tabPanelBuild').classList.toggle('active',tab==='build');
+  document.getElementById('tabPanelExplore').classList.toggle('active',tab==='explore');
+  window.scrollTo({top:document.getElementById('mainTabs').offsetTop-70,behavior:'smooth'});
+}
+
 function toggleTheme(){
   const h=document.documentElement;
   const isDark=h.dataset.theme==='dark';
@@ -1309,6 +1783,7 @@ document.querySelectorAll('.chip').forEach(c=>{
     if(divMode)return;
     document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));
     c.classList.add('active'); selFocus=c.dataset.f;
+    if(typeof wizardStep!=='undefined' && wizardStep===3) updateWizardReview();
   });
 });
 
@@ -1321,12 +1796,72 @@ function toggleDivMode(){
   const wrap=document.getElementById('chipsWrap');
   wrap.style.opacity=divMode?'0.35':'1';
   wrap.style.pointerEvents=divMode?'none':'auto';
+  if(wizardStep===3) updateWizardReview();
+}
+
+// WIZARD (3-step guided flow: Budget → Holdings → Strategy)
+let wizardStep=1;
+function goToStepInternal(n){
+  wizardStep=n;
+  document.querySelectorAll('.wizard-step').forEach(el=>el.classList.toggle('active',+el.dataset.step===n));
+  document.querySelectorAll('.wizard-dot').forEach(el=>{
+    const s=+el.dataset.step;
+    el.classList.toggle('active',s===n);
+    el.classList.toggle('completed',s<n);
+  });
+  if(n===3) updateWizardReview();
+  try{ document.getElementById('wizardStepper')?.scrollIntoView({behavior:'smooth',block:'start'}); }catch(e){}
+}
+function goToStep(n){
+  if(n>1){
+    const budget=parseFloat(document.getElementById('budget').value);
+    if(!budget||budget<100){ showErr('Please enter a budget of at least $100 first.'); goToStepInternal(1); return; }
+  }
+  hideErr();
+  goToStepInternal(n);
+}
+function wizardNext(){ goToStep(Math.min(3,wizardStep+1)); }
+function wizardBack(){ goToStepInternal(Math.max(1,wizardStep-1)); }
+function updateWizardReview(){
+  const box=document.getElementById('wizardReviewBox');
+  if(!box) return;
+  const budget=parseFloat(document.getElementById('budget').value)||0;
+  const horizonSel=document.getElementById('horizon');
+  const horizonLabel=horizonSel.options[horizonSel.selectedIndex].text;
+  const holdingsCount=getHoldings().length;
+  const activeChipText=document.querySelector('.chip.active')?.textContent||selFocus;
+  const strategyLabel=divMode?(dumbMode?'Cash-Paying Mode':'All-Dividends Mode'):activeChipText;
+  box.innerHTML=`
+    <div class="wizard-review-title">📋 ${dumbMode?'Quick recap':'Your setup so far'}</div>
+    <div class="wizard-review-row"><span>💰 ${dumbMode?'Money going in':'Budget'}</span><strong>$${budget.toLocaleString()}</strong></div>
+    <div class="wizard-review-row"><span>⏳ ${dumbMode?'How long':'Time horizon'}</span><strong>${horizonLabel}</strong></div>
+    <div class="wizard-review-row"><span>📦 ${dumbMode?'Stuff you own':'Existing holdings'}</span><strong>${holdingsCount?holdingsCount+' added':'None'}</strong></div>
+    <div class="wizard-review-row"><span>🎯 Style</span><strong>${strategyLabel}</strong></div>
+  `;
+}
+
+// Resets the whole "Build My Plan" wizard back to a brand-new state —
+// used right after a fresh signup and after "Clear all my data", so both
+// land on the same clean step-1 starting point.
+function resetWizardToFresh(){
+  document.getElementById('budget').value='';
+  document.getElementById('horizon').value='medium';
+  document.getElementById('holdingsList').innerHTML='';
+  updateBadge();
+  if(divMode) toggleDivMode();
+  document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('active',c.dataset.f==='balanced'));
+  selFocus='balanced';
+  document.getElementById('results')?.classList.remove('show');
+  hideErr();
+  curPicks=[]; curBudget=0;
+  goToStepInternal(1);
+  switchMainTab('build');
 }
 
 // PORTFOLIO
 function togglePortfolio(){
-  document.getElementById('portfolioBody').classList.toggle('open');
-  document.getElementById('pToggleIcon').classList.toggle('open');
+  document.getElementById('portfolioBody')?.classList.toggle('open');
+  document.getElementById('pToggleIcon')?.classList.toggle('open');
 }
 let hId=0;
 function addHolding(t='',l='',v=''){
@@ -1353,7 +1888,7 @@ function getHoldings(){
 }
 
 // COLORS — orange-anchored palette
-const COLORS=['#e07b00','#2563eb','#16a34a','#dc2626','#9333ea','#0d9488','#db2777','#65a30d','#0284c7','#ca8a04'];
+const COLORS=['#e8825a','#5b8fc7','#5fa382','#cf6f63','#9c7fbd','#4c9c94','#c97a99','#94a865','#5f9dbf','#c99a52'];
 
 // PICKS DATABASE
 const DB={
@@ -2094,10 +2629,10 @@ function renderLookupResult(pick,price,realMetrics,news){
 
 function addLookupToHoldings(){
   if(!lastLookupResult) return;
-  document.getElementById('portfolioBody').classList.add('open');
-  document.getElementById('pToggleIcon').classList.add('open');
+  switchMainTab('build');
+  goToStep(2);
   addHolding(lastLookupResult.ticker,lastLookupResult.name||'',0);
-  document.querySelector('.portfolio-section').scrollIntoView({behavior:'smooth',block:'center'});
+  setTimeout(()=>document.getElementById('portfolioBody')?.scrollIntoView({behavior:'smooth',block:'center'}),150);
 }
 
 function simulateLookupResult(){
@@ -2548,8 +3083,8 @@ function render(budget,horizon,picks,prices,existing,ownedPicks){
     <div class="proj-label">${dumbMode?`What $${budget.toLocaleString()} could turn into after ${hLabel}`:`Projected value of $${budget.toLocaleString()} after ${hLabel}`}</div>
     <div class="proj-row">
       <div class="proj-sc"><div class="proj-sc-label">${dumbMode?'Slow guess':'Conservative'} (${(lo*100).toFixed(0)}%/yr)</div><div class="proj-sc-val">$${pess.toLocaleString()}</div></div>
-      <div class="proj-sc"><div class="proj-sc-label">${dumbMode?'Best guess':'Optimistic'} (${(hi*100).toFixed(0)}%/yr)</div><div class="proj-sc-val" style="color:#f08c00;">$${opti.toLocaleString()}</div></div>
-      ${avgYield>0.5?`<div class="proj-sc"><div class="proj-sc-label">${dumbMode?`Cash payouts over ${hLabel}`:`Est. dividends over ${hLabel}`}</div><div class="proj-sc-val" style="color:#f08c00;">$${Math.round(annIncome*yrs).toLocaleString()}</div></div>`:''}
+      <div class="proj-sc"><div class="proj-sc-label">${dumbMode?'Best guess':'Optimistic'} (${(hi*100).toFixed(0)}%/yr)</div><div class="proj-sc-val" style="color:#f0956e;">$${opti.toLocaleString()}</div></div>
+      ${avgYield>0.5?`<div class="proj-sc"><div class="proj-sc-label">${dumbMode?`Cash payouts over ${hLabel}`:`Est. dividends over ${hLabel}`}</div><div class="proj-sc-val" style="color:#f0956e;">$${Math.round(annIncome*yrs).toLocaleString()}</div></div>`:''}
     </div>
     <div class="proj-note">${dumbMode?`Based on how ${simpleRiskLevel(riskLevel).toLowerCase()} plans have typically done in the past. This is a simplified guess, not a promise.`:`Based on historical return ranges for ${riskLevel.toLowerCase()}-risk portfolios. Illustrative only — not a guarantee.`}</div>`;
 
@@ -2621,10 +3156,10 @@ function updateWhatif(){
   const crash=Math.round(curBudget*(1+mkt/100)*Math.pow(1+lo,yrs));
   const boom=Math.round(curBudget*(1+mkt/100)*Math.pow(1+hi,yrs));
   document.getElementById('wiResults').innerHTML=`
-    <div class="wi-card"><div class="wi-card-label">Portfolio value</div><div class="wi-card-val" style="color:${val>=curBudget?'#f08c00':'#f87171'}">$${val.toLocaleString()}</div></div>
-    <div class="wi-card"><div class="wi-card-label">Gain / loss</div><div class="wi-card-val" style="color:${gain>=0?'#f08c00':'#f87171'}">${gain>=0?'+':''}$${Math.abs(gain).toLocaleString()}</div></div>
+    <div class="wi-card"><div class="wi-card-label">Portfolio value</div><div class="wi-card-val" style="color:${val>=curBudget?'#f0956e':'#e2887a'}">$${val.toLocaleString()}</div></div>
+    <div class="wi-card"><div class="wi-card-label">Gain / loss</div><div class="wi-card-val" style="color:${gain>=0?'#f0956e':'#e2887a'}">${gain>=0?'+':''}$${Math.abs(gain).toLocaleString()}</div></div>
     <div class="wi-card"><div class="wi-card-label">Conservative end</div><div class="wi-card-val">$${crash.toLocaleString()}</div></div>
-    <div class="wi-card"><div class="wi-card-label">Optimistic end</div><div class="wi-card-val" style="color:#f08c00;">$${boom.toLocaleString()}</div></div>`;
+    <div class="wi-card"><div class="wi-card-label">Optimistic end</div><div class="wi-card-val" style="color:#f0956e;">$${boom.toLocaleString()}</div></div>`;
 }
 
 function showErr(m){const e=document.getElementById('errorBox');e.textContent=m;e.classList.add('show');}
@@ -2742,27 +3277,6 @@ function updateCompoundCalc(){
     : `This assumes a steady ${ratePct}% annual return, compounded monthly. Real markets go up and down year to year — this is a simplified illustration of the math, not a prediction. The orange band is money made purely from growth; the gray band is money you actually put in yourself.`;
 }
 
-// ── SHARE MODAL ──
-function openShareModal(){
-  document.getElementById('shareLinkInput').value=window.location.href;
-  document.getElementById('shareModalBg').classList.add('open');
-}
-function closeShareModal(){
-  document.getElementById('shareModalBg').classList.remove('open');
-}
-function copyShareLink(){
-  const input=document.getElementById('shareLinkInput');
-  input.select(); input.setSelectionRange(0,99999);
-  try{
-    navigator.clipboard.writeText(input.value);
-  }catch{
-    document.execCommand('copy');
-  }
-  const btn=document.getElementById('copyBtn');
-  btn.textContent='Copied!'; btn.classList.add('copied');
-  setTimeout(()=>{btn.textContent='Copy'; btn.classList.remove('copied');},1800);
-}
-
 // ── CONFETTI ──
 const confettiCanvas=document.getElementById('confettiCanvas');
 const confettiCtx=confettiCanvas.getContext('2d');
@@ -2771,7 +3285,7 @@ resizeConfettiCanvas();
 window.addEventListener('resize',resizeConfettiCanvas);
 
 function fireConfetti(){
-  const colors=['#e07b00','#f59e0b','#3498db','#2ecc71','#9b59b6','#f08c00'];
+  const colors=['#e07b00','#f59e0b','#3498db','#2ecc71','#9b59b6','#f0956e'];
   const pieces=[];
   const count=110;
   for(let i=0;i<count;i++){
@@ -3230,6 +3744,489 @@ async function deleteSim(simId){
     alert('Could not delete: '+(e.message||'unknown error'));
   }
 }
+
+// ══════════════════════════════════════════
+// LEARN (Investing 101) — 20 short lessons, gated behind sign-in so
+// progress can be saved per account. Purely educational; doesn't touch
+// any plan/pick logic.
+//
+// REQUIRES a Supabase table named `lesson_progress` (not created
+// automatically by this frontend). Run once in the Supabase SQL editor:
+//
+//   create table lesson_progress (
+//     user_id uuid references auth.users(id) primary key,
+//     completed jsonb not null default '[]',
+//     updated_at timestamptz not null default now()
+//   );
+//   alter table lesson_progress enable row level security;
+//   create policy "Users manage their own lesson progress" on lesson_progress
+//     for all using (auth.uid() = user_id) with check (auth.uid() = user_id);
+//
+// If this table doesn't exist yet, lessons still open and read fine —
+// progress just silently won't be saved (caught in loadLearnProgress /
+// saveLearnProgress below).
+// ══════════════════════════════════════════
+let learnProgress={}; // {lessonId: true}
+
+const LESSONS=[
+  {id:'1',chapter:'The basics',title:'What is a stock?',body:"A share of stock is a tiny piece of ownership in a company. Buy one share of Apple, and you technically own a sliver of Apple itself — its stores, its products, its profits. If the company does well and grows more valuable, your share usually becomes worth more too. If it struggles, your share can lose value. Stocks are traded on exchanges like the NYSE or Nasdaq, and prices move constantly based on what buyers and sellers think a company is worth right now — not always what it's actually worth."},
+  {id:'2',chapter:'The basics',title:'What is an ETF?',body:"An ETF (exchange-traded fund) is a basket of many stocks (or bonds) bundled into one single investment you can buy with one click. Instead of picking 50 individual tech companies yourself, you could buy one tech ETF and own a slice of all 50 at once. ETFs trade throughout the day just like stocks, and most charge a small annual fee (the expense ratio) for managing the basket. They're one of the easiest ways to get instant diversification without doing the picking yourself."},
+  {id:'3',chapter:'The basics',title:'Stocks vs. bonds',body:"Stocks and bonds are the two big food groups of investing. When you buy a stock, you own a piece of a company — your return depends on that company's success. When you buy a bond, you're lending money to a company or government, and they pay you back with interest on a schedule. Bonds are generally calmer and more predictable; stocks have higher potential growth but bigger swings. Most balanced portfolios mix both, using bonds to cushion the ride when stocks get bumpy."},
+  {id:'4',chapter:'The basics',title:'What is an index fund?',body:"An index fund is a type of ETF or mutual fund that simply tracks a market index — like the S&P 500 (the 500 biggest US companies) — instead of trying to beat it. No one's picking winners; the fund just owns everything in the index, in proportion. Because there's no active guessing involved, index funds tend to charge very low fees. Decades of research suggest most professional stock-pickers don't reliably beat simple index funds over the long run, which is why they're often called the 'boring but proven' choice."},
+  {id:'5',chapter:'The basics',title:'Reading a stock quote',body:"When you look up a stock, you'll usually see: the price (what one share costs right now), the % change (how much it moved today), and the volume (how many shares traded hands). A stock moving +2% today just means it's 2% more expensive than yesterday's close — it doesn't tell you if it's a good buy. High volume usually means lots of people are actively trading it, which can make it easier to buy or sell without moving the price much yourself."},
+  {id:'6',chapter:'Risk & growth',title:'What is market cap?',body:"Market capitalization ('market cap') is a company's total value, as the stock market currently sees it — found by multiplying the share price by the number of shares. A company worth $2 trillion is a 'mega-cap'; a company worth a few hundred million is a 'small-cap.' Bigger companies are usually steadier and slower-growing; smaller companies can grow faster but are often riskier and more volatile. Market cap has nothing to do with how good the company's products are — it's purely about size."},
+  {id:'7',chapter:'Risk & growth',title:'What is a P/E ratio?',body:"The price-to-earnings (P/E) ratio compares a stock's price to how much profit the company actually makes per share. A P/E of 20 means investors are paying $20 for every $1 of the company's yearly profit. A high P/E often means people expect fast future growth (and are willing to pay a premium for it); a low P/E can mean a bargain — or a warning sign that something's wrong. P/E is a useful quick comparison tool, but it's just one clue, not the whole story."},
+  {id:'8',chapter:'Risk & growth',title:'Risk vs. reward',body:"In investing, risk and potential reward are almost always linked — you rarely get one without accepting some of the other. A savings account is very low-risk, but it barely grows your money. A single small tech stock could double... or lose half its value in a year. There's no secret combination that gives you stock-market returns with zero risk. Understanding this trade-off honestly is the first step to picking investments that match how much bumpiness you can actually stomach."},
+  {id:'9',chapter:'Risk & growth',title:'What is diversification?',body:"Diversification means spreading your money across many different investments instead of betting everything on one. If you own just one stock and it crashes, you lose big. If you own 500 companies across different industries (like through an index fund), one company crashing barely dents your total. Diversification doesn't stop the whole market from ever falling, but it protects you from any single company's bad news wiping you out. It's one of the few genuinely free lunches in investing."},
+  {id:'10',chapter:'Risk & growth',title:'What is compound interest?',body:"Compound interest is what happens when your investment gains start earning their own gains. Put in $1,000 that grows 8% in a year, and you have $1,080. The next year, that 8% applies to the full $1,080, not just your original $1,000 — so your money grows faster and faster over time, like a snowball rolling downhill. The earlier you start, the longer compounding has to work in your favor. (Try the compounding calculator higher up on the planner page with your own numbers!)"},
+  {id:'11',chapter:'Building your approach',title:'Dividends: getting paid to hold',body:"Some companies share a portion of their profits directly with shareholders, in cash, usually every quarter — that payment is called a dividend. You don't have to sell any shares to get paid; you just need to own the stock on the right date. Dividend yield tells you how much you get paid per year as a percentage of the share price. Not every company pays one — fast-growing companies often reinvest profits into growth instead. Neither approach is automatically better; it depends on what you're looking for."},
+  {id:'12',chapter:'Building your approach',title:'Dollar-cost averaging',body:"Dollar-cost averaging means investing a fixed amount on a regular schedule — say, $200 every month — no matter what prices are doing. Some months you'll buy at a high price, some months at a low one, and it averages out over time. This takes the pressure off trying to guess the 'perfect' moment to invest (which even professionals struggle with), and it turns market dips into an opportunity to buy more shares for the same money."},
+  {id:'13',chapter:'Building your approach',title:'What is your time horizon?',body:"Your time horizon is simply how long you plan to leave the money invested before you'll need it. Money you need in 1–2 years (a house down payment next spring) generally shouldn't be in stocks — there's not enough time to recover from a bad year. Money you won't touch for 10, 20, or 30+ years (like retirement savings) can handle a lot more short-term bumpiness, because there's time for it to recover and grow. Horizon is one of the biggest factors in choosing how much risk to take on."},
+  {id:'14',chapter:'Building your approach',title:'What is risk tolerance?',body:"Risk tolerance is how much ups-and-downs you can handle emotionally and financially without panic-selling at the worst possible time. It's not just about how much risk you can afford mathematically — it's also about whether you'll actually be able to sleep at night if your portfolio drops 20% in a month. Being honest with yourself here matters: a 'perfect on paper' aggressive portfolio does you no good if you bail out during the first scary dip."},
+  {id:'15',chapter:'Building your approach',title:'Asset allocation: splitting the pie',body:"Asset allocation is how you divide your money across different types of investments — stocks, bonds, cash, real estate, and so on. It's widely considered one of the single biggest drivers of your long-term returns, often more important than which specific stocks you pick. A common starting point some people use is skewing more toward stocks when young (for growth) and gradually shifting toward more bonds as a big goal like retirement gets closer (for stability) — though the right mix always depends on your own goals and comfort with risk."},
+  {id:'16',chapter:'Staying the course',title:'Rebalancing your portfolio',body:"Over time, your original mix drifts. If stocks have a great year, they might grow from 70% of your portfolio to 80%, quietly making you riskier than you intended. Rebalancing means periodically selling a bit of what's grown and buying more of what hasn't, to get back to your original target mix. It's a simple, unemotional way to 'buy low, sell high' automatically — most people do it once or twice a year, not constantly."},
+  {id:'17',chapter:'Staying the course',title:'Expense ratios & fees',body:"An expense ratio is the yearly fee a fund charges you, expressed as a percentage of your investment. A 0.03% expense ratio costs about $3 a year on a $10,000 investment; a 1% fee costs $100 a year on that same $10,000. That gap sounds small, but over decades of compounding, high fees can quietly eat a huge chunk of your returns. All else equal, lower fees leave more of the growth for you."},
+  {id:'18',chapter:'Staying the course',title:'Bull markets vs. bear markets',body:"A 'bull market' is a sustained period where prices are generally rising and confidence is high. A 'bear market' is the opposite — a sustained drop, typically defined as a 20%+ decline from a recent high, often paired with pessimism and bad economic news. Both are a completely normal part of investing history; markets have always cycled between the two. Bear markets can feel scary in the moment, but historically, markets have eventually recovered and gone on to new highs — patience during the bad stretches has usually paid off."},
+  {id:'19',chapter:'Staying the course',title:'Common investing mistakes',body:"A few patterns trip up new investors again and again: panic-selling during a downturn (locking in a loss instead of waiting it out), chasing whatever's hot right now (buying after it's already gone up a lot), checking your portfolio obsessively (which encourages emotional decisions), and putting money you'll need soon into risky investments. None of these mean you're bad at investing — they're just extremely common human tendencies. Recognizing them in yourself is often more valuable than any specific stock pick."},
+  {id:'20',chapter:'Staying the course',title:'Inflation: the silent tax on cash',body:"Inflation is the gradual rise in prices over time — meaning the same dollar buys a little less each year. Cash sitting in a low-interest account can quietly lose purchasing power even while the number on the screen stays the same. Historically, stocks and other growth investments have tended to outpace inflation over the long run, which is one of the core reasons people invest instead of just saving cash — not to get rich quick, but to make sure their money is still worth something decades from now."},
+];
+
+function openLearnModal(){
+  if(!currentUser){
+    alert("Sign in first — Learn saves which lessons you've completed to your account.");
+    openAuthModal();
+    return;
+  }
+  document.getElementById('learnModalBg').classList.add('open');
+  showLearnList();
+}
+function closeLearnModal(){
+  document.getElementById('learnModalBg').classList.remove('open');
+}
+function updateLearnProgressBar(){
+  const total=LESSONS.length;
+  const done=Object.keys(learnProgress).filter(k=>learnProgress[k]).length;
+  const fillEl=document.getElementById('learnProgressFill');
+  const textEl=document.getElementById('learnProgressText');
+  if(fillEl) fillEl.style.width=(done/total*100)+'%';
+  if(textEl) textEl.textContent=`${done}/${total} complete`;
+}
+function showLearnList(){
+  document.getElementById('learnDetailView').style.display='none';
+  const listView=document.getElementById('learnListView');
+  listView.style.display='block';
+  updateLearnProgressBar();
+  const chapters=[...new Set(LESSONS.map(l=>l.chapter))];
+  listView.innerHTML=chapters.map(ch=>`
+    <div class="learn-chapter-label">${ch}</div>
+    ${LESSONS.filter(l=>l.chapter===ch).map(l=>`
+      <div class="learn-lesson-row${learnProgress[l.id]?' done':''}" onclick="openLesson('${l.id}')">
+        <div class="learn-lesson-check">✓</div>
+        <div class="learn-lesson-num">${l.id}.</div>
+        <div class="learn-lesson-title">${l.title}</div>
+        <div class="learn-lesson-arrow">→</div>
+      </div>`).join('')}
+  `).join('');
+}
+function openLesson(id){
+  const lesson=LESSONS.find(l=>l.id===id);
+  if(!lesson) return;
+  document.getElementById('learnListView').style.display='none';
+  const idx=LESSONS.findIndex(l=>l.id===id);
+  const prev=LESSONS[idx-1], next=LESSONS[idx+1];
+  const detailView=document.getElementById('learnDetailView');
+  detailView.style.display='block';
+  detailView.innerHTML=`
+    <button class="learn-detail-back" onclick="showLearnList()">← All lessons</button>
+    <div class="learn-detail-chapter">${lesson.chapter}</div>
+    <div class="learn-detail-title">${lesson.id}. ${lesson.title}</div>
+    ${learnProgress[id]?`<div class="learn-done-badge">✓ Completed</div>`:''}
+    <div class="learn-detail-body">${lesson.body}</div>
+    <div class="learn-detail-nav">
+      <button class="learn-nav-btn" onclick="${prev?`openLesson('${prev.id}')`:''}" ${prev?'':'disabled'}>← Previous</button>
+      <button class="learn-nav-btn primary" onclick="${next?`openLesson('${next.id}')`:'showLearnList()'}">${next?'Next lesson →':'Finish ✓'}</button>
+    </div>
+  `;
+  if(!learnProgress[id]){
+    learnProgress[id]=true;
+    saveLearnProgress();
+  }
+  detailView.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+async function loadLearnProgress(){
+  if(!currentUser) return;
+  try{
+    const{data,error}=await sb.from('lesson_progress').select('completed').eq('user_id',currentUser.id).maybeSingle();
+    if(error) throw error;
+    learnProgress={};
+    (data?.completed||[]).forEach(id=>{ learnProgress[id]=true; });
+    updateLearnProgressBar();
+  }catch(e){
+    console.error('Failed to load lesson progress',e);
+  }
+}
+async function saveLearnProgress(){
+  updateLearnProgressBar();
+  if(!currentUser) return;
+  try{
+    const completed=Object.keys(learnProgress).filter(k=>learnProgress[k]);
+    await sb.from('lesson_progress').upsert({user_id:currentUser.id,completed,updated_at:new Date().toISOString()});
+  }catch(e){
+    console.error('Could not save lesson progress (has the lesson_progress table been created in Supabase yet?)',e);
+  }
+}
+
+// ══════════════════════════════════════════
+// ASK VESTLY — a conversational-feeling FAQ widget.
+//
+// IMPORTANT: this is NOT a live AI. It's a small keyword-matching search
+// over a curated knowledge base (site FAQ + the 20 Learn lessons) plus a
+// set of action commands that call the exact same functions the manual UI
+// uses (openSimModal, addHolding, runLookup, etc.) — styled as a chat so
+// it *feels* conversational. This is intentional — a real LLM-backed
+// assistant needs an API key held server-side (a small proxy like a
+// Cloudflare Worker), which this single static HTML file doesn't have.
+// ══════════════════════════════════════════
+const CHAT_STOPWORDS=new Set(['the','and','for','are','you','your','what','how','does','with','that','this','can','need','have','about','when','why','into','out','not','use','using','who','which','a','an','is','do','to','of','in','on','it','me','my','i','will','would','should','there','their','them','some','any','than','then','just','like']);
+function chatTokenize(str){
+  return (str||'').toLowerCase().replace(/[^a-z0-9\s]/g,' ').split(/\s+/).filter(w=>w.length>1 && !CHAT_STOPWORDS.has(w));
+}
+
+const CHAT_KB=[
+  // ── Site / Vestly-specific ──
+  {keywords:['vestly','app','site','website','planner','platform','tool'],answer:"Vestly's a free tool that builds a simple investment plan around your budget, timeline, and comfort with risk — with real prices, plain-English explanations, and a way to practice with fake money before using real money. It's for learning, not a licensed advisor."},
+  {keywords:['build','plan','start','wizard','steps','create','make','begin'],answer:"Head to the 'Build My Plan' tab and walk through 3 quick steps — budget & timeline, anything you already own, then pick a style. You'll get a full set of picks with real prices at the end."},
+  {keywords:['paper','trading','fake','practice','pretend','simulate','simulator','simulation'],answer:"Paper trading lets you 'invest' pretend money in real picks at today's real prices, then track how it would've actually done. Nothing real is bought or sold — it's just for practice. You'll find it below the plan builder once you're signed in."},
+  {keywords:['save','plans','multiple','goal','goals','reload','load'],answer:"Sign in (or make a free account) and you'll see a 'My Plans' section where you can save as many plans as you want, name them, and reload them anytime."},
+  {keywords:['dumb','down','simple','simplify','jargon','plain','easier'],answer:"'Dumb It Down' is a toggle in the top nav that rewrites the whole site in plainer language — jargon gets swapped for everyday words, and every pick's explanation gets a friendlier rewrite."},
+  {keywords:['safe','trust','licensed','advisor','advice','legit','legitimate','scam','real'],answer:"Vestly is educational only — not a licensed financial advisor. Real current prices come from Yahoo Finance/Finnhub, but historical charts and some stats are simulated or illustrative. Always double-check big decisions with a real licensed advisor."},
+  {keywords:['risk','level','low','medium','high','mean','means','bumpy','volatile','volatility'],answer:"Each pick gets a risk label — Low, Medium, or High — based on how much its price tends to swing around. Low-risk picks (broad ETFs, bonds) move less; High-risk picks (individual tech or momentum stocks) can swing a lot more in either direction."},
+  {keywords:['strength','score','diversified','grade','rating'],answer:"Plan Strength is a 0–100 score based on how spread out your plan is — more positions, no single pick too big, and a mix of sectors all raise the score. Tap 'See what this is based on' under the score for the exact breakdown."},
+  {keywords:['little','small','minimum','least','enough','afford'],answer:"There's no real minimum — Vestly just asks for at least $100 to build a plan, but you can absolutely start smaller in real life. Time in the market usually matters more than how much you start with."},
+  {keywords:['check','portfolio','often','frequently','watch','monitor'],answer:"There's no fixed rule, but checking too often (daily) tends to encourage emotional reactions to totally normal ups and downs. Many long-term investors check monthly or quarterly instead."},
+  {keywords:['lessons','learn','course','curriculum','education','teach','teaching'],answer:"Tap the 🎓 Learn button (top nav, or inside the plan builder) for 20 short lessons covering stocks, ETFs, risk, compounding, and more — sign in first so your progress saves."},
+  {keywords:['clear','delete','reset','wipe','erase','account','remove'],answer:"In your account dropdown (click your avatar, top right) there's a 'Clear all my data' option — it wipes your saved plans, paper trades, and lesson progress, but keeps your sign-in. It can't be undone, so it asks you to confirm first."},
+  {keywords:['avatar','picture','emoji','customize','icon','photo'],answer:"Click the pencil ✏️ next to your avatar in the account dropdown — you can pick a color or an emoji instead of your initial."},
+  {keywords:['data','source','sources','accurate','accuracy','methodology','yahoo','finnhub'],answer:"Current prices come from Yahoo Finance, with Finnhub as a backup source — those are real. Historical charts and some fundamentals (like beta or P/E when unavailable) are simulated/illustrative, and always clearly labeled Real vs. Est."},
+  {keywords:['existing','holdings','already','own','portfolio','have'],answer:"In step 2 of the plan builder you can list stocks or ETFs you already own — Vestly won't re-recommend those and will plan the rest of your budget around them."},
+  {keywords:['compare','strategies','strategy','versus','vs'],answer:"There's a 'Compare two strategies side by side' button at the end of the plan builder — pick any two styles and see their risk, return, and top holdings next to each other."},
+  {keywords:['compound','calculator','visualizer','growth','snowball'],answer:"The compound interest visualizer is in the 'Explore & Learn' tab — punch in a starting amount, monthly contribution, years, and a return rate to see how growth builds on itself over time."},
+  {keywords:['dividend','calculator','reinvest','reinvesting','drip'],answer:"Once you've built a plan, scroll down to the dividend reinvestment calculator to see how cash payouts compound over time, with or without automatically reinvesting them."},
+  // ── General investing (linked to Learn lessons) ──
+  {keywords:['stock','stocks','shares','share','ownership','equity','equities'],lessonId:'1',answer:"A share of stock is a tiny piece of ownership in a company — if it does well, your share is usually worth more."},
+  {keywords:['etf','fund','basket','exchange','traded'],lessonId:'2',answer:"An ETF bundles many stocks (or bonds) into one investment you can buy in one click — instant diversification, usually for a small yearly fee."},
+  {keywords:['bond','bonds','versus','difference','lend','lending'],lessonId:'3',answer:"Stocks make you a part-owner of a company; bonds make you a lender who gets paid back with interest. Bonds are generally calmer, stocks have higher potential growth."},
+  {keywords:['index','fund','tracks','tracking','sp500','sandp'],lessonId:'4',answer:"An index fund just owns everything in a market index (like the S&P 500) instead of trying to beat it — low fees, no guessing involved."},
+  {keywords:['quote','change','volume','ticker','symbol'],lessonId:'5',answer:"A stock quote shows the current price, the % change from yesterday, and the volume (how many shares traded) — high volume just means it's easy to buy/sell."},
+  {keywords:['market','cap','capitalization','size','bigcap','smallcap'],lessonId:'6',answer:"Market cap is a company's total value (share price × number of shares) — bigger usually means steadier, smaller usually means more room to grow (and more risk)."},
+  {keywords:['pe','ratio','earnings','multiple','expensive','cheap','overvalued','undervalued'],lessonId:'7',answer:"The P/E ratio compares a stock's price to its yearly profit per share — a high P/E often means investors expect fast growth and are paying a premium for it."},
+  {keywords:['risk','reward','tradeoff','gains','losses'],lessonId:'8',answer:"Risk and potential reward are almost always linked in investing — there's no real combination that gives stock-market returns with zero risk."},
+  {keywords:['diversification','diversify','spread','eggs','basket','concentrated','concentration'],lessonId:'9',answer:"Diversification means spreading your money across many investments instead of one — so no single company's bad news can wipe you out."},
+  {keywords:['compound','interest','compounding','snowball','grow','growing'],lessonId:'10',answer:"Compound interest is when your gains start earning their own gains — your money grows faster and faster over time, like a snowball rolling downhill."},
+  {keywords:['dividend','dividends','yield','payout','income','payments'],lessonId:'11',answer:"A dividend is cash some companies pay out to shareholders regularly, just for holding the stock — you don't need to sell anything to get paid."},
+  {keywords:['dollar','cost','averaging','dca','regularly','schedule'],lessonId:'12',answer:"Dollar-cost averaging means investing a fixed amount on a regular schedule regardless of price — it takes the pressure off trying to time the market perfectly."},
+  {keywords:['time','horizon','long','term','short','years'],lessonId:'13',answer:"Your time horizon is how long you plan to leave money invested before needing it — the longer it is, the more short-term bumpiness you can usually afford to ride out."},
+  {keywords:['risk','tolerance','comfortable','handle','stomach'],lessonId:'14',answer:"Risk tolerance is how much ups-and-downs you can handle without panic-selling at the worst time — both financially and emotionally."},
+  {keywords:['asset','allocation','mix','split','divide','allocate'],lessonId:'15',answer:"Asset allocation is how you split your money across stocks, bonds, cash, etc. — often the single biggest driver of long-term returns."},
+  {keywords:['rebalance','rebalancing','drift','realign'],lessonId:'16',answer:"Rebalancing means periodically selling a bit of what's grown and buying more of what hasn't, to get back to your original target mix."},
+  {keywords:['expense','ratio','fee','fees','cost','charge','charges'],lessonId:'17',answer:"An expense ratio is the yearly fee a fund charges — small percentages sound tiny but can eat a big chunk of returns over decades of compounding."},
+  {keywords:['bull','bear','market','crash','rally','correction','downturn'],lessonId:'18',answer:"A bull market is a sustained period of rising prices; a bear market is a sustained drop (typically 20%+). Both are totally normal parts of investing history."},
+  {keywords:['mistakes','panic','selling','timing','common','avoid','emotional'],lessonId:'19',answer:"The most common beginner mistakes: panic-selling during a dip, chasing whatever's hot right now, checking your portfolio obsessively, and investing money you'll need soon."},
+  {keywords:['inflation','purchasing','power','prices','rising'],lessonId:'20',answer:"Inflation is prices rising over time, so cash slowly buys less — one reason people invest instead of just saving cash, historically outpacing inflation long-term."},
+  // ── "What should I actually buy?" — answered responsibly, no specific
+  // picks (Vestly isn't a licensed advisor), redirected to the plan builder
+  // instead, which is the actual right tool for this question. ──
+  {keywords:['best','stock','stocks','buy','buying','get','getting','pick','picks','hot','top','recommend','recommendation','recommended'],answer:"There's no single \"best\" stock — it depends on your timeline and how much risk you're comfortable with, and anyone claiming otherwise is usually guessing. Instead of betting on one stock, Vestly can build you a diversified starter plan based on a style you pick.<button class=\"chat-msg-lesson-btn\" onclick=\"goBuildPlanFromChat()\">🎯 Build me a plan</button>"},
+  {keywords:['type','types','kind','kinds','category','categories','invest','investing','investment'],answer:"That depends on your timeline and risk comfort more than anything else — there's no universal answer. Vestly's plan builder asks a few quick questions and puts together a diversified mix that fits your style (growth, income, safe & steady, etc).<button class=\"chat-msg-lesson-btn\" onclick=\"goBuildPlanFromChat()\">🎯 Build me a plan</button>"},
+  {keywords:['choose','choosing','pick','picking','select','selecting','decide','deciding'],answer:"Picking individual winners is genuinely hard — even professionals mostly don't beat the market consistently doing it. A more reliable approach: decide your risk comfort and timeline, then let diversification do the heavy lifting instead of one lucky pick.<button class=\"chat-msg-lesson-btn\" onclick=\"goBuildPlanFromChat()\">🎯 Build me a plan</button>"},
+  {keywords:['beginner','beginners','newbie','new','first','starting','getting'],answer:"For a first investment, most beginners are better off with a broad, diversified fund (like an index fund or ETF) than picking single stocks — less risk of one bad pick tanking everything while you're still learning.<button class=\"chat-msg-lesson-btn\" onclick=\"goBuildPlanFromChat()\">🎯 Build me a plan</button>"},
+  {keywords:['save','saving','savings','versus','instead'],answer:"Savings accounts are for money you'll need soon and want zero risk on. Investing is for money you won't need for years, in exchange for a real shot at growing faster than inflation. Most people end up doing both, just for different goals."},
+  {keywords:['lose','losing','lost','everything','all','wipe'],answer:"Any single stock can lose most or all of its value — that's real. A diversified plan (many stocks/ETFs instead of one) makes losing everything far less likely, though markets falling broadly (a recession) can still cost you money. There's no investing with truly zero risk."},
+  {keywords:['safest','safe','stable','secure','conservative'],answer:"Nothing is 100% risk-free once you're off pure cash, but bonds and broad market ETFs are typically far calmer than individual stocks. Vestly's 'Safe & steady' style leans into exactly this.<button class=\"chat-msg-lesson-btn\" onclick=\"goBuildPlanFromChat()\">🎯 Build me a plan</button>"},
+  {keywords:['young','old','age','late','retire','retirement'],answer:"There's no real age cutoff — the main thing age changes is how much time your money has to ride out ups and downs, which is why younger investors often lean more into stocks and shift toward bonds later. Starting later just means being a bit more deliberate, not that it's not worth doing."},
+  {keywords:['sell','selling','when','exit','cashout'],answer:"There's no universal signal to sell — panic-selling during a normal dip is actually one of the most common beginner mistakes. Most long-term investors sell based on their own plan changing (needing the money soon, or their goals shifting), not based on short-term price moves."},
+  {keywords:['much','monthly','month','regularly','contribute','contribution'],answer:"There's no required amount — consistency matters more than size. Many people pick a fixed amount they can comfortably invest every month (see dollar-cost averaging) rather than trying to time when to put in a lump sum."},
+];
+
+function matchFAQ(input){
+  const tokens=chatTokenize(input);
+  if(!tokens.length) return null;
+  let best=null,bestScore=0;
+  CHAT_KB.forEach(entry=>{
+    // Score by how many DISTINCT tokens in the message match this entry,
+    // not how many keyword synonyms match — otherwise an entry that lists
+    // several word-forms of the same root (invest/investing/investment)
+    // scores higher purely from its own redundancy, unfairly beating a
+    // more specific entry that just has fewer, tighter keywords.
+    let score=0;
+    tokens.forEach(t=>{
+      let hit=0;
+      for(const kw of entry.keywords){
+        if(t===kw){ hit=3; break; } // exact word match
+        // Prefix match only (not "contains anywhere") — e.g. "investing"
+        // correctly matches keyword "invest", but "reinvest" does NOT
+        // match "invest" (it doesn't start with it), avoiding false hits
+        // like a dividend-reinvestment answer surfacing for "should I
+        // invest in stocks?".
+        if(t.length>3 && kw.length>3 && (t.startsWith(kw)||kw.startsWith(t))) hit=Math.max(hit,1);
+      }
+      score+=hit;
+    });
+    // On a tie, prefer the more specific entry (smaller keyword list) —
+    // a narrowly-targeted answer beats a broad catch-all scoring the same.
+    if(score>bestScore || (score===bestScore && score>0 && best && entry.keywords.length<best.keywords.length)){
+      bestScore=score; best=entry;
+    }
+  });
+  // Require either one solid exact-word hit, or several weaker prefix
+  // hits piecing together — a single coincidental prefix match alone
+  // isn't enough to answer confidently.
+  return bestScore>=3 ? best : null;
+}
+
+const CHAT_STARTER_SUGGESTIONS=['Paper trade AAPL','What is an ETF?','How do I build a plan?','Look up Tesla'];
+const CHAT_FALLBACK_SUGGESTIONS=['What is diversification?','What is compound interest?','What does risk level mean?','How does paper trading work?'];
+
+let chatOpened=false;
+function toggleChatWidget(){
+  const panel=document.getElementById('chatPanel');
+  if(!panel) return;
+  const opening=!panel.classList.contains('open');
+  panel.classList.toggle('open',opening);
+  if(opening && !chatOpened){
+    chatOpened=true;
+    appendChatMessage('bot',"Hi! Ask me a question, or tell me what to do — like \"paper trade AAPL\" or \"add Tesla to my holdings.\" 👇");
+    renderChatSuggestions(CHAT_STARTER_SUGGESTIONS);
+    setTimeout(()=>document.getElementById('chatInput')?.focus(),200);
+  }
+}
+function appendChatMessage(role,html){
+  const box=document.getElementById('chatMessages');
+  if(!box) return;
+  const el=document.createElement('div');
+  el.className='chat-msg '+role;
+  el.innerHTML=html;
+  box.appendChild(el);
+  box.scrollTop=box.scrollHeight;
+}
+function appendTypingIndicator(){
+  const box=document.getElementById('chatMessages');
+  if(!box) return null;
+  const el=document.createElement('div');
+  el.className='chat-msg bot chat-typing';
+  el.innerHTML='<span></span><span></span><span></span>';
+  box.appendChild(el);
+  box.scrollTop=box.scrollHeight;
+  return el;
+}
+function renderChatSuggestions(list){
+  const box=document.getElementById('chatSuggestions');
+  if(!box) return;
+  box.innerHTML=list.map(q=>`<button class="chat-suggest-chip" onclick='askChatQuestion(${JSON.stringify(q)})'>${escapeHtml(q)}</button>`).join('');
+}
+function askChatQuestion(q){
+  const input=document.getElementById('chatInput');
+  if(input) input.value=q;
+  sendChatMessage();
+}
+
+// ── LIVE PRICE INTENT ──
+// "what's the price of X" style questions get routed to the real price
+// lookup (same fetchPrice()/allKnownTickerEntries() the Stock Lookup tool
+// uses) instead of the static FAQ, which was answering "where does price
+// data come from" instead of just... giving the price.
+const PRICE_INTENT_WORDS=['price','prices','worth','trading at','cost','costs','quote','value','valued','stock price','share price','how much is','how much does','how much are'];
+function looksLikePriceQuery(text){
+  const t=text.toLowerCase();
+  return PRICE_INTENT_WORDS.some(w=>t.includes(w));
+}
+function extractTickerFromText(text){
+  const lower=text.toLowerCase();
+  // Company names/aliases first ("apple", "tesla") — prefer the longest
+  // matching alias so e.g. "berkshire hathaway" beats a shorter false hit.
+  const aliasHits=Object.keys(LOOKUP_ALIASES).filter(a=>lower.includes(a));
+  if(aliasHits.length){
+    aliasHits.sort((a,b)=>b.length-a.length);
+    return LOOKUP_ALIASES[aliasHits[0]];
+  }
+  // Otherwise look for a raw ticker symbol among the words as typed.
+  const known=allKnownTickerEntries();
+  const words=text.replace(/[^A-Za-z.\s]/g,' ').split(/\s+/);
+  for(const w of words){
+    const up=w.toUpperCase();
+    if(up.length>=1 && up.length<=6 && known[up]) return up;
+  }
+  return null;
+}
+async function handleChatPriceQuery(ticker,typingEl){
+  const known=allKnownTickerEntries()[ticker];
+  const name=known?.name||ticker;
+  let price=null;
+  try{ price=await fetchPrice(ticker); }catch(e){ price=null; }
+  typingEl?.remove();
+  if(price!=null){
+    appendChatMessage('bot',`<strong>${ticker}</strong>${name?' ('+escapeHtml(name)+')':''} is trading at <strong>$${(price*1).toFixed(2)}</strong> right now — live price.<button class="chat-msg-lesson-btn" onclick="openLookupFromChat('${ticker}')">🔍 See full details</button>`);
+  } else {
+    appendChatMessage('bot',`I couldn't grab a live price for ${ticker} just now — could be a brief network hiccup. The full lookup tool can retry it for you.<button class="chat-msg-lesson-btn" onclick="openLookupFromChat('${ticker}')">🔍 Look it up</button>`);
+  }
+}
+function openLookupFromChat(ticker){
+  switchMainTab('explore');
+  const input=document.getElementById('lookupInput');
+  if(input) input.value=ticker;
+  toggleChatWidget();
+  setTimeout(()=>{
+    hideLookupSuggestions();
+    runLookup();
+    document.querySelector('.lookup-section')?.scrollIntoView({behavior:'smooth',block:'start'});
+  },150);
+}
+function goBuildPlanFromChat(){
+  toggleChatWidget();
+  switchMainTab('build');
+  goToStepInternal(1);
+  document.querySelector('.planner-card')?.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ── ACTION COMMANDS ──
+// Lets people tell the chat what to do — "paper trade AAPL", "add Tesla to
+// my holdings", "build a plan" — and it calls the exact same functions the
+// manual UI uses (openSimModal, addHolding, runLookup, goToStep,
+// toggleDumbMode, toggleTheme). Same tools, same steps, just triggered
+// conversationally instead of by clicking through the page yourself.
+function detectChatAction(text){
+  const t=text.toLowerCase();
+  const ticker=extractTickerFromText(text);
+
+  if(ticker){
+    if(/paper.?trad|simulat|practice.?trad|fake.?money|fake.?trad/.test(t)) return{type:'paper_trade',ticker};
+    if(/add.*(holding|portfolio)|already own|i own/.test(t)) return{type:'add_holding',ticker};
+    if(/look.?up|tell me about|show me|info(rmation)? on|details on|pull up|search for/.test(t)) return{type:'lookup',ticker};
+    // "should I buy AAPL?" / "is Tesla a good investment?" — rather than
+    // giving actual buy/sell advice on a specific stock (which Vestly
+    // shouldn't do), redirect to the real data on that ticker instead.
+    if(/should i (buy|invest)|good (investment|buy|stock|pick)|worth (buying|investing)/.test(t)) return{type:'lookup',ticker};
+  }
+  if(/build (a |my )?plan|start (a |my )?plan|make (a |my )?plan|create (a |my )?plan/.test(t)) return{type:'build_plan'};
+  if(/open learn|show.*lesson|start learning|teach me|learn(ing)? (mode|panel|section)/.test(t)) return{type:'open_learn'};
+  if(/turn on dumb|enable dumb|simplify (the )?site|dumb it down|dumb mode/.test(t)) return{type:'dumb_on'};
+  if(/turn off dumb|disable dumb|normal (language|mode)|undo dumb/.test(t)) return{type:'dumb_off'};
+  if(/dark mode|night mode/.test(t)) return{type:'dark_mode'};
+  if(/light mode|day mode/.test(t)) return{type:'light_mode'};
+  if(!ticker && /paper trad(e|ing)|show.*paper trad|open paper trad/.test(t)) return{type:'open_paper_trading'};
+  return null;
+}
+function executeChatAction(action,typingEl){
+  typingEl?.remove();
+  const known=action.ticker?allKnownTickerEntries()[action.ticker]:null;
+  const name=known?.name?' ('+escapeHtml(known.name)+')':'';
+  if(action.type==='paper_trade'){
+    appendChatMessage('bot',`Opening a paper trade for <strong>${action.ticker}</strong>${name} — set an amount and confirm in the popup.`);
+    setTimeout(()=>{ toggleChatWidget(); openSimModal(null,{ticker:action.ticker,name:known?.name||action.ticker,type:known?.type||'Stock'}); },500);
+  } else if(action.type==='add_holding'){
+    appendChatMessage('bot',`Adding <strong>${action.ticker}</strong>${name} to your existing holdings…`);
+    setTimeout(()=>{
+      toggleChatWidget();
+      switchMainTab('build');
+      addHolding(action.ticker,known?.name||'',0);
+      goToStep(2);
+      setTimeout(()=>document.getElementById('portfolioBody')?.scrollIntoView({behavior:'smooth',block:'center'}),200);
+    },500);
+  } else if(action.type==='lookup'){
+    appendChatMessage('bot',`Pulling up <strong>${action.ticker}</strong>${name} for you…`);
+    setTimeout(()=>openLookupFromChat(action.ticker),500);
+  } else if(action.type==='build_plan'){
+    appendChatMessage('bot',"Let's do it — heading to the plan builder now.");
+    setTimeout(()=>{
+      toggleChatWidget();
+      switchMainTab('build');
+      goToStepInternal(1);
+      document.querySelector('.planner-card')?.scrollIntoView({behavior:'smooth',block:'start'});
+    },500);
+  } else if(action.type==='open_learn'){
+    appendChatMessage('bot',"Opening the Learn panel for you.");
+    setTimeout(()=>{ toggleChatWidget(); openLearnModal(); },500);
+  } else if(action.type==='dumb_on'){
+    if(!dumbMode) toggleDumbMode();
+    appendChatMessage('bot',"Done — Dumb It Down is now on. 🧠");
+  } else if(action.type==='dumb_off'){
+    if(dumbMode) toggleDumbMode();
+    appendChatMessage('bot',"Done — back to normal language.");
+  } else if(action.type==='dark_mode'){
+    if(document.documentElement.dataset.theme!=='dark') toggleTheme();
+    appendChatMessage('bot',"Switched to dark mode. 🌙");
+  } else if(action.type==='light_mode'){
+    if(document.documentElement.dataset.theme==='dark') toggleTheme();
+    appendChatMessage('bot',"Switched to light mode. ☀️");
+  } else if(action.type==='open_paper_trading'){
+    appendChatMessage('bot',"Opening paper trading for you.");
+    setTimeout(()=>{
+      toggleChatWidget();
+      switchMainTab('build');
+      document.getElementById('simSection')?.scrollIntoView({behavior:'smooth',block:'start'});
+    },500);
+  }
+}
+
+function sendChatMessage(){
+  const input=document.getElementById('chatInput');
+  if(!input) return;
+  const q=input.value.trim();
+  if(!q) return;
+  appendChatMessage('user',escapeHtml(q));
+  input.value='';
+  const suggestBox=document.getElementById('chatSuggestions');
+  if(suggestBox) suggestBox.innerHTML='';
+  const typingEl=appendTypingIndicator();
+
+  // Commands ("paper trade AAPL", "build a plan") take priority over
+  // questions — someone telling the chat what to do wants it done, not
+  // an explanation.
+  const action=detectChatAction(q);
+  if(action){
+    setTimeout(()=>executeChatAction(action,typingEl),350);
+    return;
+  }
+
+  // If this clearly names a specific company/ticker alongside price-ish
+  // wording, go straight to a real live number. Otherwise — including
+  // methodology questions like "is the price data real?" that contain the
+  // word "price" but name no company — fall through to the normal FAQ
+  // match below rather than assuming they want a specific stock's price.
+  const priceIntent=looksLikePriceQuery(q);
+  const ticker=priceIntent?extractTickerFromText(q):null;
+  if(ticker){
+    handleChatPriceQuery(ticker,typingEl);
+    return;
+  }
+
+  const match=matchFAQ(q);
+  setTimeout(()=>{
+    typingEl?.remove();
+    if(match){
+      let html=match.answer;
+      if(match.lessonId) html+=`<button class="chat-msg-lesson-btn" onclick="openLessonFromChat('${match.lessonId}')">📖 Read the full lesson</button>`;
+      appendChatMessage('bot',html);
+    } else if(priceIntent){
+      appendChatMessage('bot','Which stock or ETF? Try naming it directly — like "price of Tesla" or "AAPL price".');
+    } else {
+      const bareTicker=extractTickerFromText(q);
+      if(bareTicker){
+        appendChatMessage('bot',`Want me to pull up <strong>${bareTicker}</strong>?<button class="chat-msg-lesson-btn" onclick="openLookupFromChat('${bareTicker}')">🔍 Look it up</button>`);
+      } else {
+        appendChatMessage('bot',"I couldn't find a solid match for that — try rephrasing, or tap one of these:");
+        renderChatSuggestions(CHAT_FALLBACK_SUGGESTIONS);
+      }
+    }
+  },450);
+}
+function openLessonFromChat(id){
+  if(!currentUser){ openLearnModal(); return; }
+  openLearnModal();
+  openLesson(String(id));
+}
 </script>
+
 </body>
 </html>
